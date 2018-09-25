@@ -10,15 +10,20 @@ Public Class frmMain
 
     'beginning and end of run forms
     Public clsThanks As New frmThanks
-    Public clsBlank As New frmBlank
-    'Public clsPoints As New frmPoints
+    Public clsEndSOA As New EndSOA
+    Public clsEndTrain As New EndTrain
     Public clsSOAInstr As New InstructionsSOA
     Public clsTrainingInstr As New TrainingInstr
     Public clsDevalued As New SOA_Devalued
 
 
     'Training Stim Forms
-
+    Public StndGrapeTrain As New TrainStndGrape
+    Public StndAppleTrain As New TrainStndApple
+    Public CongBanTrain As New TrainCongBana
+    Public CongPearTrain As New TrainCongPear
+    Public InconOrngTrain As New TrainInconOrng
+    Public InconPineTrain As New TrainInconPine
 
     'SOA forms
     Public StndGrapeSOA As New SOA_Stnd_Grape
@@ -33,6 +38,7 @@ Public Class frmMain
     Private devalOne As Integer
     Private devalTwo As Integer
 
+    Private trainingScore As Integer
 
     'for detecting screen size
     Public ScrHeight As Integer
@@ -43,6 +49,8 @@ Public Class frmMain
     Private formArraySOA As New ArrayList()
     Private indxArraySOA(60) As Integer
 
+    Private formArrayTrain As New ArrayList()
+    Private indxArrayTrain(48) As Integer
 
     'clock
     Dim go As New System.Threading.Thread(AddressOf clock)
@@ -109,6 +117,19 @@ Public Class frmMain
     Public Sub setD2(ByVal value As Integer)
 
         devalTwo = value
+
+    End Sub
+
+    '-----Getter and Setter for Training Score-----'
+    Public Function getTrainScore() As Integer
+
+        Return trainingScore
+
+    End Function
+
+    Public Sub setTrainScore(ByVal value As Integer)
+
+        trainingScore = value
 
     End Sub
 
@@ -232,12 +253,13 @@ Public Class frmMain
     End Function
     '-----Method for Filling ArrayList of forms and Index Array-----'
 
-    Private Sub fillArraysSOA()
+    Private Sub fillArrays()
 
         'counter variable
-        Dim ind As Integer
+        Dim ind, inx As Integer
 
         ind = 0
+        inx = 0
 
         'add all forms to array list
         formArraySOA.Add(CongBanSOA)
@@ -246,6 +268,13 @@ Public Class frmMain
         formArraySOA.Add(InconPineSOA)
         formArraySOA.Add(StndGrapeSOA)
         formArraySOA.Add(StndAppleSOA)
+
+        formArrayTrain.Add(CongBanTrain)
+        formArrayTrain.Add(CongPearTrain)
+        formArrayTrain.Add(InconOrngTrain)
+        formArrayTrain.Add(InconPineTrain)
+        formArrayTrain.Add(StndGrapeTrain)
+        formArrayTrain.Add(StndAppleTrain)
 
         'add numbers to index array
         For ind = 0 To 59
@@ -277,6 +306,35 @@ Public Class frmMain
 
         Next
 
+        For inx = 0 To 47
+
+            'based on counter number, add specific integer to index array at position 'ind' that references index of formArraySOA
+            Select Case inx
+
+                'so in indxArraySOA spots 0 through 9, will contain 0's in each spot; indxArraySOA positions 10 through 19 have 1's in each spot, etc
+                'can changes cases to have more or less of specific form occurences
+                'say, if you want more of Congruent1 form, make first case through 15 or 20 (since Congruent1 is index '0' as seen in Add statements above
+
+                Case 0 To 7
+                    indxArrayTrain(inx) = 0
+                Case 8 To 15
+                    indxArrayTrain(inx) = 1
+                Case 16 To 23
+                    indxArrayTrain(inx) = 2
+                Case 24 To 31
+                    indxArrayTrain(inx) = 3
+                Case 32 To 39
+                    indxArrayTrain(inx) = 4
+                Case 40 To 47
+                    indxArrayTrain(inx) = 5
+                Case Else
+                    'error handling
+                    myMsgBox("YOUR STUPID FILL ARRAYS DONT WORK RIGHT", MsgBoxStyle.OkOnly, "YOU DONE FUCKED UP")
+
+            End Select
+
+        Next
+
     End Sub
 
     '-----Method for Shuffling Array of indexes-----'
@@ -284,7 +342,7 @@ Public Class frmMain
 
         'need for loop counter variable, random number variable and temp variable
         'temp holds swapped int
-        Dim count, index, rndNum, temp As Integer
+        Dim count, index, rndNum, temp, i, tmp, rdNum As Integer
 
         'call new random seeder class
         Dim rndm As Random = New Random()
@@ -309,6 +367,22 @@ Public Class frmMain
                 temp = indxArraySOA(rndNum)
                 indxArraySOA(rndNum) = indxArraySOA(index)
                 indxArraySOA(index) = temp
+
+            Next
+
+            For i = 0 To 47
+
+                rdNum = rndm.Next(0, 48)
+
+                While rdNum = i
+
+                    rdNum = rndm.Next(0, 48)
+
+                End While
+
+                tmp = indxArrayTrain(rdNum)
+                indxArrayTrain(rdNum) = indxArrayTrain(i)
+                indxArrayTrain(i) = tmp
 
             Next
         Next
@@ -353,16 +427,17 @@ Public Class frmMain
         setWin()
 
         'fill array function called, then shuffle indexArray
-        fillArraysSOA()
+        fillArrays()
         Shuffle()
 
         'assign deval'd outcomes and set score to 0
         assignOutcomes()
         setScore(0)
+        setTrainScore(0)
 
         'for loop counter
         Dim formCount As Integer
-
+        Dim trainCount As Integer
 
         '---------------------'
         'Runs through forms until completion, can be force closed before completion by user.
@@ -370,6 +445,21 @@ Public Class frmMain
         'so set the Run/showdialog statements in a try/catch block, so if exception pops up, just disposes of this form and quits cleanly
         '---------------------'
         Try
+
+            clsTrainingInstr.ShowDialog(Me)
+
+            For trainCount = 0 To 47
+
+                Dim objIndex As Integer
+
+                objIndex = indxArrayTrain(trainCount)
+                formArrayTrain(objIndex).ShowDialog(Me)
+
+            Next
+
+            clsThanks.ShowDialog(Me)
+            clsEndTrain.ShowDialog(Me)
+
 
             clsSOAInstr.ShowDialog(Me)
             clsDevalued.ShowDialog(Me)
@@ -384,8 +474,8 @@ Public Class frmMain
 
             Next
 
-            frmThanks.ShowDialog()
-            frmBlank.ShowDialog()
+            clsThanks.ShowDialog(Me)
+            clsEndSOA.ShowDialog(Me)
 
 
         Catch ex As Exception
@@ -407,7 +497,7 @@ Public Class frmMain
 
     'if cancel, close
     Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
-        frmBlank.Dispose()
+        EndSOA.Dispose()
         SOA_Stnd_Grape.Dispose()
         SOA_Stnd_Apple.Dispose()
         SOA_Cong_Ban.Dispose()

@@ -31,7 +31,7 @@ Public Class frmThanks
                 SOA_Cong_Pear.Dispose()
                 SOA_Incon_Orng.Dispose()
                 SOA_Incon_Pine.Dispose()
-                frmBlank.Dispose()
+                EndSOA.Dispose()
                 Me.Dispose()
                 Application.Exit()
             Else

@@ -20,12 +20,13 @@ Public Class TrainStndGrape
     Dim orderPath As String
     Dim stimType As String
 
-    'sets variables to get deval outcomes number from frmMain
-    Dim d1 As Integer
-    Dim d2 As Integer
+    'sets points variable from frmMain
+    Dim points As Integer
 
-    'sets points variable
-    Dim score As Integer
+    'create new stopwatch to record resp time
+    Dim stpWatch As New Stopwatch()
+    Dim milTime As Long
+
 
 
     '-----Form Load Function (what happens each time Showdialog is called for form)-----'
@@ -49,16 +50,14 @@ Public Class TrainStndGrape
         'Set pathway to read/write to file-need selected session and subID from Main, then use those to make file path
         cbx = frmMain.cbxSess.SelectedItem
         subID = frmMain.txtSubj.Text
-        path = "C:\x\" & subID & "\" & subID & cbx & "_StndGrapeSOA.txt"
+        path = "C:\x\" & subID & "\" & subID & cbx & "_StndGrapeTrain.txt"
 
         'set path and stimtype for output to stimOrder text
-        orderPath = "C:\x\" & subID & "\" & subID & cbx & "_StimOrder.txt"
+        orderPath = "C:\x\" & subID & "\" & subID & cbx & "_TrainOrder.txt"
         stimType = "StandardGrape"
 
         'get deval numbers and score
-        d1 = frmMain.getD1()
-        d2 = frmMain.getD2()
-        score = frmMain.getScore()
+        points = frmMain.getTrainScore()
 
         'set response to arbitray number not used in 3 outcomes for error handling
         resp = 100
@@ -70,9 +69,9 @@ Public Class TrainStndGrape
         LeftArr.Visible = True
         RightArr.Visible = True
 
-        'start first timer (for stim)
+        'start stopwatch and overflow timer
         FruitPic.Focus()
-        stimTimer.Start()
+        stpWatch.Start()
 
 
     End Sub
@@ -90,7 +89,7 @@ Public Class TrainStndGrape
 
             If response = MsgBoxResult.Yes Then
                 frmMain.Dispose()
-                frmBlank.Dispose()
+                EndSOA.Dispose()
                 SOA_Stnd_Apple.Dispose()
                 SOA_Cong_Ban.Dispose()
                 SOA_Cong_Pear.Dispose()
@@ -104,42 +103,54 @@ Public Class TrainStndGrape
 
         ElseIf e.KeyChar = "2" Then
 
-            'if 2 pressed, determine if feedback has been devalued. if so, show xmark feedback and subtract points. if not, show cherries and add points
+            milTime = stpWatch.ElapsedMilliseconds()
 
-            '0 is the number for cherries being deval'd
-            If d1 = 0 Or d2 = 0 Then
+            stpWatch.Reset()
 
-                'see sub at bottom of page for comments
-                stimOff()
+            Select Case milTime
 
-                'set image to feedback image for correct BUT DEVALUED Resp
-                FruitPic.Image = My.Resources.ResourceManager.GetObject("xmark")
+                Case 0 To 1000
 
-                'set response to number designation for correct key, but DEVAL resp
-                resp = 2
+                    points = points + 5
+                    frmMain.setTrainScore(points)
 
-                'subtract points from total
-                score = score - 5
-                frmMain.setScore(score)
+                Case 1001 To 1500
 
-            Else
+                    points = points + 4
+                    frmMain.setTrainScore(points)
 
-                stimOff()
+                Case 1501 To 2000
 
-                'feedback set to cherries instead
-                FruitPic.Image = My.Resources.ResourceManager.GetObject("cherries")
+                    points = points + 3
+                    frmMain.setTrainScore(points)
 
-                'resp output set to correct key press
-                resp = 1
+                Case 2001 To 2500
 
-                'add points and set the frmMain variable to new number
-                score = score + 5
-                frmMain.setScore(score)
+                    points = points + 2
+                    frmMain.setTrainScore(points)
 
-            End If
+                Case Is > 2500
+
+                    points = points + 1
+                    frmMain.setTrainScore(points)
+
+                Case Else
+
+                    MsgBox("The person coding this sucks.", MsgBoxStyle.OkOnly, "UH-OH. UH-OH. UH-OH.")
+
+            End Select
+
+
+            stimOff()
+
+            FruitPic.Image = My.Resources.ResourceManager.GetObject("cherries")
+
+            resp = 1
 
 
         ElseIf e.KeyChar = "1" Then
+
+            stpWatch.Reset()
 
             stimOff()
 
@@ -156,40 +167,6 @@ Public Class TrainStndGrape
 
 
     End Sub
-
-    '-----What to do when stimTimer runs out-----'
-
-    'similar to key press functions for 1/2, but happens if first timer runs out
-
-    Private Sub stimTimer_Tick() Handles stimTimer.Tick
-
-        'another check on DEVAL'd outcomes; if cherries are devalued, stim time-out changes slightly.
-        'similar code to keypress
-        If d1 = 0 Or d2 = 0 Then
-
-            stimOff()
-
-            FruitPic.Image = My.Resources.ResourceManager.GetObject("Checkmark")
-
-            resp = 4
-
-            score = score + 5
-            frmMain.setScore(score)
-
-        Else
-
-            stimOff()
-
-            FruitPic.Image = blankBox
-
-            resp = 3
-
-            'points = points
-
-        End If
-
-    End Sub
-
 
     '-----What to do when betweenTimer runs out-----'
 
@@ -256,9 +233,6 @@ Public Class TrainStndGrape
     '-----What to do after stim (button press or time out)-----'
 
     Private Sub stimOff()
-
-        'reset/stop timer, make pics invisible and turn off keyboard input
-        stimTimer.Stop()
 
         KeyPreview = False
 

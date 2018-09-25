@@ -24,7 +24,6 @@ Partial Class TrainInconOrng
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.bwTimer = New System.ComponentModel.BackgroundWorker()
-        Me.stimTimer = New System.Windows.Forms.Timer(Me.components)
         Me.betweenTimer = New System.Windows.Forms.Timer(Me.components)
         Me.feedbackTimer = New System.Windows.Forms.Timer(Me.components)
         Me.blankTimer = New System.Windows.Forms.Timer(Me.components)
@@ -35,10 +34,6 @@ Partial Class TrainInconOrng
         CType(Me.RightArr, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LeftArr, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
-        '
-        'stimTimer
-        '
-        Me.stimTimer.Interval = 2500
         '
         'betweenTimer
         '
@@ -90,7 +85,7 @@ Partial Class TrainInconOrng
         Me.LeftArr.TabIndex = 63
         Me.LeftArr.TabStop = False
         '
-        'Incongruent1
+        'TrainInconOrng
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.BackColor = System.Drawing.Color.LightBlue
@@ -100,7 +95,7 @@ Partial Class TrainInconOrng
         Me.Controls.Add(Me.RightArr)
         Me.Controls.Add(Me.LeftArr)
         Me.KeyPreview = True
-        Me.Name = "Incongruent1"
+        Me.Name = "TrainInconOrng"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Orange"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
@@ -114,7 +109,6 @@ Partial Class TrainInconOrng
     Friend WithEvents LeftArr As PictureBox
     Friend WithEvents RightArr As PictureBox
     Friend WithEvents FruitPic As PictureBox
-    Friend WithEvents stimTimer As Timer
     Friend WithEvents betweenTimer As Timer
     Friend WithEvents feedbackTimer As Timer
     Friend WithEvents blankTimer As Timer

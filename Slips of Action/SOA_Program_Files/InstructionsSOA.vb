@@ -43,7 +43,7 @@ Public Class InstructionsSOA
 
             If response = MsgBoxResult.Yes Then
                 frmMain.Dispose()
-                frmBlank.Dispose()
+                EndSOA.Dispose()
                 SOA_Stnd_Grape.Dispose()
                 SOA_Stnd_Apple.Dispose()
                 SOA_Cong_Ban.Dispose()

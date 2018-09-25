@@ -21,12 +21,16 @@ Public Class TrainInconOrng
     Dim stimType As String
 
     'get variables for deval and score from Main
-    Dim d1, d2, score As Integer
+    Dim points As Integer
+
+    Dim stpWatch As New Stopwatch()
+    Dim milTime As Long
+
 
 
     '-----Form Load Function (what happens each time Showdialog is called for form)-----'
 
-    Private Sub frmIncongruent1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Private Sub frmTrainOrng_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         'set the screen to extended monitor
         Dim screen As Screen
         ' We want to display a form on screen 1
@@ -46,15 +50,12 @@ Public Class TrainInconOrng
         'Set pathway to read/write to file
         cbx = frmMain.cbxSess.SelectedItem
         subID = frmMain.txtSubj.Text
-        path = "C:\x\" & subID & "\" & subID & cbx & "_InconOrngSOA.txt"
+        path = "C:\x\" & subID & "\" & subID & cbx & "_InconOrngTrain.txt"
 
-        orderPath = "C:\x\" & subID & "\" & subID & cbx & "_StimOrder.txt"
+        orderPath = "C:\x\" & subID & "\" & subID & cbx & "_TrainOrder.txt"
         stimType = "IncongruentOrange"
 
-        'get functions to set variables pulled from frmMain
-        d1 = frmMain.getD1()
-        d2 = frmMain.getD2()
-        score = frmMain.getScore()
+        points = frmMain.getTrainScore()
 
         'set response to arbitray number not used in 3 outcomes for error handling
         resp = 100
@@ -69,15 +70,14 @@ Public Class TrainInconOrng
 
         FruitPic.Focus()
 
-        'start first timer
-        stimTimer.Start()
+        stpWatch.Start()
 
 
     End Sub
 
     '-----Key Press Functions-----'
 
-    Private Sub frmIncongruent1_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles MyBase.KeyPress
+    Private Sub frmTrainOrng_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles MyBase.KeyPress
         Dim response As MsgBoxResult
 
         'if x, pop up message asking if you want to quit, Dispose all forms and exit
@@ -90,7 +90,7 @@ Public Class TrainInconOrng
                 SOA_Stnd_Apple.Dispose()
                 SOA_Cong_Ban.Dispose()
                 SOA_Cong_Pear.Dispose()
-                frmBlank.Dispose()
+                EndSOA.Dispose()
                 SOA_Incon_Pine.Dispose()
                 frmThanks.Dispose()
                 Me.Dispose()
@@ -100,28 +100,49 @@ Public Class TrainInconOrng
 
         ElseIf e.KeyChar = "2" Then
 
-            If d1 = 2 Or d2 = 2 Then
 
-                stimOff()
+            milTime = stpWatch.ElapsedMilliseconds()
 
-                FruitPic.Image = My.Resources.ResourceManager.GetObject("xmark")
+            stpWatch.Reset()
 
-                resp = 2
+            Select Case milTime
 
-                score = score - 5
-                frmMain.setScore(score)
-            Else
+                Case 0 To 1000
 
-                stimOff()
+                    points = points + 5
+                    frmMain.setTrainScore(points)
 
-                FruitPic.Image = My.Resources.ResourceManager.GetObject("pineapple")
+                Case 1001 To 1500
 
-                resp = 1
+                    points = points + 4
+                    frmMain.setTrainScore(points)
 
-                score = score + 5
-                frmMain.setScore(score)
+                Case 1501 To 2000
 
-            End If
+                    points = points + 3
+                    frmMain.setTrainScore(points)
+
+                Case 2001 To 2500
+
+                    points = points + 2
+                    frmMain.setTrainScore(points)
+
+                Case Is > 2500
+
+                    points = points + 1
+                    frmMain.setTrainScore(points)
+
+                Case Else
+
+                    MsgBox("The person coding this sucks.", MsgBoxStyle.OkOnly, "UH-OH. UH-OH. UH-OH.")
+
+            End Select
+
+            stimOff()
+
+            FruitPic.Image = My.Resources.ResourceManager.GetObject("pineapple")
+
+            resp = 1
 
         ElseIf e.KeyChar = "1" Then
 
@@ -137,34 +158,6 @@ Public Class TrainInconOrng
 
 
     End Sub
-
-    '-----What to do when stimTimer runs out-----'
-
-    Private Sub stimTimer_Tick() Handles stimTimer.Tick
-
-        If d1 = 2 Or d2 = 2 Then
-
-            stimOff()
-
-            FruitPic.Image = My.Resources.ResourceManager.GetObject("Checkmark")
-
-            resp = 4
-
-            score = score + 5
-            frmMain.setScore(score)
-
-        Else
-
-            stimOff()
-
-            FruitPic.Image = blankBox
-
-            resp = 3
-
-        End If
-
-    End Sub
-
 
     '-----What to do when betweenTimer runs out-----'
 
@@ -232,9 +225,6 @@ Public Class TrainInconOrng
     '-----Function for keypress/stim timer running out-----'
 
     Private Sub stimOff()
-
-        'reset/stop timer, make pics invisible and turn off keyboard input
-        stimTimer.Stop()
 
         KeyPreview = False
 

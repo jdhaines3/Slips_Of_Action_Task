@@ -89,7 +89,7 @@ Public Class SOA_Cong_Ban
                 frmMain.Dispose()
                 SOA_Stnd_Grape.Dispose()
                 SOA_Stnd_Apple.Dispose()
-                frmBlank.Dispose()
+                EndSOA.Dispose()
                 SOA_Cong_Pear.Dispose()
                 SOA_Incon_Orng.Dispose()
                 SOA_Incon_Pine.Dispose()

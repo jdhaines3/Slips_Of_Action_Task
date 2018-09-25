@@ -87,7 +87,7 @@ Public Class SOA_Stnd_Apple
             If response = MsgBoxResult.Yes Then
                 frmMain.Dispose()
                 SOA_Stnd_Grape.Dispose()
-                frmBlank.Dispose()
+                EndSOA.Dispose()
                 SOA_Cong_Ban.Dispose()
                 SOA_Cong_Pear.Dispose()
                 SOA_Incon_Orng.Dispose()

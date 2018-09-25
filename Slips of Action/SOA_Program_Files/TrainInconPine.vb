@@ -20,12 +20,17 @@ Public Class TrainInconPine
     Dim orderPath As String
     Dim stimType As String
 
-    'gets deval and score from Main  
-    Dim d1, d2, score As Integer
+    'Dim points variable to get from main
+    Dim points As Integer
+
+    'dims new stopwatch and milisecond integer
+    Dim stpWatch As New Stopwatch()
+    Dim milTime As Long
+
 
     '-----Form Load Function (what happens each time Showdialog is called for form)-----'
 
-    Private Sub frmIncongruent2_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Private Sub frmTrainPine_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         'set the screen to extended monitor
         Dim screen As Screen
         ' We want to display a form on screen 1
@@ -45,14 +50,12 @@ Public Class TrainInconPine
         'Set pathway to read/write to file
         cbx = frmMain.cbxSess.SelectedItem
         subID = frmMain.txtSubj.Text
-        path = "C:\x\" & subID & "\" & subID & cbx & "_InconPineSOA.txt"
+        path = "C:\x\" & subID & "\" & subID & cbx & "_InconPineTrain.txt"
 
-        orderPath = "C:\x\" & subID & "\" & subID & cbx & "_StimOrder.txt"
+        orderPath = "C:\x\" & subID & "\" & subID & cbx & "_TrainOrder.txt"
         stimType = "IncongruentPineapple"
 
-        d1 = frmMain.getD1()
-        d2 = frmMain.getD2()
-        score = frmMain.getScore()
+        points = frmMain.getTrainScore()
 
         'set response to arbitray number not used in 3 outcomes for error handling
         resp = 100
@@ -67,15 +70,13 @@ Public Class TrainInconPine
 
         FruitPic.Focus()
 
-        'start stim timer (first timer) 
-        stimTimer.Start()
-
+        stpWatch.Start()
 
     End Sub
 
     '-----Key Press Functions-----'
 
-    Private Sub frmIncongruent2_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles MyBase.KeyPress
+    Private Sub frmTrainPine_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles MyBase.KeyPress
         Dim response As MsgBoxResult
 
         'if x, pop up message asking if you want to quit, Dispose all forms and exit
@@ -90,7 +91,7 @@ Public Class TrainInconPine
                 SOA_Cong_Ban.Dispose()
                 SOA_Cong_Pear.Dispose()
                 SOA_Incon_Orng.Dispose()
-                frmBlank.Dispose()
+                EndSOA.Dispose()
                 frmThanks.Dispose()
                 Me.Dispose()
                 Application.Exit()
@@ -99,41 +100,60 @@ Public Class TrainInconPine
 
         ElseIf e.KeyChar = "2" Then
 
-            'see sub at bottom of page for comments
+            stpWatch.Reset()
+
             stimOff()
 
-            'set image to incorrect feedback
             FruitPic.Image = blankBox
 
-            'set resp to incorrect button press
             resp = 0
 
 
         ElseIf e.KeyChar = "1" Then
 
-            If d1 = 5 Or d2 = 5 Then
 
-                stimOff()
+            milTime = stpWatch.ElapsedMilliseconds()
 
-                FruitPic.Image = My.Resources.ResourceManager.GetObject("xmark")
+            stpWatch.Reset()
 
-                resp = 2
+            Select Case milTime
 
-                score = score - 5
-                frmMain.setScore(score)
+                Case 0 To 1000
 
-            Else
+                    points = points + 5
+                    frmMain.setTrainScore(points)
 
-                stimOff()
+                Case 1001 To 1500
 
-                FruitPic.Image = My.Resources.ResourceManager.GetObject("orange")
+                    points = points + 4
+                    frmMain.setTrainScore(points)
 
-                resp = 1
+                Case 1501 To 2000
 
-                score = score + 5
-                frmMain.setScore(score)
+                    points = points + 3
+                    frmMain.setTrainScore(points)
 
-            End If
+                Case 2001 To 2500
+
+                    points = points + 2
+                    frmMain.setTrainScore(points)
+
+                Case Is > 2500
+
+                    points = points + 1
+                    frmMain.setTrainScore(points)
+
+                Case Else
+
+                    MsgBox("The person coding this sucks.", MsgBoxStyle.OkOnly, "UH-OH. UH-OH. UH-OH.")
+
+            End Select
+
+            stimOff()
+
+            FruitPic.Image = My.Resources.ResourceManager.GetObject("orange")
+
+            resp = 1
 
         Else
             'if other key pressed, Do nothing
@@ -141,35 +161,6 @@ Public Class TrainInconPine
 
 
     End Sub
-
-    '-----What to do when stimTimer runs out-----'
-
-    'similar to key press functions for 1/2, but happens if first timer runs out
-
-    Private Sub stimTimer_Tick() Handles stimTimer.Tick
-
-        If d1 = 5 Or d2 = 5 Then
-            stimOff()
-
-            FruitPic.Image = My.Resources.ResourceManager.GetObject("Checkmark")
-
-            resp = 4
-
-            score = score + 5
-            frmMain.setScore(score)
-
-        Else
-
-            stimOff()
-
-            FruitPic.Image = blankBox
-
-            resp = 3
-
-        End If
-
-    End Sub
-
 
     '-----What to do when betweenTimer runs out-----'
 
@@ -236,9 +227,6 @@ Public Class TrainInconPine
     '-----Function for keypress/stim timer running out-----'
 
     Private Sub stimOff()
-
-        'reset/stop timer, make pics invisible and turn off keyboard input
-        stimTimer.Stop()
 
         KeyPreview = False
 

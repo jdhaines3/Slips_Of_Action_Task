@@ -90,7 +90,7 @@ Public Class SOA_Incon_Pine
                 SOA_Cong_Ban.Dispose()
                 SOA_Cong_Pear.Dispose()
                 SOA_Incon_Orng.Dispose()
-                frmBlank.Dispose()
+                EndSOA.Dispose()
                 frmThanks.Dispose()
                 Me.Dispose()
                 Application.Exit()

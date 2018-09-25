@@ -22,7 +22,7 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <OldToolsVersion>3.5</OldToolsVersion>
-    <ApplicationIcon>Ice-Cube-.ico</ApplicationIcon>
+    <ApplicationIcon>closedchest_gfC_icon.ico</ApplicationIcon>
     <SignAssembly>false</SignAssembly>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <TargetFrameworkProfile />
@@ -84,16 +84,28 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="EndTrain.Designer.vb">
+      <DependentUpon>EndTrain.vb</DependentUpon>
+    </Compile>
+    <Compile Include="EndTrain.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OutcomeDeval.Designer.vb">
+      <DependentUpon>OutcomeDeval.vb</DependentUpon>
+    </Compile>
+    <Compile Include="OutcomeDeval.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="SOA_Devalued.Designer.vb">
       <DependentUpon>SOA_Devalued.vb</DependentUpon>
     </Compile>
     <Compile Include="SOA_Devalued.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmBlank.Designer.vb">
-      <DependentUpon>frmBlank.vb</DependentUpon>
+    <Compile Include="EndSOA.Designer.vb">
+      <DependentUpon>EndSOA.vb</DependentUpon>
     </Compile>
-    <Compile Include="frmBlank.vb">
+    <Compile Include="EndSOA.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="SOA_Incon_Pine.Designer.vb">
@@ -118,6 +130,30 @@
       <DependentUpon>SOA_Cong_Ban.vb</DependentUpon>
     </Compile>
     <Compile Include="SOA_Cong_Ban.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TrainCongBana.Designer.vb">
+      <DependentUpon>TrainCongBana.vb</DependentUpon>
+    </Compile>
+    <Compile Include="TrainCongBana.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TrainCongPear.Designer.vb">
+      <DependentUpon>TrainCongPear.vb</DependentUpon>
+    </Compile>
+    <Compile Include="TrainCongPear.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TrainInconOrng.Designer.vb">
+      <DependentUpon>TrainInconOrng.vb</DependentUpon>
+    </Compile>
+    <Compile Include="TrainInconOrng.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TrainInconPine.Designer.vb">
+      <DependentUpon>TrainInconPine.vb</DependentUpon>
+    </Compile>
+    <Compile Include="TrainInconPine.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="TrainingInstr.Designer.vb">
@@ -172,14 +208,33 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="TrainStndApple.Designer.vb">
+      <DependentUpon>TrainStndApple.vb</DependentUpon>
+    </Compile>
+    <Compile Include="TrainStndApple.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TrainStndGrape.Designer.vb">
+      <DependentUpon>TrainStndGrape.vb</DependentUpon>
+    </Compile>
+    <Compile Include="TrainStndGrape.vb">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="EndTrain.resx">
+      <DependentUpon>EndTrain.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OutcomeDeval.resx">
+      <DependentUpon>OutcomeDeval.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SOA_Devalued.resx">
       <DependentUpon>SOA_Devalued.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmBlank.resx">
+    <EmbeddedResource Include="EndSOA.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>frmBlank.vb</DependentUpon>
+      <DependentUpon>EndSOA.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SOA_Incon_Pine.resx">
       <DependentUpon>SOA_Incon_Pine.vb</DependentUpon>
@@ -192,6 +247,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SOA_Cong_Ban.resx">
       <DependentUpon>SOA_Cong_Ban.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TrainCongBana.resx">
+      <DependentUpon>TrainCongBana.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TrainCongPear.resx">
+      <DependentUpon>TrainCongPear.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TrainInconOrng.resx">
+      <DependentUpon>TrainInconOrng.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TrainInconPine.resx">
+      <DependentUpon>TrainInconPine.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TrainingInstr.resx">
       <DependentUpon>TrainingInstr.vb</DependentUpon>
@@ -218,6 +285,12 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TrainStndApple.resx">
+      <DependentUpon>TrainStndApple.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TrainStndGrape.resx">
+      <DependentUpon>TrainStndGrape.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -313,6 +386,7 @@
   <ItemGroup>
     <Content Include="beer.ico" />
     <Content Include="Bitmap1.bmp" />
+    <Content Include="closedchest_gfC_icon.ico" />
     <Content Include="Happy Hambone.jpg" />
     <Content Include="Ice-Cube-.ico" />
     <Content Include="ICECUBE.ico" />

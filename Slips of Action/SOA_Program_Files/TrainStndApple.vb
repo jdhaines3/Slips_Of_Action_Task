@@ -20,13 +20,17 @@ Public Class TrainStndApple
     Dim orderPath As String
     Dim stimType As String
 
-    'deval outcomes and score from frmMain
-    Dim d1, d2, score As Integer
+    'dim variable for points for training from frmMain
+    Dim points As Integer
+
+    'Dim new stopwatch to record resp time
+    Dim stpWatch As New Stopwatch()
+    Dim milTime As Long
 
 
     '-----Load Function-----'
 
-    Private Sub frmStandard2_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Private Sub frmTrainApple_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         'set the screen to extended monitor
         Dim screen As Screen
         ' We want to display a form on screen 1
@@ -46,16 +50,14 @@ Public Class TrainStndApple
         'Set pathway to read/write to file-need selected session and subID from Main, then use those to make file path
         cbx = frmMain.cbxSess.SelectedItem
         subID = frmMain.txtSubj.Text
-        path = "C:\x\" & subID & "\" & subID & cbx & "_StndAppleSOA.txt"
+        path = "C:\x\" & subID & "\" & subID & cbx & "_StndAppleTrain.txt"
 
         'pathway for ordering
-        orderPath = "C:\x\" & subID & "\" & subID & cbx & "_StimOrder.txt"
+        orderPath = "C:\x\" & subID & "\" & subID & cbx & "_TrainOrder.txt"
         stimType = "StandardApple"
 
         'get deval numbers and score
-        d1 = frmMain.getD1()
-        d2 = frmMain.getD2()
-        score = frmMain.getScore()
+        points = frmMain.getTrainScore()
 
         'set response to arbitray number not used in 3 outcomes for error handling
         resp = 100
@@ -67,16 +69,15 @@ Public Class TrainStndApple
         LeftArr.Visible = True
         RightArr.Visible = True
 
-        'start stim timer
+        'start stim timer/stopwatch
         FruitPic.Focus()
-        stimTimer.Start()
-
+        stpWatch.Start()
 
     End Sub
 
     '-----Key Press Functions-----'
 
-    Private Sub frmStandard2_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles MyBase.KeyPress
+    Private Sub frmTrainApple_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles MyBase.KeyPress
         Dim response As MsgBoxResult
 
         'if x, pop up message asking if you want to quit, Dispose all forms and exit
@@ -87,7 +88,7 @@ Public Class TrainStndApple
             If response = MsgBoxResult.Yes Then
                 frmMain.Dispose()
                 SOA_Stnd_Grape.Dispose()
-                frmBlank.Dispose()
+                EndSOA.Dispose()
                 SOA_Cong_Ban.Dispose()
                 SOA_Cong_Pear.Dispose()
                 SOA_Incon_Orng.Dispose()
@@ -100,6 +101,8 @@ Public Class TrainStndApple
 
         ElseIf e.KeyChar = "2" Then
 
+            stpWatch.Reset()
+
             stimOff()
 
             'set image to feedback image for incorrect response; blank box (background image with foreground image set to 1 pixel)
@@ -111,29 +114,49 @@ Public Class TrainStndApple
 
         ElseIf e.KeyChar = "1" Then
 
-            If d1 = 3 Or d2 = 3 Then
+            milTime = stpWatch.ElapsedMilliseconds()
 
-                stimOff()
+            stpWatch.Reset()
 
-                FruitPic.Image = My.Resources.ResourceManager.GetObject("xmark")
+            Select Case milTime
 
-                resp = 2
+                Case 0 To 1000
 
-                score = score - 5
-                frmMain.setScore(score)
+                    points = points + 5
+                    frmMain.setTrainScore(points)
 
-            Else
+                Case 1001 To 1500
 
-                stimOff()
+                    points = points + 4
+                    frmMain.setTrainScore(points)
 
-                FruitPic.Image = My.Resources.ResourceManager.GetObject("halfWMelon")
+                Case 1501 To 2000
 
-                resp = 1
+                    points = points + 3
+                    frmMain.setTrainScore(points)
 
-                score = score + 5
-                frmMain.setScore(score)
+                Case 2001 To 2500
 
-            End If
+                    points = points + 2
+                    frmMain.setTrainScore(points)
+
+                Case Is > 2500
+
+                    points = points + 1
+                    frmMain.setTrainScore(points)
+
+
+                Case Else
+
+                    MsgBox("The person coding this sucks.", MsgBoxStyle.OkOnly, "UH-OH. UH-OH. UH-OH.")
+
+            End Select
+
+            stimOff()
+
+            FruitPic.Image = My.Resources.ResourceManager.GetObject("halfWMelon")
+
+            resp = 1
 
         Else
             'if other key pressed, Do nothing
@@ -141,36 +164,6 @@ Public Class TrainStndApple
 
 
     End Sub
-
-    '-----What to do when stimTimer runs out-----'
-
-    'similar to keypress for 1 or 2 but happens if no buttons pressed and stim time runs out
-
-    Private Sub stimTimer_Tick() Handles stimTimer.Tick
-
-        If d1 = 3 Or d2 = 3 Then
-
-            stimOff()
-
-            FruitPic.Image = My.Resources.ResourceManager.GetObject("Checkmark")
-
-            resp = 4
-
-            score = score + 5
-            frmMain.setScore(score)
-
-        Else
-
-            stimOff()
-
-            FruitPic.Image = blankBox
-
-            resp = 3
-
-        End If
-
-    End Sub
-
 
     '-----What to do when betweenTimer runs out-----'
 
@@ -237,9 +230,6 @@ Public Class TrainStndApple
     '-----Function for keypress/stim timer running out-----'
 
     Private Sub stimOff()
-
-        'reset/stop timer, make pics invisible and turn off keyboard input
-        stimTimer.Stop()
 
         KeyPreview = False
 

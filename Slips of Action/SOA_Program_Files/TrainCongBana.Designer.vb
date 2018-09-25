@@ -24,33 +24,16 @@ Partial Class TrainCongBana
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.bwTimer = New System.ComponentModel.BackgroundWorker()
-        Me.stimTimer = New System.Windows.Forms.Timer(Me.components)
-        Me.betweenTimer = New System.Windows.Forms.Timer(Me.components)
-        Me.feedbackTimer = New System.Windows.Forms.Timer(Me.components)
-        Me.blankTimer = New System.Windows.Forms.Timer(Me.components)
         Me.FruitPic = New System.Windows.Forms.PictureBox()
         Me.RightArr = New System.Windows.Forms.PictureBox()
         Me.LeftArr = New System.Windows.Forms.PictureBox()
+        Me.blankTimer = New System.Windows.Forms.Timer(Me.components)
+        Me.feedbackTimer = New System.Windows.Forms.Timer(Me.components)
+        Me.betweenTimer = New System.Windows.Forms.Timer(Me.components)
         CType(Me.FruitPic, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RightArr, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LeftArr, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
-        '
-        'stimTimer
-        '
-        Me.stimTimer.Interval = 2500
-        '
-        'betweenTimer
-        '
-        Me.betweenTimer.Interval = 500
-        '
-        'feedbackTimer
-        '
-        Me.feedbackTimer.Interval = 2500
-        '
-        'blankTimer
-        '
-        Me.blankTimer.Interval = 1000
         '
         'FruitPic
         '
@@ -90,7 +73,19 @@ Partial Class TrainCongBana
         Me.LeftArr.TabIndex = 63
         Me.LeftArr.TabStop = False
         '
-        'Congruent1
+        'blankTimer
+        '
+        Me.blankTimer.Interval = 1000
+        '
+        'feedbackTimer
+        '
+        Me.feedbackTimer.Interval = 2500
+        '
+        'betweenTimer
+        '
+        Me.betweenTimer.Interval = 500
+        '
+        'TrainCongBana
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.BackColor = System.Drawing.Color.LightBlue
@@ -100,7 +95,7 @@ Partial Class TrainCongBana
         Me.Controls.Add(Me.RightArr)
         Me.Controls.Add(Me.LeftArr)
         Me.KeyPreview = True
-        Me.Name = "Congruent1"
+        Me.Name = "TrainCongBana"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Banana"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
@@ -114,8 +109,7 @@ Partial Class TrainCongBana
     Friend WithEvents LeftArr As PictureBox
     Friend WithEvents RightArr As PictureBox
     Friend WithEvents FruitPic As PictureBox
-    Friend WithEvents stimTimer As Timer
-    Friend WithEvents betweenTimer As Timer
-    Friend WithEvents feedbackTimer As Timer
     Friend WithEvents blankTimer As Timer
+    Friend WithEvents feedbackTimer As Timer
+    Friend WithEvents betweenTimer As Timer
 End Class
