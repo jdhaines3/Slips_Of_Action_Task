@@ -5,25 +5,33 @@ Imports Microsoft.VisualBasic
 
 Public Class frmMain
 
+    '==================================='
+    '-----Declare frmMain variables-----'
+    '==================================='
 
-    'list instances of all forms
+    '----Declaring instances of forms----'
 
-    'beginning and end of run forms
-    Public clsThanks As New frmThanks
-    Public clsEndSOA As New EndSOA
-    Public clsEndTrain As New EndTrain
+
+    'beginning and end of each phase forms
     Public clsSOAInstr As New InstructionsSOA
     Public clsTrainingInstr As New TrainingInstr
+    Public clsODInstr As New InstructionsOD
+    Public clsEndSOA As New EndSOA
+    Public clsEndTrain As New EndTrain
+    Public clsEndDeval As New EndDeval
     Public clsDevalued As New SOA_Devalued
-    Public clsOutcome As New OutcomeDeval
+    Public clsThanks As New frmThanks
 
-    'Training Stim Forms
+    'Training phase form instances
     Public StndGrapeTrain As New TrainStndGrape
     Public StndAppleTrain As New TrainStndApple
     Public CongBanTrain As New TrainCongBana
     Public CongPearTrain As New TrainCongPear
     Public InconOrngTrain As New TrainInconOrng
     Public InconPineTrain As New TrainInconPine
+
+    'Deval form instance
+    Public clsOutcome As New OutcomeDeval
 
     'SOA forms
     Public StndGrapeSOA As New SOA_Stnd_Grape
@@ -39,6 +47,7 @@ Public Class frmMain
     Private devalTwo As Integer
 
     Private trainingScore As Integer
+    Private devalScore As Integer
 
     'for detecting screen size
     Public ScrHeight As Integer
@@ -133,6 +142,18 @@ Public Class frmMain
 
     End Sub
 
+    Public Function getDevalScore() As Integer
+
+        Return devalScore
+
+    End Function
+
+    Public Sub setDevalScore(ByVal value As Integer)
+
+        devalScore = value
+
+    End Sub
+
 
     'sets window size
 
@@ -196,23 +217,20 @@ Public Class frmMain
 
                         Select Case myMsgBox("Files exist for this Subject and Session, would you like to append to them?", MsgBoxStyle.YesNo, "ERROR")
                             Case "YES"
-                                outcomeDev()
-                                'Squizzer()
+                                Squizzer()
                             Case "NO"
                                 myMsgBox("Then please delete previous files or rename current run.", MsgBoxStyle.OkOnly, "ERROR")
                         End Select
                         'if folder exists but no files, run 
                     Else
-                        outcomeDev()
-                        'Squizzer()
+                        Squizzer()
                     End If
 
                 Else
 
                     'if directory doesn't exist, create then run
                     My.Computer.FileSystem.CreateDirectory("C:\x\" & txtSubj.Text & "\")
-                    outcomeDev()
-                    'Squizzer()
+                    Squizzer()
 
                 End If
 
@@ -223,8 +241,7 @@ Public Class frmMain
 
                     My.Computer.FileSystem.CreateDirectory("C:\x\")
                     My.Computer.FileSystem.CreateDirectory("C:\x\" & txtSubj.Text & "\")
-                    outcomeDev()
-                    'Squizzer()
+                    Squizzer()
 
                 Catch ex As Exception
 
@@ -438,17 +455,93 @@ Public Class frmMain
         assignOutcomes()
         setScore(0)
         setTrainScore(0)
+        setDevalScore(0)
 
-        'for loop counter
-        Dim formCount As Integer
-        Dim trainCount As Integer
+        Select Case cbxSess.SelectedItem
+
+            Case "Full SOA Task"
+
+                trainingPhase()
+
+            Case "DevalPhase Restart"
+
+                devalPhase()
+
+            Case "SlipOfActionPhase Restart"
+
+                SlipsOfActionPhase()
+
+            Case Else
+
+                myMsgBox("Error. Idk what happened, man", MsgBoxStyle.OkOnly, "Oh no.")
+
+        End Select
+
+
+        'each one leads to next, so can start wherever
+
+
+        ''for loop counter
+        'Dim formCount As Integer
+        'Dim trainCount As Integer
 
         '---------------------'
         'Runs through forms until completion, can be force closed before completion by user.
         'if force closed, showdialog will still try to run even when application exits and all forms disposed...don't know why
         'so set the Run/showdialog statements in a try/catch block, so if exception pops up, just disposes of this form and quits cleanly
         '---------------------'
+        'Try
+
+        '    clsTrainingInstr.ShowDialog(Me)
+
+        '    For trainCount = 0 To 47
+
+        '        Dim objIndex As Integer
+
+        '        objIndex = indxArrayTrain(trainCount)
+        '        formArrayTrain(objIndex).ShowDialog(Me)
+
+        '    Next
+
+        '    clsThanks.ShowDialog(Me)
+        '    clsEndTrain.ShowDialog(Me)
+
+        'clsODInstr.ShowDialog(Me)
+        '    clsOutcome.ShowDialog(Me)
+        '    clsThanks.ShowDialog(Me)
+        '    clsEndDeval.ShowDialog(Me)
+
+        'clsSOAInstr.ShowDialog(Me)
+        'clsDevalued.ShowDialog(Me)
+
+        'For formCount = 0 To 59
+
+        '        'set variable that collects the number in indxArraySOA, not needed, just looks cleaner to me
+        '        Dim objIndex As Integer
+
+        '        objIndex = indxArraySOA(formCount)
+        '        formArraySOA(objIndex).ShowDialog(Me)
+
+        '    Next
+
+        '    clsThanks.ShowDialog(Me)
+        '    clsEndSOA.ShowDialog(Me)
+
+
+        'Catch ex As Exception
+
+        '    Me.Close()
+        '    Application.Exit()
+
+        'End Try
+
+    End Sub
+
+    Private Sub trainingPhase()
+
         Try
+
+            Dim trainCount As Integer
 
             clsTrainingInstr.ShowDialog(Me)
 
@@ -464,6 +557,43 @@ Public Class frmMain
             clsThanks.ShowDialog(Me)
             clsEndTrain.ShowDialog(Me)
 
+            devalPhase()
+
+        Catch ex As Exception
+
+            Me.Close()
+            Application.Exit()
+
+        End Try
+
+    End Sub
+
+    Private Sub devalPhase()
+
+        Try
+
+            clsODInstr.ShowDialog(Me)
+            clsOutcome.ShowDialog(Me)
+            clsThanks.ShowDialog(Me)
+            clsEndDeval.ShowDialog(Me)
+
+            SlipsOfActionPhase()
+
+
+        Catch ex As Exception
+
+            Me.Close()
+            Application.Exit()
+
+        End Try
+
+    End Sub
+
+    Private Sub SlipsOfActionPhase()
+
+        Try
+
+            Dim formCount As Integer
 
             clsSOAInstr.ShowDialog(Me)
             clsDevalued.ShowDialog(Me)
@@ -491,14 +621,6 @@ Public Class frmMain
 
     End Sub
 
-    Private Sub outcomeDev()
-
-        clsOutcome.ShowDialog(Me)
-        frmThanks.ShowDialog(Me)
-        Application.Exit()
-
-    End Sub
-
     Private Sub clock()
         CheckForIllegalCrossThreadCalls() = False
         Do
@@ -509,16 +631,44 @@ Public Class frmMain
 
     'if cancel, close
     Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
+
+        cleanseEverything()
+
+    End Sub
+
+    Public Sub cleanseEverything()
+
+        'beginning and end of run forms
+        frmThanks.Dispose()
         EndSOA.Dispose()
+        EndTrain.Dispose()
+        EndDeval.Dispose()
+        InstructionsSOA.Dispose()
+        TrainingInstr.Dispose()
+        InstructionsOD.Dispose()
+        SOA_Devalued.Dispose()
+
+        'Training Stim Forms
+        TrainStndGrape.Dispose()
+        TrainStndApple.Dispose()
+        TrainCongBana.Dispose()
+        TrainCongPear.Dispose()
+        TrainInconOrng.Dispose()
+        TrainInconPine.Dispose()
+
+        'Deval form
+        OutcomeDeval.Dispose()
+
+        'SOA forms
         SOA_Stnd_Grape.Dispose()
         SOA_Stnd_Apple.Dispose()
         SOA_Cong_Ban.Dispose()
         SOA_Cong_Pear.Dispose()
         SOA_Incon_Orng.Dispose()
         SOA_Incon_Pine.Dispose()
-        frmThanks.Dispose()
+
         Me.Dispose()
         Application.Exit()
-    End Sub
 
+    End Sub
 End Class

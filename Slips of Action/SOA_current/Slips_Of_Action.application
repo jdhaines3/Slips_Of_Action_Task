@@ -7,14 +7,14 @@
     <framework targetVersion="4.5.1" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="Slips_Of_Action.exe.manifest" size="11251">
+    <dependentAssembly dependencyType="install" codebase="Slips_Of_Action.exe.manifest" size="9296">
       <assemblyIdentity name="Slips_Of_Action.exe" version="1.0.1.6" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>v+ag0/k3a9a9m8LDjM0aNHwYi1ycoBhHPMmM/uEv+wA=</dsig:DigestValue>
+        <dsig:DigestValue>BN3G/amcWa+6bM09s3jFHziQSYPzJdrt00bL97YeZaw=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

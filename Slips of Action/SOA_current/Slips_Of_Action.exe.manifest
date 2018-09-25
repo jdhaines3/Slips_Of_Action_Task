@@ -55,7 +55,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>ouIWVG0c6D/RyjL1aK+gJQwt2iTHDqSo/V6YfygZC7A=</dsig:DigestValue>
+        <dsig:DigestValue>bh0/vny8g7AhJrfwxn0xtUhbC5BGoFQT39BNfhz/8+g=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -67,7 +67,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>YehMGLOYo+3UIspSiMdtWi+xHwweuDZ4YRPK4QC7MjE=</dsig:DigestValue>
+        <dsig:DigestValue>cbFq3LePef6KZtSKRkCOUMWzbznQ+xANXbYQLgdJ9Zo=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -79,7 +79,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>p7l6lt4sjaF0d/FavjZqe/9Y5uG3khxNPpDOaIpSApw=</dsig:DigestValue>
+        <dsig:DigestValue>wFkOPW4IopX3uQWiaSb8cntP7uyR7fJ10wZt84nKgsw=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -91,7 +91,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>T6QUvX4Kj2eF+yZwoExq7FnvEj5GyEk3+zdw5I5/g60=</dsig:DigestValue>
+        <dsig:DigestValue>rOgSs4+QMgCp7FWtpxLSZaACRPUiqBkhJ0/I1ma++e0=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -103,40 +103,22 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>eUbfRMAfLBfxp/6XGXCHE0GLTJF+qZp/ufdlE5C88SU=</dsig:DigestValue>
+        <dsig:DigestValue>CVYEQu3wlW192xl/XHXCSlpCuGpn9eVZjqtIj5OLLQM=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Slips_Of_Action.exe" size="3106816">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Slips_Of_Action.exe" size="3113472">
       <assemblyIdentity name="Slips_Of_Action" version="1.0.0.2" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>rIh6Jk40VAWmyC8t2Uu/GNxj5gFq4jFvA6zTKM5AkVQ=</dsig:DigestValue>
+        <dsig:DigestValue>l7AE1emtIPQYoXRkDbbC5wyiJrHBVKh6a2MgTbSyL70=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="beer.ico" size="9662">
-    <hash>
-      <dsig:Transforms>
-        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
-      </dsig:Transforms>
-      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>ryiSdyeV2N97XoTU55uK6qidchRmsoYGWyguLIYiWYo=</dsig:DigestValue>
-    </hash>
-  </file>
-  <file name="Bitmap1.bmp" size="1270">
-    <hash>
-      <dsig:Transforms>
-        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
-      </dsig:Transforms>
-      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>KDsi03nxJlHyi5drmAlttg5xN45IBCuifeXkxaitt/g=</dsig:DigestValue>
-    </hash>
-  </file>
   <file name="closedchest_gfC_icon.ico" size="212030">
     <hash>
       <dsig:Transforms>
@@ -144,33 +126,6 @@
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
       <dsig:DigestValue>zw0PtyFzLQxJieLDp2v5+Y+u22Fee0sMwRQcovYXZM4=</dsig:DigestValue>
-    </hash>
-  </file>
-  <file name="Happy Hambone.jpg" size="38634">
-    <hash>
-      <dsig:Transforms>
-        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
-      </dsig:Transforms>
-      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>zvNEefazHevu2ftXmbzFnBvxpMBTfK1wnUBN9ED7KUo=</dsig:DigestValue>
-    </hash>
-  </file>
-  <file name="Ice-Cube-.ico" size="154238">
-    <hash>
-      <dsig:Transforms>
-        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
-      </dsig:Transforms>
-      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>slTnJQNUI2KcZnCMSL0yoO3Yubhv3aGuJ9oYcV3heJQ=</dsig:DigestValue>
-    </hash>
-  </file>
-  <file name="ICECUBE.ico" size="270398">
-    <hash>
-      <dsig:Transforms>
-        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
-      </dsig:Transforms>
-      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>lrVwKCMwpuyipCoFYo+q3U4ctr1hBX/VOgFY7yixrsk=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Resources\Excited Hambone.jpg" size="51624">

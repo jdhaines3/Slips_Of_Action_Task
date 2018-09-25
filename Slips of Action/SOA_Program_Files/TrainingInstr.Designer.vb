@@ -46,11 +46,11 @@ Partial Class TrainingInstr
         Me.InstrLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.InstrLabel.Location = New System.Drawing.Point(287, 171)
         Me.InstrLabel.Name = "InstrLabel"
-        Me.InstrLabel.Size = New System.Drawing.Size(122, 25)
+        Me.InstrLabel.Size = New System.Drawing.Size(203, 25)
         Me.InstrLabel.TabIndex = 1
-        Me.InstrLabel.Text = "Instructions"
+        Me.InstrLabel.Text = "Press 8 to continue."
         '
-        'Instructions
+        'TrainingInstr
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.BackColor = System.Drawing.Color.LightBlue
@@ -59,7 +59,7 @@ Partial Class TrainingInstr
         Me.Controls.Add(Me.InstrLabel)
         Me.Controls.Add(Me.Title)
         Me.KeyPreview = True
-        Me.Name = "Instructions"
+        Me.Name = "TrainingInstr"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Instructions"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized

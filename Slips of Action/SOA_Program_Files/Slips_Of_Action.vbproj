@@ -84,10 +84,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="EndDeval.Designer.vb">
+      <DependentUpon>EndDeval.vb</DependentUpon>
+    </Compile>
+    <Compile Include="EndDeval.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="EndTrain.Designer.vb">
       <DependentUpon>EndTrain.vb</DependentUpon>
     </Compile>
     <Compile Include="EndTrain.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InstructionsOD.Designer.vb">
+      <DependentUpon>InstructionsOD.vb</DependentUpon>
+    </Compile>
+    <Compile Include="InstructionsOD.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="OutcomeDeval.Designer.vb">
@@ -222,9 +234,16 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="EndDeval.resx">
+      <DependentUpon>EndDeval.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="EndTrain.resx">
       <DependentUpon>EndTrain.vb</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InstructionsOD.resx">
+      <DependentUpon>InstructionsOD.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OutcomeDeval.resx">
       <DependentUpon>OutcomeDeval.vb</DependentUpon>
@@ -384,12 +403,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="beer.ico" />
-    <Content Include="Bitmap1.bmp" />
     <Content Include="closedchest_gfC_icon.ico" />
-    <Content Include="Happy Hambone.jpg" />
-    <Content Include="Ice-Cube-.ico" />
-    <Content Include="ICECUBE.ico" />
     <None Include="Resources\crate.png" />
     <None Include="Resources\crate2.png" />
     <None Include="Resources\apple.png" />

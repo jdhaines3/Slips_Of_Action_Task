@@ -95,7 +95,7 @@ Partial Class frmMain
         'cbxSess
         '
         Me.cbxSess.FormattingEnabled = True
-        Me.cbxSess.Items.AddRange(New Object() {"Practice", "Slips Of Action Task", "Restart"})
+        Me.cbxSess.Items.AddRange(New Object() {"Full SOA Task", "DevalPhase Restart", "SlipOfActionPhase Restart"})
         Me.cbxSess.Location = New System.Drawing.Point(221, 137)
         Me.cbxSess.Name = "cbxSess"
         Me.cbxSess.Size = New System.Drawing.Size(121, 21)
