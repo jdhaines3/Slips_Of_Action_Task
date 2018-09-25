@@ -3,7 +3,9 @@ Imports System.IO
 
 Public Class TrainStndApple
 
-    '-----set variables-----'
+    '==========================='
+    '-----Declare Variables-----'
+    '==========================='
 
     'sets response to write
     Dim resp As Integer
@@ -27,8 +29,9 @@ Public Class TrainStndApple
     Dim stpWatch As New Stopwatch()
     Dim milTime As Long
 
-
-    '-----Load Function-----'
+    '============================================================================================'
+    '-----Form Load Function (Step #1: what happens each time Showdialog is called for form)-----'
+    '============================================================================================'
 
     Private Sub frmTrainApple_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         'set the screen to extended monitor
@@ -42,8 +45,6 @@ Public Class TrainStndApple
 
         ' Set the StartPosition to Manual otherwise the system will assign an automatic start position
         Me.StartPosition = FormStartPosition.Manual
-
-        ' Set the form location so it appears at Location (100, 100) on the screen 1
         Me.Location = screen.Bounds.Location + New Point(0, 0)
 
 
@@ -56,7 +57,7 @@ Public Class TrainStndApple
         orderPath = "C:\x\" & subID & "\" & subID & cbx & "_TrainOrder.txt"
         stimType = "StandardApple"
 
-        'get deval numbers and score
+        'get score from Main
         points = frmMain.getTrainScore()
 
         'set response to arbitray number not used in 3 outcomes for error handling
@@ -75,7 +76,9 @@ Public Class TrainStndApple
 
     End Sub
 
-    '-----Key Press Functions-----'
+    '======================================='
+    '-----Key Press Functions (Step #2)-----'
+    '======================================='
 
     Private Sub frmTrainApple_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles MyBase.KeyPress
         Dim response As MsgBoxResult
@@ -86,21 +89,15 @@ Public Class TrainStndApple
             response = MsgBox("You are about to exit GPRA Quizzer. Are you sure?", MsgBoxStyle.YesNo, "Quit GRPA Quizzer?")
 
             If response = MsgBoxResult.Yes Then
-                frmMain.Dispose()
-                SOA_Stnd_Grape.Dispose()
-                EndSOA.Dispose()
-                SOA_Cong_Ban.Dispose()
-                SOA_Cong_Pear.Dispose()
-                SOA_Incon_Orng.Dispose()
-                SOA_Incon_Pine.Dispose()
-                frmThanks.Dispose()
-                Me.Dispose()
-                Application.Exit()
+
+                frmMain.cleanseEverything()
+
             Else
             End If
 
         ElseIf e.KeyChar = "2" Then
 
+            'if 2 pressed, incorrect, so no points; just reset stpwatch and turn stim off
             stpWatch.Reset()
 
             stimOff()
@@ -114,10 +111,14 @@ Public Class TrainStndApple
 
         ElseIf e.KeyChar = "1" Then
 
+            'similar to 2, but correct press
+
+            'get time in millisec from stopwatch (response time), then reset the watch
             milTime = stpWatch.ElapsedMilliseconds()
 
             stpWatch.Reset()
 
+            'determine points awarded based on response time, set new score
             Select Case milTime
 
                 Case 0 To 1000
@@ -148,10 +149,12 @@ Public Class TrainStndApple
 
                 Case Else
 
+                    'error/debugging
                     MsgBox("The person coding this sucks.", MsgBoxStyle.OkOnly, "UH-OH. UH-OH. UH-OH.")
 
             End Select
 
+            'turn stim off, set pic to correct feedback, resp to 1 for correct
             stimOff()
 
             FruitPic.Image = My.Resources.ResourceManager.GetObject("halfWMelon")
@@ -162,14 +165,31 @@ Public Class TrainStndApple
             'if other key pressed, Do nothing
         End If
 
+    End Sub
+
+    '=========================================================================================================='
+    '-----Stim Off function (Step #3: Turn pics and keyboard input off and start pre-feedback blank timer)-----'
+    '=========================================================================================================='
+
+    Private Sub stimOff()
+
+        KeyPreview = False
+
+        FruitPic.Visible = False
+        LeftArr.Visible = False
+        RightArr.Visible = False
+
+        betweenTimer.Start()
 
     End Sub
 
-    '-----What to do when betweenTimer runs out-----'
+    '============================================================================='
+    '-----Between-Timer tick (Step #4: What to do when betweenTimer runs out)-----'
+    '============================================================================='
 
     Private Sub betweenTimer_Tick() Handles betweenTimer.Tick
 
-        'Again, stop/reset timer
+        'stop/reset timer
         betweenTimer.Stop()
 
         'set new feedback pic as visible
@@ -181,7 +201,9 @@ Public Class TrainStndApple
     End Sub
 
 
-    '-----What to do when feedbackTimer runs out-----'
+    '==============================================================================='
+    '-----Feedback-Timer Tick (Step #5: What to do when feedbackTimer runs out)-----'
+    '==============================================================================='
 
     Private Sub feedbackTimer_Tick() Handles feedbackTimer.Tick
 
@@ -211,7 +233,10 @@ Public Class TrainStndApple
     End Sub
 
 
-    '-----What to do after blankTimer runs out-----'
+    '=========================================================================='
+    '-----Blank-Timer Tick (Step #6: What to do after blankTimer runs out)-----'
+    '=========================================================================='
+
     Private Sub blankTimer_Tick() Handles blankTimer.Tick
 
         'stop/reset timer
@@ -223,22 +248,6 @@ Public Class TrainStndApple
         'hide this form and go on to next statement in frmMain (A.K.A---next form is shown)
         Me.Hide()
 
-
-    End Sub
-
-
-    '-----Function for keypress/stim timer running out-----'
-
-    Private Sub stimOff()
-
-        KeyPreview = False
-
-        FruitPic.Visible = False
-        LeftArr.Visible = False
-        RightArr.Visible = False
-
-        'start timer for blank period between stim and feedback
-        betweenTimer.Start()
 
     End Sub
 

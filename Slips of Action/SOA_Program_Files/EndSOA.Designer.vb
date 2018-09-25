@@ -31,9 +31,10 @@ Partial Class EndSOA
         '
         'Label2
         '
+        Me.Label2.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(52, 260)
+        Me.Label2.Location = New System.Drawing.Point(236, 314)
         Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(72, 20)
@@ -42,8 +43,9 @@ Partial Class EndSOA
         '
         'btnExit
         '
+        Me.btnExit.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.btnExit.BackColor = System.Drawing.Color.Fuchsia
-        Me.btnExit.Location = New System.Drawing.Point(170, 245)
+        Me.btnExit.Location = New System.Drawing.Point(354, 299)
         Me.btnExit.Name = "btnExit"
         Me.btnExit.Size = New System.Drawing.Size(119, 50)
         Me.btnExit.TabIndex = 4
@@ -52,9 +54,10 @@ Partial Class EndSOA
         '
         'Label6
         '
+        Me.Label6.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.Label6.AutoSize = True
         Me.Label6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label6.Location = New System.Drawing.Point(43, 241)
+        Me.Label6.Location = New System.Drawing.Point(227, 295)
         Me.Label6.MinimumSize = New System.Drawing.Size(250, 57)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(250, 57)
@@ -62,11 +65,12 @@ Partial Class EndSOA
         '
         'Label1
         '
+        Me.Label1.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!)
-        Me.Label1.Location = New System.Drawing.Point(30, 24)
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.0!)
+        Me.Label1.Location = New System.Drawing.Point(150, 35)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(283, 144)
+        Me.Label1.Size = New System.Drawing.Size(413, 186)
         Me.Label1.TabIndex = 10
         Me.Label1.Text = "The experiment is complete!" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Check your score below, then" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "press ""cntrl + x"" to s" &
     "ave and exit," & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "or press the button at the bottom." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Total Points Earned:"
@@ -77,7 +81,7 @@ Partial Class EndSOA
         Me.ScoreTxt.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.ScoreTxt.BackColor = System.Drawing.Color.PaleTurquoise
         Me.ScoreTxt.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.0!)
-        Me.ScoreTxt.Location = New System.Drawing.Point(118, 185)
+        Me.ScoreTxt.Location = New System.Drawing.Point(296, 235)
         Me.ScoreTxt.Name = "ScoreTxt"
         Me.ScoreTxt.Size = New System.Drawing.Size(111, 38)
         Me.ScoreTxt.TabIndex = 11
@@ -86,10 +90,9 @@ Partial Class EndSOA
         '
         'EndSOA
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.BackColor = System.Drawing.SystemColors.ActiveBorder
-        Me.ClientSize = New System.Drawing.Size(349, 322)
+        Me.ClientSize = New System.Drawing.Size(703, 400)
         Me.Controls.Add(Me.ScoreTxt)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.btnExit)
@@ -99,7 +102,7 @@ Partial Class EndSOA
         Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Name = "EndSOA"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "End"
+        Me.Text = "EndTask"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

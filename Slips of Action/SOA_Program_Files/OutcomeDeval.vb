@@ -532,6 +532,8 @@ Public Class OutcomeDeval
 
         Else
 
+            durTimer.Stop()
+
             'if last trial, hide form and go to text one
             Me.Hide()
 

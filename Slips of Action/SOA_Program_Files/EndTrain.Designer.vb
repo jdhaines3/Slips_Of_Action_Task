@@ -28,11 +28,12 @@ Partial Class EndTrain
         '
         'Label1
         '
+        Me.Label1.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!)
-        Me.Label1.Location = New System.Drawing.Point(39, 25)
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.0!)
+        Me.Label1.Location = New System.Drawing.Point(159, 45)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(273, 144)
+        Me.Label1.Size = New System.Drawing.Size(390, 186)
         Me.Label1.TabIndex = 10
         Me.Label1.Text = "The training phase is complete!" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Check your score below," & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "then press 8 to continu" &
     "e" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "to the next phase!" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Total Points Earned:"
@@ -43,7 +44,7 @@ Partial Class EndTrain
         Me.ScoreTxt.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.ScoreTxt.BackColor = System.Drawing.Color.PaleTurquoise
         Me.ScoreTxt.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.0!)
-        Me.ScoreTxt.Location = New System.Drawing.Point(118, 185)
+        Me.ScoreTxt.Location = New System.Drawing.Point(302, 259)
         Me.ScoreTxt.Name = "ScoreTxt"
         Me.ScoreTxt.Size = New System.Drawing.Size(111, 38)
         Me.ScoreTxt.TabIndex = 11
@@ -52,17 +53,16 @@ Partial Class EndTrain
         '
         'EndTrain
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.BackColor = System.Drawing.SystemColors.ActiveBorder
-        Me.ClientSize = New System.Drawing.Size(349, 322)
+        Me.ClientSize = New System.Drawing.Size(700, 400)
         Me.Controls.Add(Me.ScoreTxt)
         Me.Controls.Add(Me.Label1)
         Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Name = "EndTrain"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "End"
+        Me.Text = "EndTrainingPhase"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

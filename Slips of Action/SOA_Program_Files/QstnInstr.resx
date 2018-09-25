@@ -117,19 +117,11 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="bwTimer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
   <data name="Label1.Text" xml:space="preserve">
-    <value>Once again, you will have the chance to earn points by pressing keys  to open a box
-shown on the screen, only this time, some of the fruits inside the boxes are no longer
-valuable. Your job is to press the correct key for each fruit shown on the box, BUT
-withhold your key press if the fruit INSIDE that box is devalued. Correct key presses
-will be rewarded (one point) and incorrect key presses will not be rewarded, but one
-point will be subtracted for every key press made to a box with a devalued fruit inside.
-This is a test and we won’t show you your score until the very end. At the beginning
-of the phase, we will show you the two fruits that are devalued during this test - 
-these will have a cross on them. Remember to press quickly as the boxes will follow
-each other very rapidly!</value>
+    <value>You will now be asked a series of questions about the fruit and stimuli
+you have seen so far.  You will respond by moving a slider on a trackbar
+using the (1) and (2) keys. Read the questions and move the slider to the
+desired answer.  To submit your answer, press (8).  This will bring up the
+next question after a brief pause.</value>
   </data>
 </root>

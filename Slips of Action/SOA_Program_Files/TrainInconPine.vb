@@ -3,7 +3,9 @@ Imports System.IO
 
 Public Class TrainInconPine
 
-    '-----set variables-----'
+    '==========================='
+    '-----Declare Variables-----'
+    '==========================='
 
     'sets response to write
     Dim resp As Integer
@@ -28,7 +30,9 @@ Public Class TrainInconPine
     Dim milTime As Long
 
 
-    '-----Form Load Function (what happens each time Showdialog is called for form)-----'
+    '============================================================================================'
+    '-----Form Load Function (Step #1: what happens each time Showdialog is called for form)-----'
+    '============================================================================================'
 
     Private Sub frmTrainPine_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         'set the screen to extended monitor
@@ -42,8 +46,6 @@ Public Class TrainInconPine
 
         ' Set the StartPosition to Manual otherwise the system will assign an automatic start position
         Me.StartPosition = FormStartPosition.Manual
-
-        ' Set the form location so it appears at Location (100, 100) on the screen 1
         Me.Location = screen.Bounds.Location + New Point(0, 0)
 
 
@@ -67,14 +69,13 @@ Public Class TrainInconPine
         LeftArr.Visible = True
         RightArr.Visible = True
 
-
-        FruitPic.Focus()
-
         stpWatch.Start()
 
     End Sub
 
-    '-----Key Press Functions-----'
+    '======================================='
+    '-----Key Press Functions (Step #2)-----'
+    '======================================='
 
     Private Sub frmTrainPine_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles MyBase.KeyPress
         Dim response As MsgBoxResult
@@ -85,21 +86,15 @@ Public Class TrainInconPine
             response = MsgBox("You are about to exit GPRA Quizzer. Are you sure?", MsgBoxStyle.YesNo, "Quit GRPA Quizzer?")
 
             If response = MsgBoxResult.Yes Then
-                frmMain.Dispose()
-                SOA_Stnd_Grape.Dispose()
-                SOA_Stnd_Apple.Dispose()
-                SOA_Cong_Ban.Dispose()
-                SOA_Cong_Pear.Dispose()
-                SOA_Incon_Orng.Dispose()
-                EndSOA.Dispose()
-                frmThanks.Dispose()
-                Me.Dispose()
-                Application.Exit()
+
+                frmMain.cleanseEverything()
+
             Else
             End If
 
         ElseIf e.KeyChar = "2" Then
 
+            'if 2 pressed, incorrect. Reset stpwatch, set resp to 0 and feedback to blank
             stpWatch.Reset()
 
             stimOff()
@@ -111,11 +106,12 @@ Public Class TrainInconPine
 
         ElseIf e.KeyChar = "1" Then
 
-
+            'since 1 is correct, get milliseconds from response time, then reset stpwatch
             milTime = stpWatch.ElapsedMilliseconds()
 
             stpWatch.Reset()
 
+            'determine points based off response time and set the new score on frmMain
             Select Case milTime
 
                 Case 0 To 1000
@@ -145,10 +141,12 @@ Public Class TrainInconPine
 
                 Case Else
 
+                    'error/debugging
                     MsgBox("The person coding this sucks.", MsgBoxStyle.OkOnly, "UH-OH. UH-OH. UH-OH.")
 
             End Select
 
+            'turn stims off and set feedback image and resp to correct 
             stimOff()
 
             FruitPic.Image = My.Resources.ResourceManager.GetObject("orange")
@@ -162,7 +160,26 @@ Public Class TrainInconPine
 
     End Sub
 
-    '-----What to do when betweenTimer runs out-----'
+    '=========================================================================================================='
+    '-----Stim Off function (Step #3: Turn pics and keyboard input off and start pre-feedback blank timer)-----'
+    '=========================================================================================================='
+
+    Private Sub stimOff()
+
+        KeyPreview = False
+
+        FruitPic.Visible = False
+        LeftArr.Visible = False
+        RightArr.Visible = False
+
+        betweenTimer.Start()
+
+    End Sub
+
+
+    '============================================================================='
+    '-----Between-Timer tick (Step #4: What to do when betweenTimer runs out)-----'
+    '============================================================================='
 
     Private Sub betweenTimer_Tick() Handles betweenTimer.Tick
 
@@ -178,7 +195,9 @@ Public Class TrainInconPine
     End Sub
 
 
-    '-----What to do when feedbackTimer runs out-----'
+    '==============================================================================='
+    '-----Feedback-Timer Tick (Step #5: What to do when feedbackTimer runs out)-----'
+    '==============================================================================='
 
     Private Sub feedbackTimer_Tick() Handles feedbackTimer.Tick
 
@@ -208,7 +227,9 @@ Public Class TrainInconPine
     End Sub
 
 
-    '-----What to do after blankTimer runs out-----'
+    '=========================================================================='
+    '-----Blank-Timer Tick (Step #6: What to do after blankTimer runs out)-----'
+    '=========================================================================='
 
     Private Sub blankTimer_Tick() Handles blankTimer.Tick
 
@@ -221,21 +242,6 @@ Public Class TrainInconPine
         'hide this form and go on to next statement in frmMain (A.K.A---next form is shown)
         Me.Hide()
 
-
-    End Sub
-
-    '-----Function for keypress/stim timer running out-----'
-
-    Private Sub stimOff()
-
-        KeyPreview = False
-
-        FruitPic.Visible = False
-        LeftArr.Visible = False
-        RightArr.Visible = False
-
-        'start timer for blank period between stim and feedback
-        betweenTimer.Start()
 
     End Sub
 

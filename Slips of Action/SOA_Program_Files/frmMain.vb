@@ -16,6 +16,7 @@ Public Class frmMain
     Public clsSOAInstr As New InstructionsSOA
     Public clsTrainingInstr As New TrainingInstr
     Public clsODInstr As New InstructionsOD
+    Public clsQstnInstr As New QstnInstr
     Public clsEndSOA As New EndSOA
     Public clsEndTrain As New EndTrain
     Public clsEndDeval As New EndDeval
@@ -30,8 +31,10 @@ Public Class frmMain
     Public InconOrngTrain As New TrainInconOrng
     Public InconPineTrain As New TrainInconPine
 
-    'Deval form instance
+    'Deval form instance and questions
     Public clsOutcome As New OutcomeDeval
+    Public clsOutKnow As New OutKnow
+    Public clsRespKnow As New RespKnow
 
     'SOA forms
     Public StndGrapeSOA As New SOA_Stnd_Grape
@@ -41,11 +44,12 @@ Public Class frmMain
     Public InconOrngSOA As New SOA_Incon_Orng
     Public InconPineSOA As New SOA_Incon_Pine
 
-    'Variable to keep track of points won by subject; which outcomes are devalued
+    'SOA variables to keep track of score and which stims are devalued in the SOA phase
     Private score As Integer
     Private devalOne As Integer
     Private devalTwo As Integer
 
+    'Score variables for other two phases
     Private trainingScore As Integer
     Private devalScore As Integer
 
@@ -53,7 +57,7 @@ Public Class frmMain
     Public ScrHeight As Integer
     Public ScrWidth As Integer
 
-    'for two arrays, one holding instances of forms, one for indexes that point to the arraylist
+    'form two arrays, one holding instances of forms, one for indexes that point to the arraylist (done for SOA phase and for Training phase)
     'indexes used this way for shuffling easier; used for randomization of trials, array size = number of trials
     Private formArraySOA As New ArrayList()
     Private indxArraySOA(59) As Integer
@@ -68,7 +72,10 @@ Public Class frmMain
     Private m_xStart As Integer
     Private m_yStart As Integer
 
-    'for where Main window starts
+    '==============================================================================================================='
+    '-----Property Functions (getters and setters for private varibles so they can be retrieved on other forms)-----'
+    '==============================================================================================================='
+
     Public Property xStart() As Integer
         Get
             Return m_xStart
@@ -87,21 +94,23 @@ Public Class frmMain
         End Set
     End Property
 
-    '-----Getter and Setter for score-----'
-    'could use Property, but honestly having getter and setter in one function is wierd to me
-    Public Function getScore() As Integer
+    'Used separate getters and setters for score and devalued stim variables, more explicit than properties
+
+    '-----Get/Set for SOA Score-----'
+
+    Public Function getScore() As Integer                       'Function is used for getters (functions return values)
 
         Return score
 
     End Function
 
-    Public Sub setScore(ByVal value As Integer)
+    Public Sub setScore(ByVal value As Integer)                 'Sub used for setters (no value returned, value passed IN)
 
         score = value
 
     End Sub
 
-    '-----Getter and Setter for DevalOne-----'
+    '-----Getter and Setter for DevalOne (first stim devalued in SOA)-----'
 
     Public Function getD1() As Integer
 
@@ -115,7 +124,7 @@ Public Class frmMain
 
     End Sub
 
-    '-----Getter and Setter for DevalTwo-----'
+    '-----Getter and Setter for DevalTwo (second stim devalued in SOA)-----'
 
     Public Function getD2() As Integer
 
@@ -130,6 +139,7 @@ Public Class frmMain
     End Sub
 
     '-----Getter and Setter for Training Score-----'
+
     Public Function getTrainScore() As Integer
 
         Return trainingScore
@@ -141,6 +151,8 @@ Public Class frmMain
         trainingScore = value
 
     End Sub
+
+    '-----Get/Set for Outcome Devaluation Phase-----'
 
     Public Function getDevalScore() As Integer
 
@@ -154,8 +166,9 @@ Public Class frmMain
 
     End Sub
 
-
-    'sets window size
+    '======================================'
+    '-----Sets Window Size for frmMain-----'
+    '======================================'
 
     Public Sub setWin()
 
@@ -179,18 +192,21 @@ Public Class frmMain
 
     End Sub
 
+    '==================================='
+    '-----Loads Main Form (Step #1)-----'
+    '==================================='
 
-    'loads the form
     Private Sub frmMain_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+
         go.Priority = Threading.ThreadPriority.Lowest
         'find screen resolution
         'variables to use ScrHeight ScrWidth
         Dim myScreens() As Screen = Screen.AllScreens
+
         If (myScreens.Length = 2) Then
             ScrHeight = myScreens(1).WorkingArea.Height
             ScrWidth = myScreens(1).WorkingArea.Width
         Else
-
             ScrHeight = Screen.PrimaryScreen.WorkingArea.Height
             ScrWidth = Screen.PrimaryScreen.WorkingArea.Width
         End If
@@ -198,22 +214,44 @@ Public Class frmMain
         yStart = (ScrHeight / 2) - 15
         xStart = ((ScrWidth - 533) / 2) - 2
         go.Start()
+
     End Sub
 
-    'this happens when submit button is clicked
+    '==============================================================================================================================='
+    '-----Submit Button Clicked Function (Step #2: Ensures all info entered into Main form and makes sure subj isn't duplicate)-----'
+    '==============================================================================================================================='
+
     Private Sub btnSubmit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSubmit.Click
 
         'checks if any fields blank, if so, error message box
         If txtSubj.Text = "" Or cbxSess.SelectedItem = "" Or cbxTech.SelectedItem = "" Then
             myMsgBox("Please fill in all fields.", MsgBoxStyle.OkOnly, "ERROR")
         Else
+
             'if not, check to ensure directory exists
             If My.Computer.FileSystem.DirectoryExists("C:\x\") Then
 
                 If My.Computer.FileSystem.DirectoryExists("C:\x\" & txtSubj.Text & "\") Then
 
-                    'if subject folder does exist and has files in it for that session, check if want to overwrite
-                    If My.Computer.FileSystem.FileExists("C:\x\" & txtSubj.Text & "\" & txtSubj.Text & cbxSess.SelectedItem & "_StndGrapeSOA.txt") Then
+                    'creates variables and pathways to check if file exists for any of the three start conditions
+                    Dim subjPath, fullTaskPath, outDevalPath, SOA_TaskPath As String
+
+                    subjPath = "C:\x\" & txtSubj.Text & "\" & txtSubj.Text & cbxSess.SelectedItem
+                    fullTaskPath = subjPath & "_TrainOrder.txt"
+                    outDevalPath = subjPath & "_DevalOrder.txt"
+                    SOA_TaskPath = subjPath & "_StimOrder.txt"
+
+                    If My.Computer.FileSystem.FileExists(fullTaskPath) Then
+
+                        'if file does exist in pathway, ask subject if they want to append to file. If yes, run; If no, give msg box to rename or delete
+                        Select Case myMsgBox("Files exist for this Subject and Session, would you like to append to them?", MsgBoxStyle.YesNo, "ERROR")
+                            Case "YES"
+                                Squizzer()
+                            Case "NO"
+                                myMsgBox("Then please delete previous files or rename current run.", MsgBoxStyle.OkOnly, "ERROR")
+                        End Select
+
+                    ElseIf My.Computer.FileSystem.FileExists(outDevalPath) Then
 
                         Select Case myMsgBox("Files exist for this Subject and Session, would you like to append to them?", MsgBoxStyle.YesNo, "ERROR")
                             Case "YES"
@@ -221,14 +259,26 @@ Public Class frmMain
                             Case "NO"
                                 myMsgBox("Then please delete previous files or rename current run.", MsgBoxStyle.OkOnly, "ERROR")
                         End Select
-                        'if folder exists but no files, run 
+
+                    ElseIf My.Computer.FileSystem.FileExists(SOA_TaskPath) Then
+
+                        Select Case myMsgBox("Files exist for this Subject and Session, would you like to append to them?", MsgBoxStyle.YesNo, "ERROR")
+                            Case "YES"
+                                Squizzer()
+                            Case "NO"
+                                myMsgBox("Then please delete previous files or rename current run.", MsgBoxStyle.OkOnly, "ERROR")
+                        End Select
+
                     Else
+
+                        'if folder exists but no files, run 
                         Squizzer()
+
                     End If
 
                 Else
 
-                    'if directory doesn't exist, create then run
+                    'if directory doesn't exist: create, then run
                     My.Computer.FileSystem.CreateDirectory("C:\x\" & txtSubj.Text & "\")
                     Squizzer()
 
@@ -254,25 +304,69 @@ Public Class frmMain
         End If
     End Sub
 
-    'Message box functions
-    Public Shared Function myMsgBox(ByVal Prompt As Object, ByVal Buttons As MsgBoxStyle, ByVal Title As Object) As String
+    '==============================================================================================='
+    '-----Task Start Function (Step #3: Begins task based on phase started on in frmMain entry)-----'
+    '==============================================================================================='
 
-        Dim response As MsgBoxResult
+    Private Sub Squizzer()
 
-        response = MsgBox(Prompt, Buttons, Title)
+        'aborts clock timer
+        go.Abort()
 
-        If response = MsgBoxResult.Yes Then
-            Return "YES"
-        ElseIf response = MsgBoxResult.Ok Then
-            Return "OK"
-        ElseIf response = MsgBoxResult.No Then
-            Return "NO"
-        Else
-            Return Nothing
-        End If
+        'hides main and sets window 
+        Me.Hide()
+        setWin()
 
-    End Function
-    '-----Method for Filling ArrayList of forms and Index Array-----'
+        'call fillArray and Shuffle functions (seen below), this fills the arrays for first and last phases and shuffles the stim order
+        fillArrays()
+        Shuffle()
+
+        'assign deval'd stims for last phase and set score to 0 for all phases
+        assignOutcomes()
+        setScore(0)
+        setTrainScore(0)
+        setDevalScore(0)
+
+        'Get the session type entered in frmMain
+        Select Case cbxSess.SelectedItem
+
+            'if session type is full task, will start with training
+            Case "Full SOA Task"
+
+                trainingPhase()
+
+            'if session type is devalPhase (ex: after a computer/program restart in middle of experiment), then skip training phase and start on phase II
+            Case "DevalPhase Restart"
+
+                devalPhase()
+
+            'same as above, but start on last phase
+            Case "SlipOfActionPhase Restart"
+
+                SlipsOfActionPhase()
+
+
+            Case Else
+
+                'msgbox for error handling or debugging
+                myMsgBox("Error. Idk what happened, man", MsgBoxStyle.OkOnly, "Oh no.")
+
+        End Select
+
+        'since each phase calls the next phase, can start from any easily (wanted to ensure "checkpoints" in case of accidental restart)
+
+
+        '---------------------'
+        'Runs through forms until completion, can be force closed before completion by user.
+        'if force closed, showdialog will still try to run even when application exits and all forms disposed...don't know why
+        'so set the Run/showdialog statements in a try/catch block, so if exception pops up, just disposes of this form and quits cleanly
+        '---------------------'
+
+    End Sub
+
+    '========================================================================='
+    '-----Method for Filling ArrayList of forms and Index Array (Step #4)-----'
+    '========================================================================='
 
     Private Sub fillArrays()
 
@@ -282,7 +376,7 @@ Public Class frmMain
         ind = 0
         inx = 0
 
-        'add all forms to array list
+        'add all forms to each array list
         formArraySOA.Add(CongBanSOA)
         formArraySOA.Add(CongPearSOA)
         formArraySOA.Add(InconOrngSOA)
@@ -358,7 +452,10 @@ Public Class frmMain
 
     End Sub
 
-    '-----Method for Shuffling Array of indexes-----'
+    '========================================================='
+    '-----Method for Shuffling Array of indexes (Step #5)-----'
+    '========================================================='
+
     Private Sub Shuffle()
 
         'need for loop counter variable, random number variable and temp variable
@@ -385,6 +482,7 @@ Public Class frmMain
 
                 End While
 
+                'swap the numbers at array indexes 'index' and 'rndNum'
                 temp = indxArraySOA(rndNum)
                 indxArraySOA(rndNum) = indxArraySOA(index)
                 indxArraySOA(index) = temp
@@ -410,7 +508,9 @@ Public Class frmMain
 
     End Sub
 
-    '-----Randomly Assign Devalued Outcomes for SOA task-----'
+    '=================================================================='
+    '-----Randomly Assign Devalued Outcomes for SOA task (Step #6)-----'
+    '=================================================================='
 
     Private Sub assignOutcomes()
 
@@ -436,163 +536,89 @@ Public Class frmMain
 
     End Sub
 
-
-    '------------------------------------'
-    '-----SQUIZZER RUN/MAIN FUNCTION-----'
-    '------------------------------------'
-
-    Private Sub Squizzer()
-        go.Abort()
-        'hides main and sets window 
-        Me.Hide()
-        setWin()
-
-        'fill array function called, then shuffle indexArray
-        fillArrays()
-        Shuffle()
-
-        'assign deval'd outcomes and set score to 0
-        assignOutcomes()
-        setScore(0)
-        setTrainScore(0)
-        setDevalScore(0)
-
-        Select Case cbxSess.SelectedItem
-
-            Case "Full SOA Task"
-
-                trainingPhase()
-
-            Case "DevalPhase Restart"
-
-                devalPhase()
-
-            Case "SlipOfActionPhase Restart"
-
-                SlipsOfActionPhase()
-
-            Case Else
-
-                myMsgBox("Error. Idk what happened, man", MsgBoxStyle.OkOnly, "Oh no.")
-
-        End Select
-
-
-        'each one leads to next, so can start wherever
-
-
-        ''for loop counter
-        'Dim formCount As Integer
-        'Dim trainCount As Integer
-
-        '---------------------'
-        'Runs through forms until completion, can be force closed before completion by user.
-        'if force closed, showdialog will still try to run even when application exits and all forms disposed...don't know why
-        'so set the Run/showdialog statements in a try/catch block, so if exception pops up, just disposes of this form and quits cleanly
-        '---------------------'
-        'Try
-
-        '    clsTrainingInstr.ShowDialog(Me)
-
-        '    For trainCount = 0 To 47
-
-        '        Dim objIndex As Integer
-
-        '        objIndex = indxArrayTrain(trainCount)
-        '        formArrayTrain(objIndex).ShowDialog(Me)
-
-        '    Next
-
-        '    clsThanks.ShowDialog(Me)
-        '    clsEndTrain.ShowDialog(Me)
-
-        'clsODInstr.ShowDialog(Me)
-        '    clsOutcome.ShowDialog(Me)
-        '    clsThanks.ShowDialog(Me)
-        '    clsEndDeval.ShowDialog(Me)
-
-        'clsSOAInstr.ShowDialog(Me)
-        'clsDevalued.ShowDialog(Me)
-
-        'For formCount = 0 To 59
-
-        '        'set variable that collects the number in indxArraySOA, not needed, just looks cleaner to me
-        '        Dim objIndex As Integer
-
-        '        objIndex = indxArraySOA(formCount)
-        '        formArraySOA(objIndex).ShowDialog(Me)
-
-        '    Next
-
-        '    clsThanks.ShowDialog(Me)
-        '    clsEndSOA.ShowDialog(Me)
-
-
-        'Catch ex As Exception
-
-        '    Me.Close()
-        '    Application.Exit()
-
-        'End Try
-
-    End Sub
+    '========================================'
+    '-----Start Training Phase (Step #7)-----'
+    '========================================'
 
     Private Sub trainingPhase()
 
         Try
 
+            'declare a loop count
             Dim trainCount As Integer
 
+            'Show instructions first
             clsTrainingInstr.ShowDialog(Me)
 
+            'after instructions, loop through each trial
             For trainCount = 0 To 47
 
+                'Declare a variable to put the number from indxArrayTraining at index of traincount into
                 Dim objIndex As Integer
 
                 objIndex = indxArrayTrain(trainCount)
+
+                'show the form at index of objIndex in Training form arraylist; since indxArray randomized, will show specified random forms in order
                 formArrayTrain(objIndex).ShowDialog(Me)
 
             Next
 
+            'after trials, show thanks form then endTrain form with points
             clsThanks.ShowDialog(Me)
             clsEndTrain.ShowDialog(Me)
 
+            'move to deval Phase
             devalPhase()
 
         Catch ex As Exception
 
-            Me.Close()
-            Application.Exit()
+            'close if fails
+            cleanseEverything()
 
         End Try
 
     End Sub
+
+    '========================================================'
+    '-----Phase Two: Outcome Devaluation Start (Step #8)-----'
+    '========================================================'
 
     Private Sub devalPhase()
 
         Try
 
+            'show instructions, then outcomeDevaluation form, then thanks and points forms
             clsODInstr.ShowDialog(Me)
             clsOutcome.ShowDialog(Me)
             clsThanks.ShowDialog(Me)
             clsEndDeval.ShowDialog(Me)
 
+            clsQstnInstr.ShowDialog(Me)
+            clsRespKnow.ShowDialog(Me)
+            clsOutKnow.ShowDialog(Me)
+            clsThanks.ShowDialog(Me)
+
+            'continue on to slips of action
             SlipsOfActionPhase()
 
 
         Catch ex As Exception
 
-            Me.Close()
-            Application.Exit()
+            cleanseEverything()
 
         End Try
 
     End Sub
 
+    '====================================================='
+    '-----Phase Three: Slips of Action Task (Step #9)-----'
+    '====================================================='
+
     Private Sub SlipsOfActionPhase()
 
         Try
 
+            'similar to training phase, show instructions/devalued stim, loop through trials, show thanks and points forms
             Dim formCount As Integer
 
             clsSOAInstr.ShowDialog(Me)
@@ -600,7 +626,6 @@ Public Class frmMain
 
             For formCount = 0 To 59
 
-                'set variable that collects the number in indxArraySOA, not needed, just looks cleaner to me
                 Dim objIndex As Integer
 
                 objIndex = indxArraySOA(formCount)
@@ -614,12 +639,38 @@ Public Class frmMain
 
         Catch ex As Exception
 
-            Me.Close()
-            Application.Exit()
+            'if this fails, close
+            cleanseEverything()
 
         End Try
 
     End Sub
+
+    '==============================='
+    '-----Message box functions-----'
+    '==============================='
+
+    Public Shared Function myMsgBox(ByVal Prompt As Object, ByVal Buttons As MsgBoxStyle, ByVal Title As Object) As String
+
+        Dim response As MsgBoxResult
+
+        response = MsgBox(Prompt, Buttons, Title)
+
+        If response = MsgBoxResult.Yes Then
+            Return "YES"
+        ElseIf response = MsgBoxResult.Ok Then
+            Return "OK"
+        ElseIf response = MsgBoxResult.No Then
+            Return "NO"
+        Else
+            Return Nothing
+        End If
+
+    End Function
+
+    '========================'
+    '-----Clock function-----'
+    '========================'
 
     Private Sub clock()
         CheckForIllegalCrossThreadCalls() = False
@@ -629,12 +680,19 @@ Public Class frmMain
         Loop
     End Sub
 
-    'if cancel, close
+    '==========================================='
+    '-----What to do on Cancel Button click-----'
+    '==========================================='
+
     Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
 
         cleanseEverything()
 
     End Sub
+
+    '==================================================='
+    '-----Exit Program Function (used by all forms)-----'
+    '==================================================='
 
     Public Sub cleanseEverything()
 
@@ -658,6 +716,9 @@ Public Class frmMain
 
         'Deval form
         OutcomeDeval.Dispose()
+        QstnInstr.Dispose()
+        OutKnow.Dispose()
+        RespKnow.Dispose()
 
         'SOA forms
         SOA_Stnd_Grape.Dispose()
@@ -667,7 +728,7 @@ Public Class frmMain
         SOA_Incon_Orng.Dispose()
         SOA_Incon_Pine.Dispose()
 
-        Me.Dispose()
+        Me.Close()
         Application.Exit()
 
     End Sub

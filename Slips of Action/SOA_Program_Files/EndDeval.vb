@@ -40,17 +40,21 @@ Public Class EndDeval
 
 
     Private Sub EndDeval_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        Dim objPoint As Point = PointToScreen(New Point(0, 0))
-        objPoint.X += 0
-        objPoint.Y += 0
-        Cursor.Position = objPoint
-        KeyPreview = True
+        'set the screen to extended monitor
         Dim screen As Screen
+        ' We want to display a form on screen 1
+        Try
+            screen = Screen.AllScreens(1)
+        Catch ex As Exception
+            screen = Screen.AllScreens(0)
+        End Try
 
-        ' We want to display a form on screen 0 (Primary)
-        screen = Screen.AllScreens(0)
+        ' Set the StartPosition to Manual otherwise the system will assign an automatic start position
         Me.StartPosition = FormStartPosition.Manual
+        ' Set the form location so it appears at Location (100, 100) on the screen 1
         Me.Location = screen.Bounds.Location + New Point(0, 0)
+
+        KeyPreview = True
 
         score = frmMain.getDevalScore()
 

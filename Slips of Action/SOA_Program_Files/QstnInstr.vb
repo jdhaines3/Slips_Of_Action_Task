@@ -1,14 +1,11 @@
 Imports System
 Imports System.IO
 
-Public Class TrainingInstr
+Public Class QstnInstr
 
-    '==================================================================================='
     '-----Form Load Function (what happens each time Showdialog is called for form)-----'
-    '==================================================================================='
 
     Private Sub frmInstructions_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-
         'set the screen to extended monitor
         Dim screen As Screen
         ' We want to display a form on screen 1
@@ -27,11 +24,14 @@ Public Class TrainingInstr
         'turn on keyboard input
         KeyPreview = True
 
+        Title.Focus()
+        InstrLabel.Focus()
+
+
     End Sub
 
-    '============================='
-    '-----Key Press Functions-----'
-    '============================='
+
+    '-----what to do on key press-----'
 
     Private Sub frmInstructions_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles MyBase.KeyPress
         Dim response As MsgBoxResult
@@ -42,9 +42,17 @@ Public Class TrainingInstr
             response = MsgBox("You are about to exit GPRA Quizzer. Are you sure?", MsgBoxStyle.YesNo, "Quit GRPA Quizzer?")
 
             If response = MsgBoxResult.Yes Then
-
-                frmMain.cleanseEverything()
-
+                frmMain.Dispose()
+                EndSOA.Dispose()
+                SOA_Stnd_Grape.Dispose()
+                SOA_Stnd_Apple.Dispose()
+                SOA_Cong_Ban.Dispose()
+                SOA_Cong_Pear.Dispose()
+                SOA_Incon_Orng.Dispose()
+                SOA_Incon_Pine.Dispose()
+                frmThanks.Dispose()
+                Me.Dispose()
+                Application.Exit()
             Else
             End If
 
@@ -65,9 +73,7 @@ Public Class TrainingInstr
 
     End Sub
 
-    '=============================='
     '-----Message Box Function-----'
-    '=============================='
 
     Public Function myMsgBox(ByVal Prompt As Object, ByVal Buttons As MsgBoxStyle, ByVal Title As Object) As String
 

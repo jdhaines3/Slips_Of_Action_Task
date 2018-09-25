@@ -108,14 +108,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Slips_Of_Action.exe" size="3113472">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Slips_Of_Action.exe" size="3136512">
       <assemblyIdentity name="Slips_Of_Action" version="1.0.0.2" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>l7AE1emtIPQYoXRkDbbC5wyiJrHBVKh6a2MgTbSyL70=</dsig:DigestValue>
+        <dsig:DigestValue>pywuLDyHAmy5O0nD4sM1zjAAf1cnweySu3Bukw0een8=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

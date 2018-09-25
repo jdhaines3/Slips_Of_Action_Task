@@ -120,4 +120,12 @@
   <metadata name="bwTimer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <data name="Label1.Text" xml:space="preserve">
+    <value>Two open boxes will appear on the screen with different fruits inside.
+One fruit was earned by a left response in the first stage and the other
+by a right response. Although both were valuable before, one of them
+is now devalued and earns no points. The devalued fruit will have a cross
+on it. Please press the correct button for the valued fruit, rather than the
+devalued fruit.</value>
+  </data>
 </root>

@@ -3,15 +3,17 @@ Imports System.IO
 
 Public Class TrainStndGrape
 
-    '-----set variables-----'
+    '==========================='
+    '-----Declare Variables-----'
+    '==========================='
 
-    'sets response to write
+    'for correct/incorrect response output
     Dim resp As Integer
 
     'creates new 1 pixel image to put in feedback image's place in case of incorrect resp
     Dim blankBox As New Bitmap(1, 1)
 
-    'sets variables that take values from Main form; used in file output
+    'declares variables that take values from Main form; used in file output
     Dim cbx As String
     Dim subID As String
     Dim path As String
@@ -27,9 +29,9 @@ Public Class TrainStndGrape
     Dim stpWatch As New Stopwatch()
     Dim milTime As Long
 
-
-
-    '-----Form Load Function (what happens each time Showdialog is called for form)-----'
+    '============================================================================================'
+    '-----Form Load Function (Step #1: what happens each time Showdialog is called for form)-----'
+    '============================================================================================'
 
     Private Sub TrainStndGrape_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         'set the screen to extended monitor
@@ -43,7 +45,6 @@ Public Class TrainStndGrape
 
         ' Set the StartPosition to Manual otherwise the system will assign an automatic start position
         Me.StartPosition = FormStartPosition.Manual
-        ' Set the form location so it appears at Location (100, 100) on the screen 1
         Me.Location = screen.Bounds.Location + New Point(0, 0)
 
 
@@ -56,7 +57,7 @@ Public Class TrainStndGrape
         orderPath = "C:\x\" & subID & "\" & subID & cbx & "_TrainOrder.txt"
         stimType = "StandardGrape"
 
-        'get deval numbers and score
+        'get score from Main
         points = frmMain.getTrainScore()
 
         'set response to arbitray number not used in 3 outcomes for error handling
@@ -76,8 +77,9 @@ Public Class TrainStndGrape
 
     End Sub
 
-
-    '-----what to do on key press-----'
+    '======================================='
+    '-----Key Press Functions (Step #2)-----'
+    '======================================='
 
     Private Sub TrainStndGrape_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles MyBase.KeyPress
         Dim response As MsgBoxResult
@@ -88,25 +90,21 @@ Public Class TrainStndGrape
             response = MsgBox("You are about to exit GPRA Quizzer. Are you sure?", MsgBoxStyle.YesNo, "Quit GRPA Quizzer?")
 
             If response = MsgBoxResult.Yes Then
-                frmMain.Dispose()
-                EndSOA.Dispose()
-                SOA_Stnd_Apple.Dispose()
-                SOA_Cong_Ban.Dispose()
-                SOA_Cong_Pear.Dispose()
-                SOA_Incon_Orng.Dispose()
-                SOA_Incon_Pine.Dispose()
-                frmThanks.Dispose()
-                Me.Dispose()
-                Application.Exit()
+
+                frmMain.cleanseEverything()
+
             Else
+                'do nothing
             End If
 
         ElseIf e.KeyChar = "2" Then
 
+            'if 2 pressed, get the milliseconds from stopwatch, then reset stopwatch
             milTime = stpWatch.ElapsedMilliseconds()
 
             stpWatch.Reset()
 
+            'determine how many points to give based on response time, set new score on form Main
             Select Case milTime
 
                 Case 0 To 1000
@@ -135,21 +133,24 @@ Public Class TrainStndGrape
                     frmMain.setTrainScore(points)
 
                 Case Else
-
+                    'error/debugging
                     MsgBox("The person coding this sucks.", MsgBoxStyle.OkOnly, "UH-OH. UH-OH. UH-OH.")
 
             End Select
 
-
+            'do stimOff function
             stimOff()
 
+            'set image to feedback image (cherries for correct)
             FruitPic.Image = My.Resources.ResourceManager.GetObject("cherries")
 
+            'set response to 1 for correct
             resp = 1
 
 
         ElseIf e.KeyChar = "1" Then
 
+            'similar to 2, but since incorrect response, no points awarded, just reset stpwatch
             stpWatch.Reset()
 
             stimOff()
@@ -157,9 +158,8 @@ Public Class TrainStndGrape
             'feedback image set to background: empty box
             FruitPic.Image = blankBox
 
+            'resp to 0 for incorrect
             resp = 0
-
-            'points
 
         Else
             'if other key pressed, Do nothing
@@ -168,12 +168,29 @@ Public Class TrainStndGrape
 
     End Sub
 
-    '-----What to do when betweenTimer runs out-----'
+    '=========================================================================================================='
+    '-----Stim Off function (Step #3: Turn pics and keyboard input off and start pre-feedback blank timer)-----'
+    '=========================================================================================================='
 
-    'blank period between stim and feedback
+    Private Sub stimOff()
+
+        KeyPreview = False
+
+        FruitPic.Visible = False
+        LeftArr.Visible = False
+        RightArr.Visible = False
+
+        betweenTimer.Start()
+
+    End Sub
+
+    '============================================================================='
+    '-----Between-Timer tick (Step #4: What to do when betweenTimer runs out)-----'
+    '============================================================================='
+
     Private Sub betweenTimer_Tick() Handles betweenTimer.Tick
 
-        'Again, stop/reset timer
+        'stop/reset timer
         betweenTimer.Stop()
 
         'set new feedback pic as visible
@@ -184,8 +201,10 @@ Public Class TrainStndGrape
 
     End Sub
 
+    '==============================================================================='
+    '-----Feedback-Timer Tick (Step #5: What to do when feedbackTimer runs out)-----'
+    '==============================================================================='
 
-    '-----What to do when feedbackTimer runs out-----'
     Private Sub feedbackTimer_Tick() Handles feedbackTimer.Tick
 
         'stop/reset timer
@@ -214,8 +233,10 @@ Public Class TrainStndGrape
 
     End Sub
 
+    '=========================================================================='
+    '-----Blank-Timer Tick (Step #6: What to do after blankTimer runs out)-----'
+    '=========================================================================='
 
-    '-----What to do after blankTimer runs out-----'
     Private Sub blankTimer_Tick() Handles blankTimer.Tick
 
         'stop/reset timer
@@ -227,21 +248,6 @@ Public Class TrainStndGrape
         'hide this form and go on to next statement in frmMain (A.K.A---next form is shown)
         Me.Hide()
 
-
-    End Sub
-
-    '-----What to do after stim (button press or time out)-----'
-
-    Private Sub stimOff()
-
-        KeyPreview = False
-
-        FruitPic.Visible = False
-        LeftArr.Visible = False
-        RightArr.Visible = False
-
-        'start timer for blank period between stim and feedback
-        betweenTimer.Start()
 
     End Sub
 
