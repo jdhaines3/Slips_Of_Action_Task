@@ -15,7 +15,7 @@ Public Class frmMain
     Public clsSOAInstr As New InstructionsSOA
     Public clsTrainingInstr As New TrainingInstr
     Public clsDevalued As New SOA_Devalued
-
+    Public clsOutcome As New OutcomeDeval
 
     'Training Stim Forms
     Public StndGrapeTrain As New TrainStndGrape
@@ -47,10 +47,10 @@ Public Class frmMain
     'for two arrays, one holding instances of forms, one for indexes that point to the arraylist
     'indexes used this way for shuffling easier; used for randomization of trials, array size = number of trials
     Private formArraySOA As New ArrayList()
-    Private indxArraySOA(60) As Integer
+    Private indxArraySOA(59) As Integer
 
     Private formArrayTrain As New ArrayList()
-    Private indxArrayTrain(48) As Integer
+    Private indxArrayTrain(47) As Integer
 
     'clock
     Dim go As New System.Threading.Thread(AddressOf clock)
@@ -196,20 +196,23 @@ Public Class frmMain
 
                         Select Case myMsgBox("Files exist for this Subject and Session, would you like to append to them?", MsgBoxStyle.YesNo, "ERROR")
                             Case "YES"
-                                Squizzer()
+                                outcomeDev()
+                                'Squizzer()
                             Case "NO"
                                 myMsgBox("Then please delete previous files or rename current run.", MsgBoxStyle.OkOnly, "ERROR")
                         End Select
                         'if folder exists but no files, run 
                     Else
-                        Squizzer()
+                        outcomeDev()
+                        'Squizzer()
                     End If
 
                 Else
 
                     'if directory doesn't exist, create then run
                     My.Computer.FileSystem.CreateDirectory("C:\x\" & txtSubj.Text & "\")
-                    Squizzer()
+                    outcomeDev()
+                    'Squizzer()
 
                 End If
 
@@ -220,7 +223,8 @@ Public Class frmMain
 
                     My.Computer.FileSystem.CreateDirectory("C:\x\")
                     My.Computer.FileSystem.CreateDirectory("C:\x\" & txtSubj.Text & "\")
-                    Squizzer()
+                    outcomeDev()
+                    'Squizzer()
 
                 Catch ex As Exception
 
@@ -484,6 +488,14 @@ Public Class frmMain
             Application.Exit()
 
         End Try
+
+    End Sub
+
+    Private Sub outcomeDev()
+
+        clsOutcome.ShowDialog(Me)
+        frmThanks.ShowDialog(Me)
+        Application.Exit()
 
     End Sub
 

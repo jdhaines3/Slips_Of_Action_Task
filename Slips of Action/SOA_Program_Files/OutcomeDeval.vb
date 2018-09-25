@@ -3,20 +3,31 @@ Imports System.IO
 
 Public Class OutcomeDeval
 
+    '=========TO DO========='
+
+    'it is currently spitting out DEVALUED image, may need it to spit out valued image too
+    'correct and incorrect button presses might be backwards. might be "correct" if pressing the opposite direction
+    'comment what all this shit does
+    'make a points screen at end
+
+
+
+
+
     '-----Dim variables-----'
 
     'score for outcome deval portion
-    Dim points As Integer
+    Dim points, resp As Integer
 
     'global variable for loop index (needed for key press)
-    Dim outcomeIndx As Integer
+    Dim outcomeIndx, boxIndx, rightIndx, leftIndx As Integer
 
     'arrays for dynamically changing the pictures
-    Dim boxArray(12) As Integer
-    Dim outcmArray(12) As Integer
+    Dim boxArray() As Integer = {1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2}
+    Dim outcmArray() As Integer = {0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5}
     Dim outcomeList As New List(Of Bitmap)
-    Dim rightArray(3) As Integer
-    Dim leftArray(3) As Integer
+    Dim rightArray() As Integer = {0, 0, 1, 1, 2, 2}
+    Dim leftArray() As Integer = {3, 3, 4, 4, 5, 5}
 
     'for foreground image (to see background)
     Dim blankBox As New Bitmap(1, 1)
@@ -30,7 +41,13 @@ Public Class OutcomeDeval
 
     'sets variables for text output of deval'd outcomes
     Dim orderPath As String
-    Dim stimType As String
+    Dim respPath As String
+    Dim devalType As String
+
+
+
+    'stopwatch and points
+
 
     '-----Form Load Function (what happens each time Showdialog is called for form)-----'
 
@@ -54,7 +71,8 @@ Public Class OutcomeDeval
         'Set pathway to read/write to file
         cbx = frmMain.cbxSess.SelectedItem
         subID = frmMain.txtSubj.Text
-        orderPath = "C:\x\" & subID & "\" & subID & cbx & "_StimOrder.txt"
+        orderPath = "C:\x\" & subID & "\" & subID & cbx & "_DevalOrder.txt"
+        respPath = "C:\x\" & subID & "\" & subID & cbx & "_DevalResp.txt"
 
         'turn on Key Preview for exiting if needed
         KeyPreview = False
@@ -68,7 +86,14 @@ Public Class OutcomeDeval
         pear = My.Resources.ResourceManager.GetObject("pear2")
         orange = My.Resources.ResourceManager.GetObject("orange")
 
+        outcomeList.Add(cherry)
+        outcomeList.Add(banana)
+        outcomeList.Add(pineapple)
+        outcomeList.Add(melon)
+        outcomeList.Add(pear)
+        outcomeList.Add(orange)
 
+        randomizeArrays()
 
         runTask()
 
@@ -79,18 +104,34 @@ Public Class OutcomeDeval
 
         Dim fs As New FileStream(orderPath, FileMode.Append, FileAccess.Write)
         Dim sr As New StreamWriter(fs)
-        sr.WriteLine(Now & "  " & stimType)
+        sr.WriteLine(Now & "  " & devalType)
         sr.Close()
         fs.Close()
+
+        Dim fs2 As New FileStream(respPath, FileMode.Append, FileAccess.Write)
+        Dim sr2 As New StreamWriter(fs2)
+        sr2.WriteLine(Now & "  " & resp)
+        sr2.Close()
+        fs2.Close()
 
     End Sub
     Private Sub durTimer_Tick() Handles durTimer.Tick
 
-        'stop/reset timer
-        durTimer.Stop()
+        If outcomeIndx < 11 Then
 
-        'hide this form and go on to next statement in frmMain (A.K.A---next form is shown)
-        Me.Hide()
+            durTimer.Stop()
+
+            outcomeIndx = outcomeIndx + 1
+            boxIndx = boxIndx + 1
+            runTask()
+
+        Else
+
+            Me.Hide()
+
+        End If
+
+        'Else Hide
 
 
     End Sub
@@ -113,6 +154,35 @@ Public Class OutcomeDeval
                 Application.Exit()
             Else
             End If
+
+        ElseIf e.KeyChar = "1" Then
+
+            Select Case outcmArray(outcomeIndx)
+                Case 0 To 2
+                    'incorrect
+                    incorrectPress()
+                Case 3 To 5
+                    'correct
+                    correctPress()
+                Case Else
+                    'msgbox error
+            End Select
+
+        ElseIf e.KeyChar = "2" Then
+
+            Select Case outcmArray(outcomeIndx)
+                Case 0 To 2
+                    'correct
+                    correctPress()
+                Case 3 To 5
+                    'incorrect
+                    incorrectPress()
+                Case Else
+                    'msgbox error
+            End Select
+
+        Else
+            'do nothing
         End If
     End Sub
 
@@ -136,27 +206,205 @@ Public Class OutcomeDeval
 
     Private Sub runTask()
 
-        'run algorithm
+        Dim boxNum, outNum, rightLeft As Integer
+
+        boxNum = boxArray(outcomeIndx)
+        outNum = outcmArray(outcomeIndx)
+
+        If outNum <= 2 AndAlso outNum >= 0 Then
+
+            rightLeft = leftArray(leftIndx)
+
+            Select Case boxNum
+                Case 1
+
+                    TopPic.BackgroundImage = outcomeList(outNum)
+                    TopPic.Image = My.Resources.ResourceManager.GetObject("xmark")
+                    TopPic.Visible = True
+
+                    BottomPic.BackgroundImage = outcomeList(rightLeft)
+                    BottomPic.Image = blankBox
+                    BottomPic.Visible = True
+
+                    leftIndx = leftIndx + 1
+                Case 2
+
+                    BottomPic.BackgroundImage = outcomeList(outNum)
+                    BottomPic.Image = My.Resources.ResourceManager.GetObject("xmark")
+                    BottomPic.Visible = True
+
+                    TopPic.BackgroundImage = outcomeList(rightLeft)
+                    TopPic.Image = blankBox
+                    TopPic.Visible = True
+
+                    'leftIndx++
+                    leftIndx = leftIndx + 1
+
+                Case Else
+                    'msgbox error
+            End Select
+
+        ElseIf outNum >= 3 AndAlso outNum <= 5 Then
+
+            rightLeft = rightArray(rightIndx)
+
+            Select Case boxNum
+                Case 1
+
+                    TopPic.BackgroundImage = outcomeList(outNum)
+                    TopPic.Image = My.Resources.ResourceManager.GetObject("xmark")
+                    TopPic.Visible = True
+
+                    BottomPic.BackgroundImage = outcomeList(rightLeft)
+                    BottomPic.Image = blankBox
+                    BottomPic.Visible = True
+
+                    'rightIndx++
+                    rightIndx = rightIndx + 1
+                Case 2
+
+                    BottomPic.BackgroundImage = outcomeList(outNum)
+                    BottomPic.Image = My.Resources.ResourceManager.GetObject("xmark")
+                    BottomPic.Visible = True
+
+                    TopPic.BackgroundImage = outcomeList(rightLeft)
+                    TopPic.Image = blankBox
+                    TopPic.Visible = True
+
+                    rightIndx = rightIndx + 1
+                Case Else
+                    'msgbox error
+            End Select
+
+        Else
+
+            'msgbox error
+
+        End If
+
+        KeyPreview = True
 
     End Sub
 
-    Private Sub fillArrays()
-
-        'fill outcmArray and box array
-
-        'add in order of left then right, pic variables to list
-
-        'fill left array with 0,1,2 and right array with 3,4,5
-
-    End Sub
 
     Private Sub randomizeArrays()
 
-        'randomize box and outcm Arrays
+        Dim indx, tempBox, tempOut, rdNumBox, rdNumOut, loopCount As Integer
+        Dim tmpRight, tmpLeft, ind, rndRight, rndLeft As Integer
 
-        'no need to randomize left,right arrays and list, they are used for pointers and bools
+        Dim rndm As Random = New Random()
+
+        For loopCount = 0 To 2
+
+            For indx = 0 To 11
+
+                rdNumBox = rndm.Next(0, 11)
+                rdNumOut = rndm.Next(0, 11)
+
+                While rdNumBox = indx
+
+                    rdNumBox = rndm.Next(0, 11)
+
+                End While
+
+                While rdNumOut = indx
+
+                    rdNumOut = rndm.Next(0, 11)
+
+                End While
+
+                tempBox = boxArray(rdNumBox)
+                boxArray(rdNumBox) = boxArray(indx)
+                boxArray(indx) = tempBox
+
+                tempOut = outcmArray(rdNumOut)
+                outcmArray(rdNumOut) = outcmArray(indx)
+                outcmArray(indx) = tempOut
+
+            Next
+
+            For ind = 0 To 5
+
+                rndRight = rndm.Next(0, 6)
+                rndLeft = rndm.Next(0, 6)
+
+                While rndRight = ind
+
+                    rndRight = rndm.Next(0, 6)
+
+                End While
+
+                While rndLeft = ind
+
+                    rndLeft = rndm.Next(0, 6)
+
+                End While
+
+                tmpRight = rightArray(rndRight)
+                rightArray(rndRight) = rightArray(ind)
+                rightArray(ind) = tmpRight
+
+                tmpLeft = leftArray(rndLeft)
+                leftArray(rndLeft) = leftArray(ind)
+                leftArray(ind) = tmpLeft
+
+            Next
+
+        Next
+    End Sub
+
+
+    'add correct sub
+    Public Sub correctPress()
+
+        KeyPreview = False
+
+        resp = 1
+        points = points + 5
+
+        TopPic.Visible = False
+        BottomPic.Visible = False
+
+        outcomeString()
+        textOutput()
+        durTimer.Start()
+
+    End Sub
+    'incorrect sub
+
+    Public Sub incorrectPress()
+
+        KeyPreview = False
+        resp = 0
+
+        TopPic.Visible = False
+        BottomPic.Visible = False
+
+        outcomeString()
+        textOutput()
+        durTimer.Start()
 
     End Sub
 
+    Public Sub outcomeString()
+
+        Select Case outcmArray(outcomeIndx)
+            Case 0
+                devalType = "cherry"
+            Case 1
+                devalType = "banana"
+            Case 2
+                devalType = "pineapple"
+            Case 3
+                devalType = "melon"
+            Case 4
+                devalType = "pear"
+            Case 5
+                devalType = "orange"
+            Case Else
+                devalType = "error"
+
+        End Select
+    End Sub
 End Class
 

@@ -54,7 +54,7 @@ Partial Class OutcomeDeval
         '
         'durTimer
         '
-        Me.durTimer.Interval = 10000
+        Me.durTimer.Interval = 1500
         '
         'OutcomeDeval
         '
