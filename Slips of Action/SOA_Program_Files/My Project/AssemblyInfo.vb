@@ -9,11 +9,11 @@ Imports System.Runtime.InteropServices
 ' Review the values of the assembly attributes
 
 <Assembly: AssemblyTitle("Slips Of Action Task")>
-<Assembly: AssemblyDescription("")> 
+<Assembly: AssemblyDescription("Slips Of Action task based on Gillan et al 2011")>
 <Assembly: AssemblyCompany("IU School of Medicine")>
 <Assembly: AssemblyProduct("SOA_Program")>
 <Assembly: AssemblyCopyright("Copyright © IU School of Medicine 2018")>
-<Assembly: AssemblyTrademark("")> 
+<Assembly: AssemblyTrademark("Created, tested, and designed by David Haines")>
 
 <Assembly: ComVisible(False)>
 

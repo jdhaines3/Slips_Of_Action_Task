@@ -67,7 +67,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>DQUxTFLeNVpt/My3RhNKeqLOmijm7wiK+9K6MMpl5uY=</dsig:DigestValue>
+        <dsig:DigestValue>fHXpSfPH7fk1iSUyD7FbDHTjzAPRp5x95yqkqky/fg4=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -79,7 +79,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>ri0+a4PDAh5uHAORwkTN8pEboo4XC9iDVGwxnh46Sy0=</dsig:DigestValue>
+        <dsig:DigestValue>4bP7/YduUmLzBNeYRxx9ujh3zb+UKV+B4GCN33llNd4=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -91,7 +91,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>jtwYREvjsYa3R5TUWmS0AJwycodr9UxetG4himJ0weE=</dsig:DigestValue>
+        <dsig:DigestValue>uHKICz8wYYKd7WlaGyXGzj1j1WcNByTfH8357ct6U1I=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -103,19 +103,19 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>iKF/bbSEA8TGvJ5Vf/Nmu2MnbcNL+eDfu57wzyW48pg=</dsig:DigestValue>
+        <dsig:DigestValue>LW3KA2hEYVznBYGcK7SjsLX6giwuM7F4Fxa9/Za5114=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Slips_Of_Action.exe" size="4205568">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Slips_Of_Action.exe" size="4207104">
       <assemblyIdentity name="Slips_Of_Action" version="1.0.0.2" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>XIiEWgMVll/TPbt22Fc41i5XwvOHXyx6VSPvp8nlRwQ=</dsig:DigestValue>
+        <dsig:DigestValue>iFlxnXGTsKB3Sz2yn7osPCV7ckALKmgKA3kHX1sfhAM=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

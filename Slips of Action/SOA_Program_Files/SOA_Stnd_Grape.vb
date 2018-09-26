@@ -23,6 +23,10 @@ Public Class SOA_Stnd_Grape
     'sets points variable
     Dim score, pointsEarned As Integer
 
+    'sets stopwatch to get response time
+    Dim stpWatch As New Stopwatch()
+    Dim milTime As Long
+
     Dim acceptKey As Boolean
 
 
@@ -69,6 +73,7 @@ Public Class SOA_Stnd_Grape
         'start first timer (for stim)
         FruitPic.Focus()
         stimTimer.Start()
+        stpWatch.Start()
 
         acceptKey = True
 
@@ -99,6 +104,10 @@ Public Class SOA_Stnd_Grape
             If acceptKey = True Then
 
                 acceptKey = False
+
+                milTime = stpWatch.ElapsedMilliseconds()
+
+                stpWatch.Reset()
 
                 '0 is the number for cherries being deval'd
                 If d1 = 0 Or d2 = 0 Then
@@ -147,6 +156,10 @@ Public Class SOA_Stnd_Grape
             If acceptKey = True Then
 
                 acceptKey = False
+
+                milTime = stpWatch.ElapsedMilliseconds()
+
+                stpWatch.Reset()
 
                 If d1 = 0 Or d2 = 0 Then
 
@@ -197,6 +210,10 @@ Public Class SOA_Stnd_Grape
     Private Sub stimTimer_Tick() Handles stimTimer.Tick
 
         acceptKey = False
+
+        milTime = GlobVars.SlipsStimDur
+
+        stpWatch.Reset()
 
         'another check on DEVAL'd outcomes; if cherries are devalued, stim time-out changes slightly.
         'similar code to keypress
@@ -283,7 +300,7 @@ Public Class SOA_Stnd_Grape
         'write the resp variable to the text file, then close filestream
         Dim fs As New FileStream(path, FileMode.Append, FileAccess.Write)
         Dim sr As New StreamWriter(fs)
-        sr.WriteLine(stimType & "," & resp & "," & pointsEarned & "," & score)
+        sr.WriteLine(stimType & "," & resp & "," & milTime & "," & pointsEarned & "," & score)
         sr.Close()
         fs.Close()
 

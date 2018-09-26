@@ -19,6 +19,9 @@ Public Class SOA_Incon_Orng
     'get variables for deval and score from Main
     Dim d1, d2, score, pointsEarned As Integer
 
+    Dim stpWatch As New Stopwatch()
+    Dim milTime As Long
+
     Dim acceptKey As Boolean
 
     '==================================================================================='
@@ -65,6 +68,7 @@ Public Class SOA_Incon_Orng
 
         'start first timer
         stimTimer.Start()
+        stpWatch.Start()
 
         acceptKey = True
 
@@ -94,6 +98,10 @@ Public Class SOA_Incon_Orng
             If acceptKey = True Then
 
                 acceptKey = False
+
+                milTime = stpWatch.ElapsedMilliseconds()
+
+                stpWatch.Reset()
 
                 If d1 = 2 Or d2 = 2 Then
 
@@ -133,6 +141,10 @@ Public Class SOA_Incon_Orng
             If acceptKey = True Then
 
                 acceptKey = False
+
+                milTime = stpWatch.ElapsedMilliseconds()
+
+                stpWatch.Reset()
 
                 If d1 = 2 Or d2 = 2 Then
 
@@ -181,6 +193,10 @@ Public Class SOA_Incon_Orng
     Private Sub stimTimer_Tick() Handles stimTimer.Tick
 
         acceptKey = False
+
+        milTime = GlobVars.SlipsStimDur
+
+        stpWatch.Reset()
 
         If d1 = 2 Or d2 = 2 Then
 
@@ -264,7 +280,7 @@ Public Class SOA_Incon_Orng
         'write the resp variable to the text file, then close filestream
         Dim fs As New FileStream(path, FileMode.Append, FileAccess.Write)
         Dim sr As New StreamWriter(fs)
-        sr.WriteLine(stimType & "," & resp & "," & pointsEarned & "," & score)
+        sr.WriteLine(stimType & "," & resp & "," & milTime & "," & pointsEarned & "," & score)
         sr.Close()
         fs.Close()
 

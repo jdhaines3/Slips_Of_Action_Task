@@ -348,8 +348,10 @@ Public Class frmMain
         setWin()
 
         'call fillArray and Shuffle functions (seen below), this fills the arrays for first and last phases and shuffles the stim order
-        fillArrays()
-        Shuffle()
+        fillTrainArray()
+        fillSOAarray()
+        ShuffleSlips()
+        ShuffleTrain()
 
         'assign deval'd stims for last phase and set score to 0 for all phases
         assignOutcomes()
@@ -403,24 +405,13 @@ Public Class frmMain
     '-----Method for Filling ArrayList of forms and Index Array (Step #4)-----'
     '========================================================================='
 
-    Private Sub fillArrays()
+    Private Sub fillTrainArray()
 
         'counter variable
-        Dim ind, inx, SopCount, TrnCount As Integer
+        Dim inx, TrnCount As Integer
 
-        ind = 0
         inx = 0
-        SopCount = (GlobVars.SlipsTrialNum) \ 6
         TrnCount = (GlobVars.TrainTrialNum) \ 6
-
-
-        'add all forms to each array list
-        formArraySOA.Add(CongBanSOA)
-        formArraySOA.Add(CongPearSOA)
-        formArraySOA.Add(InconOrngSOA)
-        formArraySOA.Add(InconPineSOA)
-        formArraySOA.Add(StndGrapeSOA)
-        formArraySOA.Add(StndAppleSOA)
 
         formArrayTrain.Add(CongBanTrain)
         formArrayTrain.Add(CongPearTrain)
@@ -429,48 +420,12 @@ Public Class frmMain
         formArrayTrain.Add(StndGrapeTrain)
         formArrayTrain.Add(StndAppleTrain)
 
-        'add numbers to index array
-        For ind = 0 To GlobVars.SlipsTrialNum - 1
-
-            'based on counter number, add specific integer to index array at position 'ind' that references index of formArraySOA
-            Select Case ind
-
-                'so in indxArraySOA spots 0 through 9, will contain 0's in each spot; indxArraySOA positions 10 through 19 have 1's in each spot, etc
-                'can changes cases to have more or less of specific form occurences
-                'say, if you want more of Congruent1 form, make first case through 15 or 20 (since Congruent1 is index '0' as seen in Add statements above
-
-                Case 0 To SopCount - 1
-                    indxArraySOA(ind) = 0
-
-                Case SopCount To (2 * SopCount) - 1
-                    indxArraySOA(ind) = 1
-
-                Case 2 * SopCount To (3 * SopCount) - 1
-                    indxArraySOA(ind) = 2
-
-                Case 3 * SopCount To (4 * SopCount) - 1
-                    indxArraySOA(ind) = 3
-
-                Case 4 * SopCount To (5 * SopCount) - 1
-                    indxArraySOA(ind) = 4
-
-                Case 5 * SopCount To (6 * SopCount) - 1
-                    indxArraySOA(ind) = 5
-
-                Case Else
-                    'error handling
-                    myMsgBox("YOUR STUPID FILL ARRAYS DONT WORK RIGHT", MsgBoxStyle.OkOnly, "YOU DONE FUCKED UP")
-
-            End Select
-
-        Next
-
         For inx = 0 To GlobVars.TrainTrialNum - 1
 
             'based on counter number, add specific integer to index array at position 'ind' that references index of formArraySOA
             Select Case inx
 
-                'so in indxArraySOA spots 0 through 9, will contain 0's in each spot; indxArraySOA positions 10 through 19 have 1's in each spot, etc
+                'so in indxArraySOA spots 0 through TrnCount - 1, will contain 0's in each spot; indxArraySOA positions trnCount through 2*trncount - 1 have 1's in each spot, etc
                 'can changes cases to have more or less of specific form occurences
                 'say, if you want more of Congruent1 form, make first case through 15 or 20 (since Congruent1 is index '0' as seen in Add statements above
 
@@ -502,20 +457,73 @@ Public Class frmMain
 
     End Sub
 
+    Public Sub fillSOAarray()
+
+        Dim ind, SopCount As Integer
+
+        ind = 0
+        SopCount = (GlobVars.SlipsTrialNum) \ 6
+
+        'add all forms to each array list
+        formArraySOA.Add(CongBanSOA)
+        formArraySOA.Add(CongPearSOA)
+        formArraySOA.Add(InconOrngSOA)
+        formArraySOA.Add(InconPineSOA)
+        formArraySOA.Add(StndGrapeSOA)
+        formArraySOA.Add(StndAppleSOA)
+
+        'add numbers to index array
+        For ind = 0 To GlobVars.SlipsTrialNum - 1
+
+            'based on counter number, add specific integer to index array at position 'ind' that references index of formArraySOA
+            Select Case ind
+
+                'so in indxArraySOA spots 0 through SopCount - 1 will contain 0's in each spot; indxArraySOA positions sopCount through 2*SopCount - 1 have 1's in each spot, etc
+                'can changes cases to have more or less of specific form occurences
+                'say, if you want more of Congruent1 form, make first case through 15 or 20 (since Congruent1 is index '0' as seen in Add statements above
+
+                Case 0 To SopCount - 1
+                    indxArraySOA(ind) = 0
+
+                Case SopCount To (2 * SopCount) - 1
+                    indxArraySOA(ind) = 1
+
+                Case 2 * SopCount To (3 * SopCount) - 1
+                    indxArraySOA(ind) = 2
+
+                Case 3 * SopCount To (4 * SopCount) - 1
+                    indxArraySOA(ind) = 3
+
+                Case 4 * SopCount To (5 * SopCount) - 1
+                    indxArraySOA(ind) = 4
+
+                Case 5 * SopCount To (6 * SopCount) - 1
+                    indxArraySOA(ind) = 5
+
+                Case Else
+                    'error handling
+                    myMsgBox("YOUR STUPID FILL ARRAYS DONT WORK RIGHT", MsgBoxStyle.OkOnly, "YOU DONE FUCKED UP")
+
+            End Select
+
+        Next
+
+
+    End Sub
     '========================================================='
     '-----Method for Shuffling Array of indexes (Step #5)-----'
     '========================================================='
 
-    Private Sub Shuffle()
+    Private Sub ShuffleSlips()
 
         'need for loop counter variable, random number variable and temp variable
         'temp holds swapped int
-        Dim count, index, rndNum, temp, i, tmp, rdNum As Integer
+        Dim count, index, rndNum, temp As Integer
 
         'call new random seeder class
         Dim rndm As Random = New Random()
 
-        'for each index in indxArraySOA, choose random number between 0 and 59, take the indxArraySOA integer at rndNum index and swap with indxArraySOA at current counter index
+        'for each index in indxArraySOA, choose random number between 0 and Block Trial Number, take the indxArraySOA integer at rndNum index and swap with indxArraySOA at current counter index
         'Goes through shuffle 3 times for more randomization
         For count = 0 To 2
 
@@ -539,6 +547,22 @@ Public Class frmMain
 
             Next
 
+
+        Next
+
+
+    End Sub
+
+
+    Private Sub ShuffleTrain()
+
+        Dim count, i, tmp, rdNum As Integer
+
+        'call new random seeder class
+        Dim rndm As Random = New Random()
+
+        For count = 0 To 2
+
             For i = 0 To GlobVars.TrainTrialNum - 1
 
                 rdNum = rndm.Next(0, GlobVars.TrainTrialNum)
@@ -554,10 +578,10 @@ Public Class frmMain
                 indxArrayTrain(i) = tmp
 
             Next
+
         Next
 
     End Sub
-
     '=================================================================='
     '-----Randomly Assign Devalued Outcomes for SOA task (Step #6)-----'
     '=================================================================='
@@ -585,6 +609,7 @@ Public Class frmMain
         Me.setD2(devOut2)
 
     End Sub
+
 
     '========================================'
     '-----Start Training Phase (Step #7)-----'
@@ -620,6 +645,11 @@ Public Class frmMain
 
                 BlckEndTrain.ShowDialog(Me)
 
+                're-randomize trials
+                formArrayTrain.Clear()
+                fillTrainArray()
+                ShuffleTrain()
+
             Next
 
             'after trials, show thanks form then endTrain form with points
@@ -632,9 +662,11 @@ Public Class frmMain
         Catch ex As Exception
 
             'close if fails
-            cleanseEverything()
+            Exit Try
 
         End Try
+
+        cleanseEverything()
 
     End Sub
 
@@ -659,9 +691,11 @@ Public Class frmMain
 
         Catch ex As Exception
 
-            cleanseEverything()
+            Exit Try
 
         End Try
+
+        cleanseEverything()
 
     End Sub
 
@@ -682,9 +716,11 @@ Public Class frmMain
 
         Catch ex As Exception
 
-            cleanseEverything()
+            Exit Try
 
         End Try
+
+        cleanseEverything()
 
     End Sub
 
@@ -720,6 +756,10 @@ Public Class frmMain
 
                 BlckEndSOA.ShowDialog(Me)
 
+                formArraySOA.Clear()
+                fillSOAarray()
+                ShuffleSlips()
+
             Next
 
             clsThanks.ShowDialog(Me)
@@ -730,9 +770,11 @@ Public Class frmMain
         Catch ex As Exception
 
             'if this fails, close
-            cleanseEverything()
+            Exit Try
 
         End Try
+
+        cleanseEverything()
 
     End Sub
 
@@ -757,18 +799,6 @@ Public Class frmMain
         End If
 
     End Function
-
-    '========================'
-    '-----Clock function-----'
-    '========================'
-
-    Private Sub clock()
-        CheckForIllegalCrossThreadCalls() = False
-        Do
-            Label2.Text = Now
-            Threading.Thread.Sleep(1000)
-        Loop
-    End Sub
 
     '==========================================='
     '-----What to do on Cancel Button click-----'

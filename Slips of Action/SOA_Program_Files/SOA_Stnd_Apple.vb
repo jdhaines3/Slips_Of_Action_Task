@@ -19,6 +19,9 @@ Public Class SOA_Stnd_Apple
     'deval outcomes and score from frmMain
     Dim d1, d2, score, pointsEarned As Integer
 
+    Dim stpWatch As New Stopwatch()
+    Dim milTime As Long
+
     Dim acceptKey As Boolean
 
 
@@ -65,6 +68,7 @@ Public Class SOA_Stnd_Apple
         'start stim timer
         FruitPic.Focus()
         stimTimer.Start()
+        stpWatch.Start()
 
         acceptKey = True
 
@@ -95,6 +99,10 @@ Public Class SOA_Stnd_Apple
             If acceptKey = True Then
 
                 acceptKey = False
+
+                milTime = stpWatch.ElapsedMilliseconds()
+
+                stpWatch.Reset()
 
                 If d1 = 3 Or d2 = 3 Then
 
@@ -133,6 +141,10 @@ Public Class SOA_Stnd_Apple
             If acceptKey = True Then
 
                 acceptKey = False
+
+                milTime = stpWatch.ElapsedMilliseconds()
+
+                stpWatch.Reset()
 
                 If d1 = 3 Or d2 = 3 Then
 
@@ -182,6 +194,10 @@ Public Class SOA_Stnd_Apple
 
         'similar to key press functions for 1/2, but happens if first timer runs out
         acceptKey = False
+
+        milTime = GlobVars.SlipsStimDur
+
+        stpWatch.Reset()
 
         If d1 = 3 Or d2 = 3 Then
 
@@ -265,7 +281,7 @@ Public Class SOA_Stnd_Apple
         'write the resp variable to the text file, then close filestream
         Dim fs As New FileStream(path, FileMode.Append, FileAccess.Write)
         Dim sr As New StreamWriter(fs)
-        sr.WriteLine(stimType & "," & resp & "," & pointsEarned & "," & score)
+        sr.WriteLine(stimType & "," & resp & "," & milTime & "," & pointsEarned & "," & score)
         sr.Close()
         fs.Close()
 

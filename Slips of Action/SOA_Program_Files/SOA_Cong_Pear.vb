@@ -19,6 +19,9 @@ Public Class SOA_Cong_Pear
     'dims variables that will be gotten from frmMain
     Dim d1, d2, score, pointsEarned As Integer
 
+    Dim stpWatch As New Stopwatch()
+    Dim milTime As Long
+
     Dim acceptKey As Boolean
 
     '==================================================================================='
@@ -65,6 +68,7 @@ Public Class SOA_Cong_Pear
 
         'start first timer
         stimTimer.Start()
+        stpWatch.Start()
 
         acceptKey = True
 
@@ -95,12 +99,17 @@ Public Class SOA_Cong_Pear
             If acceptKey = True Then
 
                 acceptKey = False
+
+                milTime = stpWatch.ElapsedMilliseconds()
+
+                stpWatch.Reset()
+
                 If d1 = 4 Or d2 = 4 Then
 
                     stimOff()
 
                     ChestPic.BackgroundImage = My.Resources.ResourceManager.GetObject("OpnChst")
-                    FruitPic.BackgroundImage = My.Resources.ResourceManager.GetObject("pear2")
+                    FruitPic.BackgroundImage = blankBox
                     FruitPic.Image = My.Resources.ResourceManager.GetObject("xmark")
 
                     resp = 3
@@ -130,6 +139,10 @@ Public Class SOA_Cong_Pear
             If acceptKey = True Then
 
                 acceptKey = False
+
+                milTime = stpWatch.ElapsedMilliseconds()
+
+                stpWatch.Reset()
 
                 'if deval'd set feedback image to red x for incorrect go, set resp = 2, subtract points
                 If d1 = 4 Or d2 = 4 Then
@@ -181,6 +194,10 @@ Public Class SOA_Cong_Pear
     Private Sub stimTimer_Tick() Handles stimTimer.Tick
 
         acceptKey = False
+
+        milTime = GlobVars.SlipsStimDur
+
+        stpWatch.Reset()
 
         If d1 = 4 Or d2 = 4 Then
 
@@ -264,7 +281,7 @@ Public Class SOA_Cong_Pear
         'write the resp variable to the text file, then close filestream
         Dim fs As New FileStream(path, FileMode.Append, FileAccess.Write)
         Dim sr As New StreamWriter(fs)
-        sr.WriteLine(stimType & "," & resp & "," & pointsEarned & "," & score)
+        sr.WriteLine(stimType & "," & resp & "," & milTime & "," & pointsEarned & "," & score)
         sr.Close()
         fs.Close()
 

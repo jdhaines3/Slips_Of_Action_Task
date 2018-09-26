@@ -19,6 +19,9 @@ Public Class SOA_Cong_Ban
     'dim variables from frmMain
     Dim d1, d2, score, pointsEarned As Integer
 
+    Dim stpWatch As New Stopwatch()
+    Dim milTime As Long
+
     Dim acceptKey As Boolean
 
     '==================================================================================='
@@ -65,6 +68,7 @@ Public Class SOA_Cong_Ban
 
         'start first timer
         stimTimer.Start()
+        stpWatch.Start()
 
         acceptKey = True
 
@@ -96,6 +100,10 @@ Public Class SOA_Cong_Ban
             If acceptKey = True Then
 
                 acceptKey = False
+
+                milTime = stpWatch.ElapsedMilliseconds()
+
+                stpWatch.Reset()
 
                 'if so, set feedback to red x and resp to 2 for incorrect go, subtract point
                 If d1 = 1 Or d2 = 1 Then
@@ -136,6 +144,11 @@ Public Class SOA_Cong_Ban
             If acceptKey = True Then
 
                 acceptKey = False
+
+                milTime = stpWatch.ElapsedMilliseconds()
+
+                stpWatch.Reset()
+
                 If d1 = 1 Or d2 = 1 Then
 
                     stimOff()
@@ -182,6 +195,10 @@ Public Class SOA_Cong_Ban
     Private Sub stimTimer_Tick() Handles stimTimer.Tick
 
         acceptKey = False
+
+        milTime = GlobVars.SlipsStimDur
+
+        stpWatch.Reset()
 
         If d1 = 1 Or d2 = 1 Then
 
@@ -266,7 +283,7 @@ Public Class SOA_Cong_Ban
         'write the resp variable to the text file, then close filestream
         Dim fs As New FileStream(path, FileMode.Append, FileAccess.Write)
         Dim sr As New StreamWriter(fs)
-        sr.WriteLine(stimType & "," & resp & "," & pointsEarned & "," & score)
+        sr.WriteLine(stimType & "," & resp & "," & milTime & "," & pointsEarned & "," & score)
         sr.Close()
         fs.Close()
 

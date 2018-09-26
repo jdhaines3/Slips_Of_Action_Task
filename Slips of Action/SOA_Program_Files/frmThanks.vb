@@ -28,6 +28,7 @@ Public Class frmThanks
     '=================================================='
 
     Private Sub timer_elapsed(ByVal myObject As Object, ByVal myEventArgs As System.Timers.ElapsedEventArgs)
+        timer.Stop()
         Me.Hide()
     End Sub
 
