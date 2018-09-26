@@ -119,11 +119,11 @@
   </resheader>
   <data name="Label1.Text" xml:space="preserve">
     <value>Part 4 starts showing the reward fruits. This window stays on the screen for about 5 seconds.
-Two of the reward fruits are worthless and have a red 'X' over them. If a box contains a
-worthless reward fruit, you lose a point with either a '1' OR a '2' key press. But, if you wait
-on those boxes, you earn a point. All other fruits are worth one point for correct key presses.
- Incorrect key presses or failure to press for valuable reward fruits results in earning no points.
-Press '8' to continue when you are ready.</value>
+Two of the reward fruits are worthless and have a red 'X' over them. During the following
+task, if a box contains one of the worthless reward fruit, you lose a point with either a '1' OR
+a '2' key press. But, if you wait on those boxes, you earn a point. All other fruits are worth
+one point for correct key presses. Incorrect key presses or failure to press for valuable reward
+fruits results in earning no points. Press '8' to continue when you are ready.</value>
   </data>
   <metadata name="AllowKeyTimer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>27, 19</value>

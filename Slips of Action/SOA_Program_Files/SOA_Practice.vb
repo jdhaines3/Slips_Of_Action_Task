@@ -64,8 +64,9 @@ Public Class SOA_Practice
                 InstrLbl.Text = "Each trial starts showing a box with fruit on the" &
                     vbNewLine & "outside. These fruits are the same ones from earlier." &
                     vbNewLine & "In Part 1 practice, a '2' press on a box with a" &
-                    vbNewLine & "raspberry did not earn a reward. Now, please hit" &
-                    vbNewLine & "the '1' key for a reward."
+                    vbNewLine & "raspberry did not earn a reward. During the task," &
+                    vbNewLine & "you will only have about a second to respond." &
+                    vbNewLine & "For now, please hit the '1' key for a reward."
 
                 InstrLbl.Size = New Size(640, 210)
                 InstrLbl.Refresh()
@@ -200,10 +201,9 @@ Public Class SOA_Practice
                 fdbkVis()
 
                 InstrLbl.Text = "The box is open and it holds a reward fruit - you" &
-                    vbNewLine & "have earned a point. Remember, you will only have" &
-                    vbNewLine & "about one second to answer, so respond quickly. This" &
-                    vbNewLine & "feedback will show for about one second, then the" &
-                    vbNewLine & "program moves to the next trial." &
+                    vbNewLine & "have earned a point. This feedback will show for" &
+                    vbNewLine & "about one second, then the program moves to the" &
+                    vbNewLine & "next trial." &
                     vbNewLine & "For now, please press '8' to continue."
 
                 AllowKeyTimer.Start()
@@ -227,10 +227,8 @@ Public Class SOA_Practice
                 InstrLbl.Text = "The box is open and it contains a worthless reward" &
                     vbNewLine & "fruit. While you pressed the correct key for" &
                     vbNewLine & "strawberry, the lemon inside is worthless. The 'X'" &
-                    vbNewLine & "means that you have lost a point. Again, feedback" &
-                    vbNewLine & "will show for only about one second before the" &
-                    vbNewLine & "program moves to the next trial." &
-                    vbNewLine & "For now, press '8' to continue."
+                    vbNewLine & "means that you have lost a point." &
+                    vbNewLine & "Press '8' to continue."
 
                 InstrLbl.Refresh()
 

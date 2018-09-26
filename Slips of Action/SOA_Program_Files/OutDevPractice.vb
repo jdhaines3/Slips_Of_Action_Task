@@ -83,10 +83,10 @@ Public Class OutDevPractice
 
 
                 InstrLbl.Text = "Now the 'X' is on a pomegranate. You will" &
-                    vbNewLine & "want to press the key earned a papaya. Let's" &
-                    vbNewLine & "say a '1' key press earned the pomegranate," &
-                    vbNewLine & "and a '2' earned a papaya. So, you should" &
-                    vbNewLine & "press '2' to earn points."
+                    vbNewLine & "want to press the key that earned a papaya." &
+                    vbNewLine & "Let's say a '1' key press earned the" &
+                    vbNewLine & "pomegranite and a '2' earned a papaya. So," &
+                    vbNewLine & "you should press '2' to earn points."
 
                 InstrLbl.Refresh()
 
