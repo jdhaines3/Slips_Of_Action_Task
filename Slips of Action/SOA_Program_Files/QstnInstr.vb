@@ -3,9 +3,11 @@ Imports System.IO
 
 Public Class QstnInstr
 
+    '==================================================================================='
     '-----Form Load Function (what happens each time Showdialog is called for form)-----'
+    '==================================================================================='
 
-    Private Sub frmInstructions_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Private Sub QstnInstr_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         'set the screen to extended monitor
         Dim screen As Screen
         ' We want to display a form on screen 1
@@ -17,42 +19,30 @@ Public Class QstnInstr
 
         ' Set the StartPosition to Manual otherwise the system will assign an automatic start position
         Me.StartPosition = FormStartPosition.Manual
-        ' Set the form location so it appears at Location (100, 100) on the screen 1
         Me.Location = screen.Bounds.Location + New Point(0, 0)
 
 
         'turn on keyboard input
         KeyPreview = True
 
-        Title.Focus()
-        InstrLabel.Focus()
-
-
     End Sub
 
+    '============================='
+    '-----Key Press Functions-----'
+    '============================='
 
-    '-----what to do on key press-----'
-
-    Private Sub frmInstructions_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles MyBase.KeyPress
+    Private Sub QstnInstr_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles MyBase.KeyPress
         Dim response As MsgBoxResult
 
         'if x, pop up message asking if you want to quit, Dispose all forms and exit
         If e.KeyChar = "x" Then
 
-            response = MsgBox("You are about to exit GPRA Quizzer. Are you sure?", MsgBoxStyle.YesNo, "Quit GRPA Quizzer?")
+            response = MsgBox("You are about to exit the Slips Of Action task. Are you sure?", MsgBoxStyle.YesNo, "Quit the Slips Of Action task?")
 
             If response = MsgBoxResult.Yes Then
-                frmMain.Dispose()
-                EndSOA.Dispose()
-                SOA_Stnd_Grape.Dispose()
-                SOA_Stnd_Apple.Dispose()
-                SOA_Cong_Ban.Dispose()
-                SOA_Cong_Pear.Dispose()
-                SOA_Incon_Orng.Dispose()
-                SOA_Incon_Pine.Dispose()
-                frmThanks.Dispose()
-                Me.Dispose()
-                Application.Exit()
+
+                frmMain.cleanseEverything()
+
             Else
             End If
 
@@ -73,7 +63,9 @@ Public Class QstnInstr
 
     End Sub
 
+    '=============================='
     '-----Message Box Function-----'
+    '=============================='
 
     Public Function myMsgBox(ByVal Prompt As Object, ByVal Buttons As MsgBoxStyle, ByVal Title As Object) As String
 

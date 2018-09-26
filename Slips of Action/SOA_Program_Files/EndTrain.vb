@@ -3,31 +3,27 @@ Public Class EndTrain
 
     Dim score As Integer
 
+    '============================='
+    '-----Key Press Functions-----'
+    '============================='
 
-    Private Sub frmCongruent1_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles MyBase.KeyPress
+    Private Sub EndTrain_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles MyBase.KeyPress
         Dim response As MsgBoxResult
 
         'if x, pop up message asking if you want to quit, Dispose all forms and exit
         If e.KeyChar = "x" Then
 
-            response = MsgBox("You are about to exit GPRA Quizzer. Are you sure?", MsgBoxStyle.YesNo, "Quit GRPA Quizzer?")
+            response = MsgBox("You are about to exit the Slips Of Action task. Are you sure?", MsgBoxStyle.YesNo, "Quit the Slips Of Action task?")
 
             If response = MsgBoxResult.Yes Then
-                frmMain.Dispose()
-                SOA_Stnd_Grape.Dispose()
-                SOA_Stnd_Apple.Dispose()
-                EndSOA.Dispose()
-                SOA_Cong_Pear.Dispose()
-                SOA_Incon_Orng.Dispose()
-                SOA_Incon_Pine.Dispose()
-                frmThanks.Dispose()
-                Me.Dispose()
-                Application.Exit()
+
+                frmMain.cleanseEverything()
+
             Else
             End If
 
         ElseIf e.KeyChar = "8" Then
-
+            'if 8 pressed, move to next form
             Me.Hide()
 
         Else
@@ -37,7 +33,9 @@ Public Class EndTrain
 
     End Sub
 
-
+    '============================'
+    '-----Form Load Function-----'
+    '============================'
 
     Private Sub EndTrain_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         'set the screen to extended monitor
@@ -55,6 +53,8 @@ Public Class EndTrain
         Me.Location = screen.Bounds.Location + New Point(0, 0)
 
         KeyPreview = True
+
+        'get the score from frmMain and display it
 
         score = frmMain.getTrainScore()
 

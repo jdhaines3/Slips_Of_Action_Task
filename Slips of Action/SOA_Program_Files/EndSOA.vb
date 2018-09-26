@@ -3,32 +3,24 @@ Public Class EndSOA
 
     Dim score As Integer
 
+    '============================='
+    '-----Key Press Functions-----'
+    '============================='
 
     Private Sub frmBlank_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles Me.KeyDown
-        'Dim response As MsgBoxResult
-
-        'Keeping this section in case want ability to go a second round
-
-        'If e.Control And e.KeyCode = Keys.N Then
-        'Me.Hide()
-        'End If
 
         If e.Control And e.KeyCode = Keys.X Then
-            frmMain.Dispose()
-            SOA_Stnd_Grape.Dispose()
-            SOA_Stnd_Apple.Dispose()
-            SOA_Cong_Ban.Dispose()
-            SOA_Cong_Pear.Dispose()
-            SOA_Incon_Orng.Dispose()
-            SOA_Incon_Pine.Dispose()
-            frmThanks.Dispose()
-            Me.Dispose()
-            Application.Exit()
+
+            'if x pressed, close/end experiment
+            frmMain.cleanseEverything()
+
         End If
 
     End Sub
 
-
+    '============================'
+    '-----Form Load Function-----'
+    '============================'
 
     Private Sub frmBlank_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         'set the screen to extended monitor
@@ -42,9 +34,9 @@ Public Class EndSOA
 
         ' Set the StartPosition to Manual otherwise the system will assign an automatic start position
         Me.StartPosition = FormStartPosition.Manual
-        ' Set the form location so it appears at Location (100, 100) on the screen 1
         Me.Location = screen.Bounds.Location + New Point(0, 0)
 
+        'make sure keyboard input is on, get score from Main, then show score in number box
         KeyPreview = True
 
         score = frmMain.getScore()
@@ -56,23 +48,15 @@ Public Class EndSOA
 
     End Sub
 
+    '========================================='
+    '-----Function for Cancel/Exit Button-----'
+    '========================================='
 
     Private Sub btnExit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExit.Click
-        'Dim response As MsgBoxResult
-        'response = MsgBox("You are about to exit sQuizzer. Are you sure?", MsgBoxStyle.YesNo, "Quit sQuizzer?")
-        'If response = MsgBoxResult.Yes Then
-        frmMain.Dispose()
-        SOA_Stnd_Grape.Dispose()
-        SOA_Stnd_Apple.Dispose()
-        SOA_Cong_Ban.Dispose()
-        SOA_Cong_Pear.Dispose()
-        SOA_Incon_Orng.Dispose()
-        SOA_Incon_Pine.Dispose()
-        frmThanks.Dispose()
-        Me.Dispose()
-        Application.Exit()
-        'Else
-        'End If
+
+        'if the button is clicked, exit (like if cntrl x is pressed)
+        frmMain.cleanseEverything()
+
     End Sub
 
 

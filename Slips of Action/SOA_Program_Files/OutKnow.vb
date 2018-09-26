@@ -4,21 +4,33 @@ Imports System.Windows.Forms.Form
 
 Public Class OutKnow
 
+    '==========================='
+    '-----Declare Variables-----'
+    '==========================='
+
+    'need list of pics, index array, and global loop index
     Dim stimList As New List(Of Bitmap)
     Dim indxArray() As Integer = {0, 1, 2, 3, 4, 5}
     Dim stimIndx As Integer
 
+    'need variables for each picture
     Dim grape, banana, orange, pineapple, pear, apple As Bitmap
 
+    'variables from frmMain
     Dim cbx As String
     Dim subID As String
 
+    'need response output variables and output pathways for each
     Dim stimType As String
     Dim resp As Integer
-    Dim respPath, orderPath, correctPath As String
+    Dim path As String
+
+    Dim acceptKey As Boolean
 
 
-
+    '============================'
+    '-----Form Load Function-----'
+    '============================'
 
     Private Sub OutKnow_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
@@ -41,11 +53,9 @@ Public Class OutKnow
         subID = frmMain.txtSubj.Text
 
         'set pathways to the three different text ouput files
-        orderPath = "C:\x\" & subID & "\" & subID & cbx & "_OutKnowOrder.txt"
-        respPath = "C:\x\" & subID & "\" & subID & cbx & "_OutKnowResp.txt"
-        correctPath = "C:\x\" & subID & "\" & subID & cbx & "_OutKnowCorrect.txt"
+        path = "C:\x\" & subID & "\" & subID & cbx & "_OutKnow.txt"
 
-
+        'set each variable to corresponding picture
         grape = My.Resources.ResourceManager.GetObject("grapes")
         banana = My.Resources.ResourceManager.GetObject("Banana")
         pineapple = My.Resources.ResourceManager.GetObject("pineapple")
@@ -53,6 +63,7 @@ Public Class OutKnow
         pear = My.Resources.ResourceManager.GetObject("pear2")
         orange = My.Resources.ResourceManager.GetObject("orange")
 
+        'add each pic to list
         stimList.Add(grape)
         stimList.Add(banana)
         stimList.Add(orange)
@@ -60,15 +71,19 @@ Public Class OutKnow
         stimList.Add(pear)
         stimList.Add(apple)
 
+        'start loop index at 0
         stimIndx = 0
 
+        'shuffle indxArray
         randomizeArrays()
-
-        KeyPreview = False
 
         runTask()
 
     End Sub
+
+    '===================================='
+    '-----IndxArray Shuffle Function-----'
+    '===================================='
 
     Public Sub randomizeArrays()
 
@@ -76,8 +91,10 @@ Public Class OutKnow
 
         Dim rndm As Random = New Random()
 
+        'loop through shuffle twice
         For loopCount = 0 To 2
 
+            'for each indx, get random number and swap indxArray(indx) with indxArray(rndNum)
             For indx = 0 To 5
 
                 rndNum = rndm.Next(0, 6)
@@ -98,14 +115,20 @@ Public Class OutKnow
 
     End Sub
 
+    '======================='
+    '-----Start Of Task-----'
+    '======================='
+
     Public Sub runTask()
 
         Dim ind As Integer
 
+        'get image at indxArray(stimIndx) and set to stimBox
         ind = indxArray(stimIndx)
 
         StimBox.Image = stimList(ind)
 
+        'set stimType output variable to whatever picture appears
         Select Case ind
             Case 0
                 stimType = "StandardGrapes"
@@ -120,12 +143,18 @@ Public Class OutKnow
             Case 5
                 stimType = "StandardApple"
             Case Else
+                'error/debug
                 MsgBox("Uh-oh. Someone goofed.", MsgBoxStyle.OkOnly, "Error")
         End Select
 
+        'make everything visible after ITI
         makeVisible()
 
     End Sub
+
+    '===================================================='
+    '-----Function to Make All Form Elements Visible-----'
+    '===================================================='
 
     Public Sub makeVisible()
 
@@ -149,9 +178,14 @@ Public Class OutKnow
         lblQstn.Visible = True
         StimBox.Visible = True
 
-        KeyPreview = True
+        'make sure keyboard input on, as that advances the code
+        acceptKey = True
 
     End Sub
+
+    '============================================================================='
+    '-----Function to Make All Form Elements Invisible (for blank period ITI)-----'
+    '============================================================================='
 
     Public Sub makeInvisible()
 
@@ -176,10 +210,16 @@ Public Class OutKnow
         StimBox.Visible = False
 
     End Sub
+
+    '============================='
+    '-----Key Press Functions-----'
+    '============================='
+
     Private Sub OutKnow_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles MyBase.KeyPress
         Dim response As MsgBoxResult
+        'if x pressed, dispose of all forms and exit
         If e.KeyChar = "x" Then
-            response = MsgBox("You are about to exit sQuizzer. Are you sure?", MsgBoxStyle.YesNo, "Quit sQuizzer?")
+            response = MsgBox("You are about to exit the Slips Of Action task. Are you sure?", MsgBoxStyle.YesNo, "Quit the Slips Of Action task?")
             If response = MsgBoxResult.Yes Then
 
                 frmMain.cleanseEverything()
@@ -189,6 +229,7 @@ Public Class OutKnow
 
         ElseIf e.KeyChar = "2" Then
 
+            'if 2 pressed, move trkbar slider right 
             Select Case trkBar.Value
 
                 Case Is > 5
@@ -201,6 +242,7 @@ Public Class OutKnow
 
         ElseIf e.KeyChar = "1" Then
 
+            'if 1 pressed, move trkbar slider left
             Select Case trkBar.Value
 
                 Case Is < 1
@@ -212,17 +254,25 @@ Public Class OutKnow
 
         ElseIf e.KeyChar = "8" Then
 
-            If trkBar.Value = 0 Then
+            'if subject chooses invalid entry (0), make them select valid selection
+            If acceptKey = True Then
 
-                MsgBox("Please choose a fruit.", MsgBoxStyle.OkOnly, "Invalid Entry")
+                If trkBar.Value = 0 Then
 
-            Else
+                    MsgBox("Please choose a fruit.", MsgBoxStyle.OkOnly, "Invalid Entry")
 
-                makeInvisible()
+                Else
 
-                textOutput()
+                    acceptKey = False
 
-                ITItimer.Start()
+                    'start ITI, output the response, hide all
+                    makeInvisible()
+
+                    textOutput()
+
+                    ITItimer.Start()
+
+                End If
 
             End If
 
@@ -230,17 +280,22 @@ Public Class OutKnow
 
     End Sub
 
+    '================================='
+    '-----Blank Period Timer Tick-----'
+    '================================='
+
     Private Sub ITItimer_Tick() Handles ITItimer.Tick
 
-        'if the index is less than 11 (last index in array, trial number - 1), continue
+        'if the index is less than 5 (last index in array, trial number - 1), continue
         If stimIndx < 5 Then
 
             'stop timer
             ITItimer.Stop()
 
-            'increment outcome and box index for next run
+            'increment index for next run
             stimIndx = stimIndx + 1
 
+            'reset trkbar value
             trkBar.Value = 0
 
             'start over again
@@ -257,12 +312,17 @@ Public Class OutKnow
 
     End Sub
 
+    '=============================='
+    '-----Text Output Function-----'
+    '=============================='
+
     Private Sub textOutput()
 
         Dim output As String
 
         Select Case trkBar.Value
 
+            'determine the output response based on trkBar value and picture shown
             Case 1
 
                 If indxArray(stimIndx) = 1 Then
@@ -271,6 +331,7 @@ Public Class OutKnow
                     resp = 0
                 End If
 
+                'show what subject chose as well
                 output = "Banana"
 
             Case 2
@@ -329,25 +390,12 @@ Public Class OutKnow
 
         End Select
 
-        Dim fs As New FileStream(orderPath, FileMode.Append, FileAccess.Write)
+        'output three variables (resp, order, and fruit chosen)
+        Dim fs As New FileStream(path, FileMode.Append, FileAccess.Write)
         Dim sr As New StreamWriter(fs)
-        sr.WriteLine(Now & "  " & stimType)
+        sr.WriteLine(stimType & "," & output & "," & resp)
         sr.Close()
         fs.Close()
-
-        'response text file
-        Dim fs2 As New FileStream(respPath, FileMode.Append, FileAccess.Write)
-        Dim sr2 As New StreamWriter(fs2)
-        sr2.WriteLine(Now & "  " & output)
-        sr2.Close()
-        fs2.Close()
-
-        'valued stim order text file
-        Dim fs3 As New FileStream(correctPath, FileMode.Append, FileAccess.Write)
-        Dim sr3 As New StreamWriter(fs3)
-        sr3.WriteLine(Now & "  " & resp)
-        sr3.Close()
-        fs3.Close()
 
     End Sub
 

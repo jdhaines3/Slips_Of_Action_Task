@@ -3,7 +3,9 @@ Imports System.IO
 
 Public Class SOA_Cong_Pear
 
-    '-----set variables-----'
+    '==========================='
+    '-----Declare Variables-----'
+    '==========================='
 
     'sets response to write
     Dim resp As Integer
@@ -12,21 +14,18 @@ Public Class SOA_Cong_Pear
     Dim blankBox As New Bitmap(1, 1)
 
     'sets variables that take values from Main form; used in file output
-    Dim cbx As String
-    Dim subID As String
-    Dim path As String
-
-    'sets variables for text output of order of stims
-    Dim orderPath As String
-    Dim stimType As String
+    Dim cbx, subID, path, stimType As String
 
     'dims variables that will be gotten from frmMain
-    Dim d1, d2, score As Integer
+    Dim d1, d2, score, pointsEarned As Integer
 
+    Dim acceptKey As Boolean
 
-    '-----Load/Run Function (What form initially does when Main calls frm.showdialog)-----'
+    '==================================================================================='
+    '-----Form Load Function (what happens each time Showdialog is called for form)-----'
+    '==================================================================================='
 
-    Private Sub frmCongruent2_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Private Sub PearSOA_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         'set the screen to extended monitor
         Dim screen As Screen
         ' We want to display a form on screen 1
@@ -38,17 +37,13 @@ Public Class SOA_Cong_Pear
 
         ' Set the StartPosition to Manual otherwise the system will assign an automatic start position
         Me.StartPosition = FormStartPosition.Manual
-
-        ' Set the form location so it appears at Location (100, 100) on the screen 1
         Me.Location = screen.Bounds.Location + New Point(0, 0)
 
 
         'Set pathway to read/write to file
         cbx = frmMain.cbxSess.SelectedItem
         subID = frmMain.txtSubj.Text
-        path = "C:\x\" & subID & "\" & subID & cbx & "_CongPearSOA.txt"
-
-        orderPath = "C:\x\" & subID & "\" & subID & cbx & "_StimOrder.txt"
+        path = "C:\x\" & subID & "\" & subID & cbx & "_SlipsPhase.txt"
         stimType = "CongruentPear"
 
         'get variables from frmMain for deval and score
@@ -58,10 +53,9 @@ Public Class SOA_Cong_Pear
 
         'set response to arbitray number not used in 3 outcomes for error handling
         resp = 100
+        pointsEarned = 100
 
         'turn on keyboard input and make pics visible
-        KeyPreview = True
-
         FruitPic.Visible = True
         LeftArr.Visible = True
         RightArr.Visible = True
@@ -71,65 +65,78 @@ Public Class SOA_Cong_Pear
         'start first timer
         stimTimer.Start()
 
+        acceptKey = True
 
     End Sub
 
+    '==========================='
+    '-----KeyPress Function-----'
+    '==========================='
 
-    '-----Key Press Functions-----'
-
-    Private Sub frmCongruent2_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles MyBase.KeyPress
+    Private Sub PearSOA_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles MyBase.KeyPress
         Dim response As MsgBoxResult
 
         'if x, pop up message asking if you want to quit, Dispose all forms and exit
         If e.KeyChar = "x" Then
 
-            response = MsgBox("You are about to exit GPRA Quizzer. Are you sure?", MsgBoxStyle.YesNo, "Quit GRPA Quizzer?")
+            response = MsgBox("You are about to exit the Slips Of Action task. Are you sure?", MsgBoxStyle.YesNo, "Quit the Slips Of Action task?")
 
             If response = MsgBoxResult.Yes Then
-                frmMain.Dispose()
-                SOA_Stnd_Grape.Dispose()
-                SOA_Stnd_Apple.Dispose()
-                SOA_Cong_Ban.Dispose()
-                EndSOA.Dispose()
-                SOA_Incon_Orng.Dispose()
-                SOA_Incon_Pine.Dispose()
-                frmThanks.Dispose()
-                Me.Dispose()
-                Application.Exit()
+
+                frmMain.cleanseEverything()
+
             Else
             End If
 
         ElseIf e.KeyChar = "2" Then
 
-            stimOff()
+            'incorrect press, feedback set to 1 pixel image ("transparent" image to just show background box)
+            If acceptKey = True Then
 
-            FruitPic.Image = blankBox
+                acceptKey = False
 
-            resp = 0
+                stimOff()
+
+                FruitPic.Image = blankBox
+
+                resp = 0
+                pointsEarned = 0
+
+            End If
 
         ElseIf e.KeyChar = "1" Then
 
-            If d1 = 4 Or d2 = 4 Then
+            'if 1 is pressed, determine if deval'd or not
+            If acceptKey = True Then
 
-                stimOff()
+                acceptKey = False
 
-                FruitPic.Image = My.Resources.ResourceManager.GetObject("xmark")
+                'if deval'd set feedback image to red x for incorrect go, set resp = 2, subtract points
+                If d1 = 4 Or d2 = 4 Then
 
-                resp = 2
+                    stimOff()
 
-                score = score - 5
-                frmMain.setScore(score)
+                    FruitPic.Image = My.Resources.ResourceManager.GetObject("xmark")
 
-            Else
+                    resp = 2
 
-                stimOff()
+                    score = score - 1
+                    frmMain.setScore(score)
+                    pointsEarned = -1
 
-                FruitPic.Image = My.Resources.ResourceManager.GetObject("pear2")
+                Else
+                    'if not deval'd, correct press
+                    stimOff()
 
-                resp = 1
+                    FruitPic.Image = My.Resources.ResourceManager.GetObject("pear2")
 
-                score = score + 5
-                frmMain.setScore(score)
+                    resp = 1
+
+                    score = score + 1
+                    frmMain.setScore(score)
+                    pointsEarned = 1
+
+                End If
 
             End If
 
@@ -140,9 +147,16 @@ Public Class SOA_Cong_Pear
 
     End Sub
 
-    '-----What to do when stimTimer runs out-----'
+    '================================='
+    '-----Stim Timer Tick/Elapsed-----'
+    '================================='
+
+
+    'similar to key press functions for 1/2, but happens if first timer runs out
 
     Private Sub stimTimer_Tick() Handles stimTimer.Tick
+
+        acceptKey = False
 
         If d1 = 4 Or d2 = 4 Then
 
@@ -152,8 +166,9 @@ Public Class SOA_Cong_Pear
 
             resp = 4
 
-            score = score + 5
+            score = score + 1
             frmMain.setScore(score)
+            pointsEarned = 1
 
         Else
 
@@ -162,13 +177,33 @@ Public Class SOA_Cong_Pear
             FruitPic.Image = blankBox
 
             resp = 3
+            pointsEarned = 0
 
         End If
 
     End Sub
 
+    '====================================================='
+    '-----Stimulus Off/Hide Function (and timer stop)-----'
+    '====================================================='
 
-    '-----What to do when betweenTimer runs out-----'
+    Private Sub stimOff()
+
+        'reset/stop timer, make pics invisible and turn off keyboard input
+        stimTimer.Stop()
+
+        FruitPic.Visible = False
+        LeftArr.Visible = False
+        RightArr.Visible = False
+
+        'start timer for blank period between stim and feedback
+        betweenTimer.Start()
+
+    End Sub
+
+    '================================================================'
+    '-----Blank Period (between stim and feedback) Timer Elapsed-----'
+    '================================================================'
 
     Private Sub betweenTimer_Tick() Handles betweenTimer.Tick
 
@@ -183,8 +218,9 @@ Public Class SOA_Cong_Pear
 
     End Sub
 
-
-    '-----What to do when feedbackTimer runs out-----'
+    '==============================='
+    '-----Feedback Timer Elapse-----'
+    '==============================='
 
     Private Sub feedbackTimer_Tick() Handles feedbackTimer.Tick
 
@@ -197,23 +233,18 @@ Public Class SOA_Cong_Pear
         'write the resp variable to the text file, then close filestream
         Dim fs As New FileStream(path, FileMode.Append, FileAccess.Write)
         Dim sr As New StreamWriter(fs)
-        sr.WriteLine(Now & "  " & resp)
+        sr.WriteLine(stimType & "," & resp & "," & pointsEarned & "," & score)
         sr.Close()
-
-        'write type of stim to text file
-        Dim fsOP As New FileStream(orderPath, FileMode.Append, FileAccess.Write)
-        Dim srOP As New StreamWriter(fsOP)
-        srOP.WriteLine(Now & "  " & stimType)
-        srOP.Close()
-        fsOP.Close()
+        fs.Close()
 
         'start InterTrialInterval
         blankTimer.Start()
 
     End Sub
 
-
-    '-----What to do after blankTimer runs out-----'
+    '================================================='
+    '-----Post Feedback Blank Period Timer Elapse-----'
+    '================================================='
 
     Private Sub blankTimer_Tick() Handles blankTimer.Tick
 
@@ -228,25 +259,5 @@ Public Class SOA_Cong_Pear
 
 
     End Sub
-
-
-    '-----Function for keypress/stim timer running out-----'
-
-    Private Sub stimOff()
-
-        'reset/stop timer, make pics invisible and turn off keyboard input
-        stimTimer.Stop()
-
-        KeyPreview = False
-
-        FruitPic.Visible = False
-        LeftArr.Visible = False
-        RightArr.Visible = False
-
-        'start timer for blank period between stim and feedback
-        betweenTimer.Start()
-
-    End Sub
-
 
 End Class

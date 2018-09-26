@@ -38,7 +38,7 @@ Partial Class SOA_Stnd_Apple
         '
         'stimTimer
         '
-        Me.stimTimer.Interval = 2500
+        Me.stimTimer.Interval = 1500
         '
         'betweenTimer
         '
@@ -90,7 +90,7 @@ Partial Class SOA_Stnd_Apple
         Me.LeftArr.TabIndex = 63
         Me.LeftArr.TabStop = False
         '
-        'Standard2
+        'SOA_Stnd_Apple
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.BackColor = System.Drawing.Color.LightBlue
@@ -100,7 +100,7 @@ Partial Class SOA_Stnd_Apple
         Me.Controls.Add(Me.RightArr)
         Me.Controls.Add(Me.LeftArr)
         Me.KeyPreview = True
-        Me.Name = "Standard2"
+        Me.Name = "SOA_Stnd_Apple"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Apple"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized

@@ -38,7 +38,7 @@ Partial Class SOA_Incon_Orng
         '
         'stimTimer
         '
-        Me.stimTimer.Interval = 2500
+        Me.stimTimer.Interval = 1500
         '
         'betweenTimer
         '
@@ -90,7 +90,7 @@ Partial Class SOA_Incon_Orng
         Me.LeftArr.TabIndex = 63
         Me.LeftArr.TabStop = False
         '
-        'Incongruent1
+        'SOA_Incon_Orng
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.BackColor = System.Drawing.Color.LightBlue
@@ -100,7 +100,7 @@ Partial Class SOA_Incon_Orng
         Me.Controls.Add(Me.RightArr)
         Me.Controls.Add(Me.LeftArr)
         Me.KeyPreview = True
-        Me.Name = "Incongruent1"
+        Me.Name = "SOA_Incon_Orng"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Orange"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized

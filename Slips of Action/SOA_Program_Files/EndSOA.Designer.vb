@@ -26,7 +26,7 @@ Partial Class EndSOA
         Me.btnExit = New System.Windows.Forms.Button()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.ScoreTxt = New System.Windows.Forms.TextBox()
+        Me.ScoreTxt = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'Label2
@@ -79,14 +79,15 @@ Partial Class EndSOA
         'ScoreTxt
         '
         Me.ScoreTxt.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.ScoreTxt.BackColor = System.Drawing.Color.PaleTurquoise
-        Me.ScoreTxt.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.0!)
-        Me.ScoreTxt.Location = New System.Drawing.Point(296, 235)
+        Me.ScoreTxt.BackColor = System.Drawing.Color.LightBlue
+        Me.ScoreTxt.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.ScoreTxt.Font = New System.Drawing.Font("Microsoft Sans Serif", 21.7!)
+        Me.ScoreTxt.Location = New System.Drawing.Point(295, 235)
         Me.ScoreTxt.Name = "ScoreTxt"
         Me.ScoreTxt.Size = New System.Drawing.Size(111, 38)
-        Me.ScoreTxt.TabIndex = 11
+        Me.ScoreTxt.TabIndex = 71
         Me.ScoreTxt.Text = "0"
-        Me.ScoreTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.ScoreTxt.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'EndSOA
         '
@@ -103,6 +104,7 @@ Partial Class EndSOA
         Me.Name = "EndSOA"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "EndTask"
+        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -111,5 +113,5 @@ Partial Class EndSOA
     Friend WithEvents btnExit As System.Windows.Forms.Button
     Friend WithEvents Label6 As System.Windows.Forms.Label
     Friend WithEvents Label1 As Label
-    Friend WithEvents ScoreTxt As TextBox
+    Friend WithEvents ScoreTxt As Label
 End Class

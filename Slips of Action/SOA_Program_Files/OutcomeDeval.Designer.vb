@@ -26,6 +26,7 @@ Partial Class OutcomeDeval
         Me.BottomPic = New System.Windows.Forms.PictureBox()
         Me.TopPic = New System.Windows.Forms.PictureBox()
         Me.durTimer = New System.Windows.Forms.Timer(Me.components)
+        Me.OverflowTimer = New System.Windows.Forms.Timer(Me.components)
         CType(Me.BottomPic, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TopPic, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -56,6 +57,10 @@ Partial Class OutcomeDeval
         '
         Me.durTimer.Interval = 1500
         '
+        'OverflowTimer
+        '
+        Me.OverflowTimer.Interval = 60000
+        '
         'OutcomeDeval
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
@@ -77,4 +82,5 @@ Partial Class OutcomeDeval
     Friend WithEvents TopPic As PictureBox
     Friend WithEvents BottomPic As PictureBox
     Friend WithEvents durTimer As Timer
+    Friend WithEvents OverflowTimer As Timer
 End Class

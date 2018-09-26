@@ -9,14 +9,17 @@ Public Class frmMain
     '-----Declare frmMain variables-----'
     '==================================='
 
+
     '----Declaring instances of forms----'
 
-
-    'beginning and end of each phase forms
+    'instruction forms
+    Public clsTaskInstr As New TaskInstr
     Public clsSOAInstr As New InstructionsSOA
     Public clsTrainingInstr As New TrainingInstr
     Public clsODInstr As New InstructionsOD
     Public clsQstnInstr As New QstnInstr
+
+    'End of phase forms
     Public clsEndSOA As New EndSOA
     Public clsEndTrain As New EndTrain
     Public clsEndDeval As New EndDeval
@@ -43,6 +46,9 @@ Public Class frmMain
     Public CongPearSOA As New SOA_Cong_Pear
     Public InconOrngSOA As New SOA_Incon_Orng
     Public InconPineSOA As New SOA_Incon_Pine
+
+
+    '-----Declaring Other Variables-----'
 
     'SOA variables to keep track of score and which stims are devalued in the SOA phase
     Private score As Integer
@@ -246,7 +252,7 @@ Public Class frmMain
                         'if file does exist in pathway, ask subject if they want to append to file. If yes, run; If no, give msg box to rename or delete
                         Select Case myMsgBox("Files exist for this Subject and Session, would you like to append to them?", MsgBoxStyle.YesNo, "ERROR")
                             Case "YES"
-                                Squizzer()
+                                runTask()
                             Case "NO"
                                 myMsgBox("Then please delete previous files or rename current run.", MsgBoxStyle.OkOnly, "ERROR")
                         End Select
@@ -255,7 +261,7 @@ Public Class frmMain
 
                         Select Case myMsgBox("Files exist for this Subject and Session, would you like to append to them?", MsgBoxStyle.YesNo, "ERROR")
                             Case "YES"
-                                Squizzer()
+                                runTask()
                             Case "NO"
                                 myMsgBox("Then please delete previous files or rename current run.", MsgBoxStyle.OkOnly, "ERROR")
                         End Select
@@ -264,7 +270,7 @@ Public Class frmMain
 
                         Select Case myMsgBox("Files exist for this Subject and Session, would you like to append to them?", MsgBoxStyle.YesNo, "ERROR")
                             Case "YES"
-                                Squizzer()
+                                runTask()
                             Case "NO"
                                 myMsgBox("Then please delete previous files or rename current run.", MsgBoxStyle.OkOnly, "ERROR")
                         End Select
@@ -272,7 +278,7 @@ Public Class frmMain
                     Else
 
                         'if folder exists but no files, run 
-                        Squizzer()
+                        runTask()
 
                     End If
 
@@ -280,7 +286,7 @@ Public Class frmMain
 
                     'if directory doesn't exist: create, then run
                     My.Computer.FileSystem.CreateDirectory("C:\x\" & txtSubj.Text & "\")
-                    Squizzer()
+                    runTask()
 
                 End If
 
@@ -291,13 +297,13 @@ Public Class frmMain
 
                     My.Computer.FileSystem.CreateDirectory("C:\x\")
                     My.Computer.FileSystem.CreateDirectory("C:\x\" & txtSubj.Text & "\")
-                    Squizzer()
+                    runTask()
 
                 Catch ex As Exception
 
                     My.Computer.FileSystem.CreateDirectory("E:\x\")
                     My.Computer.FileSystem.CreateDirectory("E:\x\" & txtSubj.Text & "\")
-                    Squizzer()
+                    runTask()
 
                 End Try
             End If
@@ -308,7 +314,7 @@ Public Class frmMain
     '-----Task Start Function (Step #3: Begins task based on phase started on in frmMain entry)-----'
     '==============================================================================================='
 
-    Private Sub Squizzer()
+    Private Sub runTask()
 
         'aborts clock timer
         go.Abort()
@@ -548,6 +554,7 @@ Public Class frmMain
             Dim trainCount As Integer
 
             'Show instructions first
+            clsTaskInstr.ShowDialog(Me)
             clsTrainingInstr.ShowDialog(Me)
 
             'after instructions, loop through each trial
@@ -701,10 +708,12 @@ Public Class frmMain
         EndSOA.Dispose()
         EndTrain.Dispose()
         EndDeval.Dispose()
+
         InstructionsSOA.Dispose()
         TrainingInstr.Dispose()
         InstructionsOD.Dispose()
         SOA_Devalued.Dispose()
+        TaskInstr.Dispose()
 
         'Training Stim Forms
         TrainStndGrape.Dispose()

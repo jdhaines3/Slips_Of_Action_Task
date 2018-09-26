@@ -14,20 +14,17 @@ Public Class TrainStndApple
     Dim blankBox As New Bitmap(1, 1)
 
     'sets variables that take values from Main form; used in file output
-    Dim cbx As String
-    Dim subID As String
-    Dim path As String
-
-    'sets variables for text output of order of stims
-    Dim orderPath As String
-    Dim stimType As String
+    Dim cbx, subID, path, stimType As String
 
     'dim variable for points for training from frmMain
-    Dim points As Integer
+    Dim points, pointsEarned As Integer
 
     'Dim new stopwatch to record resp time
     Dim stpWatch As New Stopwatch()
     Dim milTime As Long
+
+    Dim acceptKey As Boolean
+
 
     '============================================================================================'
     '-----Form Load Function (Step #1: what happens each time Showdialog is called for form)-----'
@@ -51,28 +48,29 @@ Public Class TrainStndApple
         'Set pathway to read/write to file-need selected session and subID from Main, then use those to make file path
         cbx = frmMain.cbxSess.SelectedItem
         subID = frmMain.txtSubj.Text
-        path = "C:\x\" & subID & "\" & subID & cbx & "_StndAppleTrain.txt"
-
-        'pathway for ordering
-        orderPath = "C:\x\" & subID & "\" & subID & cbx & "_TrainOrder.txt"
+        path = "C:\x\" & subID & "\" & subID & cbx & "_TrainPhase.txt"
         stimType = "StandardApple"
 
         'get score from Main
         points = frmMain.getTrainScore()
+        ScoreBox.Text = points
 
         'set response to arbitray number not used in 3 outcomes for error handling
         resp = 100
+        pointsEarned = 100
 
         'turn on keyboard input; pics all visible
-        KeyPreview = True
 
         FruitPic.Visible = True
         LeftArr.Visible = True
         RightArr.Visible = True
+        ScoreBox.Visible = True
 
         'start stim timer/stopwatch
-        FruitPic.Focus()
         stpWatch.Start()
+        OverflowTimer.Start()
+
+        acceptKey = True
 
     End Sub
 
@@ -86,7 +84,7 @@ Public Class TrainStndApple
         'if x, pop up message asking if you want to quit, Dispose all forms and exit
         If e.KeyChar = "x" Then
 
-            response = MsgBox("You are about to exit GPRA Quizzer. Are you sure?", MsgBoxStyle.YesNo, "Quit GRPA Quizzer?")
+            response = MsgBox("You are about to exit the Slips Of Action task. Are you sure?", MsgBoxStyle.YesNo, "Quit the Slips Of Action task?")
 
             If response = MsgBoxResult.Yes Then
 
@@ -98,68 +96,90 @@ Public Class TrainStndApple
         ElseIf e.KeyChar = "2" Then
 
             'if 2 pressed, incorrect, so no points; just reset stpwatch and turn stim off
-            stpWatch.Reset()
 
-            stimOff()
+            If acceptKey = True Then
 
-            'set image to feedback image for incorrect response; blank box (background image with foreground image set to 1 pixel)
-            FruitPic.Image = blankBox
+                acceptKey = False
 
-            'set resp to incorrect key press
-            resp = 0
+                milTime = stpWatch.ElapsedMilliseconds()
 
+                stpWatch.Reset()
+                OverflowTimer.Stop()
+
+                stimOff()
+
+                'set image to feedback image for incorrect response; blank box (background image with foreground image set to 1 pixel)
+                FruitPic.Image = blankBox
+
+                'set resp to incorrect key press
+                resp = 0
+                pointsEarned = 0
+
+            End If
 
         ElseIf e.KeyChar = "1" Then
 
             'similar to 2, but correct press
+            If acceptKey = True Then
 
-            'get time in millisec from stopwatch (response time), then reset the watch
-            milTime = stpWatch.ElapsedMilliseconds()
+                acceptKey = False
 
-            stpWatch.Reset()
+                'get time in millisec from stopwatch (response time), then reset the watch
+                milTime = stpWatch.ElapsedMilliseconds()
 
-            'determine points awarded based on response time, set new score
-            Select Case milTime
+                OverflowTimer.Stop()
+                stpWatch.Reset()
 
-                Case 0 To 1000
+                'determine points awarded based on response time, set new score
+                Select Case milTime
 
-                    points = points + 5
-                    frmMain.setTrainScore(points)
+                    Case 0 To 1000
 
-                Case 1001 To 1500
+                        points = points + 5
+                        frmMain.setTrainScore(points)
+                        pointsEarned = 5
 
-                    points = points + 4
-                    frmMain.setTrainScore(points)
+                    Case 1001 To 1500
 
-                Case 1501 To 2000
+                        points = points + 4
+                        frmMain.setTrainScore(points)
+                        pointsEarned = 4
 
-                    points = points + 3
-                    frmMain.setTrainScore(points)
+                    Case 1501 To 2000
 
-                Case 2001 To 2500
+                        points = points + 3
+                        frmMain.setTrainScore(points)
+                        pointsEarned = 3
 
-                    points = points + 2
-                    frmMain.setTrainScore(points)
+                    Case 2001 To 2500
 
-                Case Is > 2500
+                        points = points + 2
+                        frmMain.setTrainScore(points)
+                        pointsEarned = 2
 
-                    points = points + 1
-                    frmMain.setTrainScore(points)
+                    Case Is > 2500
 
+                        points = points + 1
+                        frmMain.setTrainScore(points)
+                        pointsEarned = 1
 
-                Case Else
+                    Case Else
 
-                    'error/debugging
-                    MsgBox("The person coding this sucks.", MsgBoxStyle.OkOnly, "UH-OH. UH-OH. UH-OH.")
+                        'error/debugging
+                        MsgBox("The person coding this sucks.", MsgBoxStyle.OkOnly, "UH-OH. UH-OH. UH-OH.")
 
-            End Select
+                End Select
 
-            'turn stim off, set pic to correct feedback, resp to 1 for correct
-            stimOff()
+                'turn stim off, set pic to correct feedback, resp to 1 for correct
+                stimOff()
 
-            FruitPic.Image = My.Resources.ResourceManager.GetObject("halfWMelon")
+                FruitPic.Image = My.Resources.ResourceManager.GetObject("halfWMelon")
 
-            resp = 1
+                ScoreBox.Text = points
+
+                resp = 1
+            End If
+
 
         Else
             'if other key pressed, Do nothing
@@ -173,13 +193,47 @@ Public Class TrainStndApple
 
     Private Sub stimOff()
 
-        KeyPreview = False
-
         FruitPic.Visible = False
         LeftArr.Visible = False
         RightArr.Visible = False
+        ScoreBox.Visible = False
 
         betweenTimer.Start()
+
+    End Sub
+
+    '======================================'
+    '-----Overflow Timer Tick Function-----'
+    '======================================'
+
+    'the overflow timer ensures that the milTime variable doesn't overflow (if stim left unanswered for VERY long time)
+    Private Sub OverflowTimer_Tick() Handles OverflowTimer.Tick
+
+        Dim response As MsgBoxResult
+
+        'turns off key input
+        acceptKey = False
+
+        'stops timer and stopwatch 
+        OverflowTimer.Stop()
+        stpWatch.Reset()
+
+        'throws msg to user that they reached time limit on this trial, and lets them know the task will be moving on
+        response = MsgBox("Time limit reached on this trial. Moving to feedback.", MsgBoxStyle.OkOnly, "Timed Out.")
+
+        If response = MsgBoxResult.Ok Then
+
+            stimOff()
+
+            'sets resp, milTime, and pointsEarned to values not normally gotten, so the textOutput will show a timeOut
+            resp = 2
+            milTime = -5
+            pointsEarned = -5
+
+            'set feedback image to blank crate
+            FruitPic.Image = blankBox
+
+        End If
 
     End Sub
 
@@ -194,6 +248,7 @@ Public Class TrainStndApple
 
         'set new feedback pic as visible
         FruitPic.Visible = True
+        ScoreBox.Visible = True
 
         'start timer for how long feedback image stays on screen
         feedbackTimer.Start()
@@ -212,20 +267,14 @@ Public Class TrainStndApple
 
         'turn off feedback pic
         FruitPic.Visible = False
+        ScoreBox.Visible = False
 
-        'write the resp variable to the text file, then close filestream
+        'write the output variables to a file, if file exists appends to next line
         Dim fs As New FileStream(path, FileMode.Append, FileAccess.Write)
         Dim sr As New StreamWriter(fs)
-        sr.WriteLine(Now & "  " & resp)
+        sr.WriteLine(stimType & "," & resp & "," & milTime & "," & pointsEarned & "," & points)
         sr.Close()
         fs.Close()
-
-        'write type of stim to text file
-        Dim fsOP As New FileStream(orderPath, FileMode.Append, FileAccess.Write)
-        Dim srOP As New StreamWriter(fsOP)
-        srOP.WriteLine(Now & "  " & stimType)
-        srOP.Close()
-        fsOP.Close()
 
         'start InterTrialInterval
         blankTimer.Start()

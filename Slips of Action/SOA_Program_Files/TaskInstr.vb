@@ -1,13 +1,13 @@
 Imports System
 Imports System.IO
 
-Public Class TrainingInstr
+Public Class TaskInstr
 
     '==================================================================================='
     '-----Form Load Function (what happens each time Showdialog is called for form)-----'
     '==================================================================================='
 
-    Private Sub TrainingInstr_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Private Sub TaskInstr_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
         'set the screen to extended monitor
         Dim screen As Screen
@@ -33,7 +33,7 @@ Public Class TrainingInstr
     '-----Key Press Functions-----'
     '============================='
 
-    Private Sub TrainingInstr_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles MyBase.KeyPress
+    Private Sub TaskInstr_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles MyBase.KeyPress
         Dim response As MsgBoxResult
 
         'if x, pop up message asking if you want to quit, Dispose all forms and exit

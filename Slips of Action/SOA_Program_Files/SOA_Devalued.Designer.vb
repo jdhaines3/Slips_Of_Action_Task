@@ -129,7 +129,7 @@ Partial Class SOA_Devalued
         Me.Controls.Add(Me.CherryPic)
         Me.Name = "SOA_Devalued"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "Devalued"
+        Me.Text = "Devalued Stims SOA"
         Me.TransparencyKey = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(64, Byte), Integer))
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         CType(Me.WatermelonPic, System.ComponentModel.ISupportInitialize).EndInit()

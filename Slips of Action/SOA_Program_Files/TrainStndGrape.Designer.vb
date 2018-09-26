@@ -30,6 +30,8 @@ Partial Class TrainStndGrape
         Me.FruitPic = New System.Windows.Forms.PictureBox()
         Me.RightArr = New System.Windows.Forms.PictureBox()
         Me.LeftArr = New System.Windows.Forms.PictureBox()
+        Me.OverflowTimer = New System.Windows.Forms.Timer(Me.components)
+        Me.ScoreBox = New System.Windows.Forms.Label()
         CType(Me.FruitPic, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RightArr, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LeftArr, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -85,12 +87,30 @@ Partial Class TrainStndGrape
         Me.LeftArr.TabIndex = 63
         Me.LeftArr.TabStop = False
         '
+        'OverflowTimer
+        '
+        Me.OverflowTimer.Interval = 60000
+        '
+        'ScoreBox
+        '
+        Me.ScoreBox.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.ScoreBox.BackColor = System.Drawing.Color.LightGray
+        Me.ScoreBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.ScoreBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 21.7!)
+        Me.ScoreBox.Location = New System.Drawing.Point(295, 344)
+        Me.ScoreBox.Name = "ScoreBox"
+        Me.ScoreBox.Size = New System.Drawing.Size(102, 40)
+        Me.ScoreBox.TabIndex = 69
+        Me.ScoreBox.Text = "0"
+        Me.ScoreBox.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'TrainStndGrape
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.BackColor = System.Drawing.Color.LightBlue
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.ClientSize = New System.Drawing.Size(700, 400)
+        Me.Controls.Add(Me.ScoreBox)
         Me.Controls.Add(Me.FruitPic)
         Me.Controls.Add(Me.RightArr)
         Me.Controls.Add(Me.LeftArr)
@@ -112,4 +132,6 @@ Partial Class TrainStndGrape
     Friend WithEvents betweenTimer As Timer
     Friend WithEvents feedbackTimer As Timer
     Friend WithEvents blankTimer As Timer
+    Friend WithEvents OverflowTimer As Timer
+    Friend WithEvents ScoreBox As Label
 End Class

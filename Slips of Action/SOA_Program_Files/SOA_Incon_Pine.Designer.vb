@@ -38,7 +38,7 @@ Partial Class SOA_Incon_Pine
         '
         'stimTimer
         '
-        Me.stimTimer.Interval = 2500
+        Me.stimTimer.Interval = 1500
         '
         'betweenTimer
         '
@@ -90,7 +90,7 @@ Partial Class SOA_Incon_Pine
         Me.LeftArr.TabIndex = 63
         Me.LeftArr.TabStop = False
         '
-        'Incongruent2
+        'SOA_Incon_Pine
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.BackColor = System.Drawing.Color.LightBlue
@@ -100,7 +100,7 @@ Partial Class SOA_Incon_Pine
         Me.Controls.Add(Me.RightArr)
         Me.Controls.Add(Me.LeftArr)
         Me.KeyPreview = True
-        Me.Name = "Incongruent2"
+        Me.Name = "SOA_Incon_Pine"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Pineapple"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized

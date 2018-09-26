@@ -23,7 +23,7 @@ Partial Class EndDeval
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.ScoreTxt = New System.Windows.Forms.TextBox()
+        Me.ScoreTxt = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'Label1
@@ -31,7 +31,7 @@ Partial Class EndDeval
         Me.Label1.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.0!)
-        Me.Label1.Location = New System.Drawing.Point(125, 35)
+        Me.Label1.Location = New System.Drawing.Point(131, 38)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(440, 186)
         Me.Label1.TabIndex = 10
@@ -42,14 +42,15 @@ Partial Class EndDeval
         'ScoreTxt
         '
         Me.ScoreTxt.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.ScoreTxt.BackColor = System.Drawing.Color.PaleTurquoise
-        Me.ScoreTxt.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.0!)
-        Me.ScoreTxt.Location = New System.Drawing.Point(295, 246)
+        Me.ScoreTxt.BackColor = System.Drawing.Color.LightBlue
+        Me.ScoreTxt.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.ScoreTxt.Font = New System.Drawing.Font("Microsoft Sans Serif", 21.7!)
+        Me.ScoreTxt.Location = New System.Drawing.Point(295, 260)
         Me.ScoreTxt.Name = "ScoreTxt"
         Me.ScoreTxt.Size = New System.Drawing.Size(111, 38)
-        Me.ScoreTxt.TabIndex = 11
+        Me.ScoreTxt.TabIndex = 71
         Me.ScoreTxt.Text = "0"
-        Me.ScoreTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.ScoreTxt.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'EndDeval
         '
@@ -69,5 +70,5 @@ Partial Class EndDeval
 
     End Sub
     Friend WithEvents Label1 As Label
-    Friend WithEvents ScoreTxt As TextBox
+    Friend WithEvents ScoreTxt As Label
 End Class

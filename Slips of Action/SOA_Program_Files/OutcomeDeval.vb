@@ -9,7 +9,7 @@ Public Class OutcomeDeval
 
 
     'Declares variables for # of points and key response
-    Dim points, resp As Integer
+    Dim points, resp, pointsEarned As Integer
 
     '--arrays used in this form--'                                                  'length of box and outcome array MUST BE #trials, right/left array = #trials/2
     Dim boxArray() As Integer = {1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2}                'used to determine which box to put devalued stim in: 1 is top, 2 is bottom
@@ -27,21 +27,15 @@ Public Class OutcomeDeval
     Dim cherry, banana, pineapple, melon, pear, orange As Bitmap
 
     'declares variables from frmMain for session and subID (entered at beginning)
-    Dim cbx As String
-    Dim subID As String
-
-    'sets variables for text output pathways of: Deval'd stim order, response to each trial, and non deval'd stim order
-    Dim orderPath As String
-    Dim respPath As String
-    Dim nonDevalPath As String
-
-    'string variables for use in output; devalued stim and valued stim
-    Dim nonDevalPic As String
-    Dim devalType As String
+    Dim cbx, subID, path, nonDevalPic, devalType As String
 
     'stopwatch to measure reaction time and convert to points, Long variable (for large ints) used to convert stopwatch time to milliseconds
     Dim stpWatch As New Stopwatch()
     Dim milTime As Long
+
+    'work around to turn key presses on and off. 
+    Dim acceptKey As Boolean
+
 
 
     '============================================================================================'
@@ -69,14 +63,7 @@ Public Class OutcomeDeval
         'Set cbx/subID to variables entered from Main
         cbx = frmMain.cbxSess.SelectedItem
         subID = frmMain.txtSubj.Text
-
-        'set pathways to the three different text ouput files
-        orderPath = "C:\x\" & subID & "\" & subID & cbx & "_DevalOrder.txt"
-        respPath = "C:\x\" & subID & "\" & subID & cbx & "_DevalResp.txt"
-        nonDevalPath = "C:\x\" & subID & "\" & subID & cbx & "_NonDevOrder.txt"
-
-        'turn off keyPreview to prevent accidental button presses
-        KeyPreview = False
+        path = "C:\x\" & subID & "\" & subID & cbx & "_OutDevPhase.txt"
 
         'set each picture variable to the corresponding resources pic
         cherry = My.Resources.ResourceManager.GetObject("cherries")
@@ -99,6 +86,7 @@ Public Class OutcomeDeval
 
         'once arrays are randomized, start task
         runTask()
+
 
     End Sub
 
@@ -259,11 +247,11 @@ Public Class OutcomeDeval
 
             Select Case rightLeft
                 Case 0
-                    nonDevalPic = "cherry"
+                    nonDevalPic = "Cherry"
                 Case 1
-                    nonDevalPic = "banana"
+                    nonDevalPic = "Banana"
                 Case 2
-                    nonDevalPic = "pineapple"
+                    nonDevalPic = "Pineapple"
                 Case Else
                     'msgbox error/debugging
                     myMsgBox("Code not working right, you dunce.", MsgBoxStyle.OkOnly, "Whoopsie")
@@ -303,9 +291,16 @@ Public Class OutcomeDeval
 
         End If
 
+        'set resp and pointsEarned to arbitrary numbers to catch errors in output
+        resp = 100
+        pointsEarned = 100
+
         'Now that stims are chosen and visible, start stopwatch and turn on keyboard input
         stpWatch.Start()
-        KeyPreview = True
+        OverflowTimer.Start()
+
+        'turn on key press
+        acceptKey = True
 
     End Sub
 
@@ -317,61 +312,103 @@ Public Class OutcomeDeval
         Dim response As MsgBoxResult
         'if x is pressed, exit (after confirming exit)
         If e.KeyChar = "x" Then
-            response = MsgBox("You are about to exit the program. Are you sure?", MsgBoxStyle.YesNo, "Quit Program?")
+            response = MsgBox("You are about to exit the Slips Of Action task. Are you sure?", MsgBoxStyle.YesNo, "Quit Slips Of Action task?")
             If response = MsgBoxResult.Yes Then
                 'dispose of all forms
-                frmMain.Dispose()
-                SOA_Stnd_Grape.Dispose()
-                SOA_Stnd_Apple.Dispose()
-                SOA_Cong_Ban.Dispose()
-                SOA_Cong_Pear.Dispose()
-                SOA_Incon_Orng.Dispose()
-                SOA_Incon_Pine.Dispose()
-                EndSOA.Dispose()
-                frmThanks.Dispose()
-                Me.Dispose()
-                Application.Exit()
+                frmMain.cleanseEverything()
             Else
             End If
 
         ElseIf e.KeyChar = "1" Then
 
-            'if 1 pressed (left) determine what the number in outcome array index is, if right press is deval'd then correct, if left press deval'd incorrect
-            Select Case outcmArray(outcomeIndx)
-                Case 0 To 2
-                    correctPress()
-                Case 3 To 5
-                    incorrectPress()
-                Case Else
-                    'msgbox error/debugging
-                    myMsgBox("Code not working right, you dunce.", MsgBoxStyle.OkOnly, "Whoopsie")
-            End Select
+            'turn off keyboard input to prevent misclicks/keypress function from being run again
+            If acceptKey = True Then
+
+                acceptKey = False
+
+                OverflowTimer.Stop()
+
+                'if 1 pressed (left) determine what the number in outcome array index is, if right press is deval'd then correct, if left press deval'd incorrect
+                Select Case outcmArray(outcomeIndx)
+                    Case 0 To 2
+                        correctPress()
+                    Case 3 To 5
+                        incorrectPress()
+                    Case Else
+                        'msgbox error/debugging
+                        myMsgBox("Code not working right, you dunce.", MsgBoxStyle.OkOnly, "Whoopsie")
+                End Select
+
+            End If
 
         ElseIf e.KeyChar = "2" Then
-            'reverse of keypress 1
-            Select Case outcmArray(outcomeIndx)
-                Case 0 To 2
-                    incorrectPress()
-                Case 3 To 5
-                    correctPress()
-                Case Else
-                    'msgbox error
-                    myMsgBox("Code not working right, you dunce.", MsgBoxStyle.OkOnly, "Whoopsie")
-            End Select
+
+            'turn off keyboard input to prevent misclicks/keypress function from being run again
+            If acceptKey = True Then
+
+                acceptKey = False
+
+                OverflowTimer.Stop()
+
+                'reverse of keypress 1
+                Select Case outcmArray(outcomeIndx)
+                    Case 0 To 2
+                        incorrectPress()
+                    Case 3 To 5
+                        correctPress()
+                    Case Else
+                        'msgbox error
+                        myMsgBox("Code not working right, you dunce.", MsgBoxStyle.OkOnly, "Whoopsie")
+                End Select
+
+            End If
 
         Else
             'any other key press, do nothing
         End If
     End Sub
 
+    '================================================='
+    '-----Overflow Timer Tick Function (Step #5a)-----'
+    '================================================='
+
+    'the overflow timer ensures that the milTime variable doesn't overflow (if stim left unanswered for VERY long time)
+    Private Sub OverflowTimer_Tick() Handles OverflowTimer.Tick
+
+        'turns off key input
+        acceptKey = False
+
+        'stops timer and stopwatch 
+        OverflowTimer.Stop()
+        stpWatch.Reset()
+
+        'throws msg to user that they reached time limit on this trial, and lets them know the task will be moving on
+        Select Case myMsgBox("Time limit reached on this trial. Moving to feedback.", MsgBoxStyle.OkOnly, "Timed Out.")
+
+            Case "OK"
+
+                TopPic.Visible = False
+                BottomPic.Visible = False
+
+                'sets resp, milTime, and pointsEarned to values not normally gotten, so the textOutput will show a timeOut
+                resp = 2
+                milTime = -5
+                pointsEarned = -5
+
+                'run outcome string function to get deval'd stim in string form, run textoutput function, then start ITI timer
+                outcomeString()
+                textOutput()
+                durTimer.Start()
+
+        End Select
+
+    End Sub
+
     '====================================='
-    '-----Correct Key Press (Step #5)-----'
+    '-----Correct Key Press (Step #5b)-----'
     '====================================='
 
     Public Sub correctPress()
-
-        'turn off keyboard input to prevent misclicks/keypress function from being run again
-        KeyPreview = False
 
         'make the response variable 1 for correct
         resp = 1
@@ -390,26 +427,31 @@ Public Class OutcomeDeval
 
                 points = points + 5
                 frmMain.setDevalScore(points)
+                pointsEarned = 5
 
             Case 1001 To 1500
 
                 points = points + 4
                 frmMain.setDevalScore(points)
+                pointsEarned = 4
 
             Case 1501 To 2000
 
                 points = points + 3
                 frmMain.setDevalScore(points)
+                pointsEarned = 3
 
             Case 2001 To 2500
 
                 points = points + 2
                 frmMain.setDevalScore(points)
+                pointsEarned = 2
 
             Case Is > 2500
 
                 points = points + 1
                 frmMain.setDevalScore(points)
+                pointsEarned = 1
 
             Case Else
 
@@ -430,7 +472,7 @@ Public Class OutcomeDeval
     End Sub
 
     '======================================='
-    '-----Incorrect Key Press (Step #5)-----'
+    '-----Incorrect Key Press (Step #5c)-----'
     '======================================='
 
 
@@ -438,8 +480,10 @@ Public Class OutcomeDeval
 
         'similar to correct press, but no assigning points, just reset timer and set response to 0
 
-        KeyPreview = False
         resp = 0
+        pointsEarned = 0
+
+        milTime = stpWatch.ElapsedMilliseconds()
 
         stpWatch.Reset()
 
@@ -461,17 +505,17 @@ Public Class OutcomeDeval
         'determines which string to set output variable to based on number at outcomeIndx in outcomeArray
         Select Case outcmArray(outcomeIndx)
             Case 0
-                devalType = "cherry"
+                devalType = "Cherry"
             Case 1
-                devalType = "banana"
+                devalType = "Banana"
             Case 2
-                devalType = "pineapple"
+                devalType = "Pineapple"
             Case 3
-                devalType = "melon"
+                devalType = "Melon"
             Case 4
-                devalType = "pear"
+                devalType = "Pear"
             Case 5
-                devalType = "orange"
+                devalType = "Orange"
             Case Else
                 'debugging
                 devalType = "error"
@@ -489,25 +533,12 @@ Public Class OutcomeDeval
         'could make into csv maybe, do we need time?
 
         'deval order text file
-        Dim fs As New FileStream(orderPath, FileMode.Append, FileAccess.Write)
+        Dim fs As New FileStream(path, FileMode.Append, FileAccess.Write)
         Dim sr As New StreamWriter(fs)
-        sr.WriteLine(Now & "  " & devalType)
+        sr.WriteLine(devalType & "," & nonDevalPic & "," & resp & "," & milTime & "," & pointsEarned & "," & points)
         sr.Close()
         fs.Close()
 
-        'response text file
-        Dim fs2 As New FileStream(respPath, FileMode.Append, FileAccess.Write)
-        Dim sr2 As New StreamWriter(fs2)
-        sr2.WriteLine(Now & "  " & resp)
-        sr2.Close()
-        fs2.Close()
-
-        'valued stim order text file
-        Dim fs3 As New FileStream(nonDevalPath, FileMode.Append, FileAccess.Write)
-        Dim sr3 As New StreamWriter(fs3)
-        sr3.WriteLine(Now & "  " & nonDevalPic)
-        sr3.Close()
-        fs3.Close()
 
     End Sub
 

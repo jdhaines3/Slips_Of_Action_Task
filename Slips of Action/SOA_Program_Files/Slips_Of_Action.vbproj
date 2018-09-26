@@ -186,6 +186,12 @@
     <Compile Include="TrainInconPine.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="TaskInstr.Designer.vb">
+      <DependentUpon>TaskInstr.vb</DependentUpon>
+    </Compile>
+    <Compile Include="TaskInstr.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="TrainingInstr.Designer.vb">
       <DependentUpon>TrainingInstr.vb</DependentUpon>
     </Compile>
@@ -305,6 +311,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TrainInconPine.resx">
       <DependentUpon>TrainInconPine.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TaskInstr.resx">
+      <DependentUpon>TaskInstr.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TrainingInstr.resx">
       <DependentUpon>TrainingInstr.vb</DependentUpon>

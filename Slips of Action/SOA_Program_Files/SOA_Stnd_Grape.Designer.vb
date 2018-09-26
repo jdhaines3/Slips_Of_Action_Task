@@ -38,7 +38,7 @@ Partial Class SOA_Stnd_Grape
         '
         'stimTimer
         '
-        Me.stimTimer.Interval = 2500
+        Me.stimTimer.Interval = 1500
         '
         'betweenTimer
         '
@@ -90,7 +90,7 @@ Partial Class SOA_Stnd_Grape
         Me.LeftArr.TabIndex = 63
         Me.LeftArr.TabStop = False
         '
-        'Standard1
+        'SOA_Stnd_Grape
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.BackColor = System.Drawing.Color.LightBlue
@@ -100,7 +100,7 @@ Partial Class SOA_Stnd_Grape
         Me.Controls.Add(Me.RightArr)
         Me.Controls.Add(Me.LeftArr)
         Me.KeyPreview = True
-        Me.Name = "Standard1"
+        Me.Name = "SOA_Stnd_Grape"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Grape"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized

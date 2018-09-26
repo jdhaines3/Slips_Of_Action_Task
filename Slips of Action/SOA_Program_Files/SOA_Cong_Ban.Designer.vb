@@ -38,7 +38,7 @@ Partial Class SOA_Cong_Ban
         '
         'stimTimer
         '
-        Me.stimTimer.Interval = 2500
+        Me.stimTimer.Interval = 1500
         '
         'betweenTimer
         '
@@ -90,7 +90,7 @@ Partial Class SOA_Cong_Ban
         Me.LeftArr.TabIndex = 63
         Me.LeftArr.TabStop = False
         '
-        'Congruent1
+        'SOA_Cong_Ban
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.BackColor = System.Drawing.Color.LightBlue
@@ -100,7 +100,7 @@ Partial Class SOA_Cong_Ban
         Me.Controls.Add(Me.RightArr)
         Me.Controls.Add(Me.LeftArr)
         Me.KeyPreview = True
-        Me.Name = "Congruent1"
+        Me.Name = "SOA_Cong_Ban"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Banana"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized

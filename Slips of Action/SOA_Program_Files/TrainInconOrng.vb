@@ -14,20 +14,17 @@ Public Class TrainInconOrng
     Dim blankBox As New Bitmap(1, 1)
 
     'sets variables that take values from Main form; used in file output
-    Dim cbx As String
-    Dim subID As String
-    Dim path As String
-
-    'sets variables for text output of order of stims
-    Dim orderPath As String
-    Dim stimType As String
+    Dim cbx, subID, path, stimType As String
 
     'get score from Main
-    Dim points As Integer
+    Dim points, pointsEarned As Integer
 
     'declares new stpwatch and millisec variable for resp time
     Dim stpWatch As New Stopwatch()
     Dim milTime As Long
+
+    Dim acceptKey As Boolean
+
 
     '============================================================================================'
     '-----Form Load Function (Step #1: what happens each time Showdialog is called for form)-----'
@@ -51,24 +48,26 @@ Public Class TrainInconOrng
         'Set pathway to read/write to file
         cbx = frmMain.cbxSess.SelectedItem
         subID = frmMain.txtSubj.Text
-        path = "C:\x\" & subID & "\" & subID & cbx & "_InconOrngTrain.txt"
-
-        orderPath = "C:\x\" & subID & "\" & subID & cbx & "_TrainOrder.txt"
+        path = "C:\x\" & subID & "\" & subID & cbx & "_TrainPhase.txt"
         stimType = "IncongruentOrange"
 
         points = frmMain.getTrainScore()
+        ScoreBox.Text = points
 
         'set response to arbitray number not used in 3 outcomes for error handling
         resp = 100
+        pointsEarned = 100
 
         'keyboard input on and pics visible
-        KeyPreview = True
-
         FruitPic.Visible = True
         LeftArr.Visible = True
         RightArr.Visible = True
+        ScoreBox.Visible = True
 
         stpWatch.Start()
+        OverflowTimer.Start()
+
+        acceptKey = True
 
     End Sub
 
@@ -81,7 +80,7 @@ Public Class TrainInconOrng
 
         'if x, pop up message asking if you want to quit, Dispose all forms and exit
         If e.KeyChar = "x" Then
-            response = MsgBox("You are about to exit GPRA Quizzer. Are you sure?", MsgBoxStyle.YesNo, "Quit GRPA Quizzer?")
+            response = MsgBox("You are about to exit the Slips Of Action task. Are you sure?", MsgBoxStyle.YesNo, "Quit the Slips Of Action task?")
 
             If response = MsgBoxResult.Yes Then
 
@@ -93,62 +92,87 @@ Public Class TrainInconOrng
         ElseIf e.KeyChar = "2" Then
 
             'if 2 pressed, correct; get millisec resp time from stpwatch then reset it
-            milTime = stpWatch.ElapsedMilliseconds()
+            If acceptKey = True Then
 
-            stpWatch.Reset()
+                acceptKey = False
 
-            'determine points awarded based on resp time; set new score on frmMain
-            Select Case milTime
+                milTime = stpWatch.ElapsedMilliseconds()
 
-                Case 0 To 1000
+                OverflowTimer.Stop()
+                stpWatch.Reset()
 
-                    points = points + 5
-                    frmMain.setTrainScore(points)
+                'determine points awarded based on resp time; set new score on frmMain
+                Select Case milTime
 
-                Case 1001 To 1500
+                    Case 0 To 1000
 
-                    points = points + 4
-                    frmMain.setTrainScore(points)
+                        points = points + 5
+                        frmMain.setTrainScore(points)
+                        pointsEarned = 5
 
-                Case 1501 To 2000
+                    Case 1001 To 1500
 
-                    points = points + 3
-                    frmMain.setTrainScore(points)
+                        points = points + 4
+                        frmMain.setTrainScore(points)
+                        pointsEarned = 4
 
-                Case 2001 To 2500
+                    Case 1501 To 2000
 
-                    points = points + 2
-                    frmMain.setTrainScore(points)
+                        points = points + 3
+                        frmMain.setTrainScore(points)
+                        pointsEarned = 3
 
-                Case Is > 2500
+                    Case 2001 To 2500
 
-                    points = points + 1
-                    frmMain.setTrainScore(points)
+                        points = points + 2
+                        frmMain.setTrainScore(points)
+                        pointsEarned = 2
 
-                Case Else
+                    Case Is > 2500
 
-                    'error/debugging
-                    MsgBox("The person coding this sucks.", MsgBoxStyle.OkOnly, "UH-OH. UH-OH. UH-OH.")
+                        points = points + 1
+                        frmMain.setTrainScore(points)
+                        pointsEarned = 1
 
-            End Select
+                    Case Else
 
-            'turn pics off, set feedback and resp to correct
-            stimOff()
+                        'error/debugging
+                        MsgBox("The person coding this sucks.", MsgBoxStyle.OkOnly, "UH-OH. UH-OH. UH-OH.")
 
-            FruitPic.Image = My.Resources.ResourceManager.GetObject("pineapple")
+                End Select
 
-            resp = 1
+                'turn pics off, set feedback and resp to correct
+                stimOff()
+
+                FruitPic.Image = My.Resources.ResourceManager.GetObject("pineapple")
+
+                ScoreBox.Text = points
+
+                resp = 1
+
+            End If
+
 
         ElseIf e.KeyChar = "1" Then
 
             'if 2 pressed then incorrect, reset stpwatch, set feedback and resp to incorrect
-            stpWatch.Reset()
+            If acceptKey = True Then
 
-            stimOff()
+                acceptKey = False
 
-            FruitPic.Image = blankBox
+                milTime = stpWatch.ElapsedMilliseconds()
 
-            resp = 0
+                stpWatch.Reset()
+                OverflowTimer.Stop()
+
+                stimOff()
+
+                FruitPic.Image = blankBox
+
+                resp = 0
+                pointsEarned = 0
+
+            End If
 
         Else
             'if other key pressed, Do nothing
@@ -163,13 +187,47 @@ Public Class TrainInconOrng
 
     Private Sub stimOff()
 
-        KeyPreview = False
-
         FruitPic.Visible = False
         LeftArr.Visible = False
         RightArr.Visible = False
+        ScoreBox.Visible = False
 
         betweenTimer.Start()
+
+    End Sub
+
+    '======================================'
+    '-----Overflow Timer Tick Function-----'
+    '======================================'
+
+    'the overflow timer ensures that the milTime variable doesn't overflow (if stim left unanswered for VERY long time)
+    Private Sub OverflowTimer_Tick() Handles OverflowTimer.Tick
+
+        Dim response As MsgBoxResult
+
+        'turns off key input
+        acceptKey = False
+
+        'stops timer and stopwatch 
+        OverflowTimer.Stop()
+        stpWatch.Reset()
+
+        'throws msg to user that they reached time limit on this trial, and lets them know the task will be moving on
+        response = MsgBox("Time limit reached on this trial. Moving to feedback.", MsgBoxStyle.OkOnly, "Timed Out.")
+
+        If response = MsgBoxResult.Ok Then
+
+            stimOff()
+
+            'sets resp, milTime, and pointsEarned to values not normally gotten, so the textOutput will show a timeOut
+            resp = 2
+            milTime = -5
+            pointsEarned = -5
+
+            'set feedback image to blank crate
+            FruitPic.Image = blankBox
+
+        End If
 
     End Sub
 
@@ -184,6 +242,7 @@ Public Class TrainInconOrng
 
         'set new feedback pic as visible
         FruitPic.Visible = True
+        ScoreBox.Visible = True
 
         'start timer for how long feedback image stays on screen
         feedbackTimer.Start()
@@ -201,20 +260,14 @@ Public Class TrainInconOrng
 
         'turn off feedback pic
         FruitPic.Visible = False
-
-        'write the resp variable to the text file, then close filestream
-        Dim fs As New FileStream(path, FileMode.Append, FileAccess.Write)
-        Dim sr As New StreamWriter(fs)
-        sr.WriteLine(Now & "  " & resp)
-        sr.Close()
-        fs.Close()
+        ScoreBox.Visible = False
 
         'write type of stim to text file
-        Dim fsOP As New FileStream(orderPath, FileMode.Append, FileAccess.Write)
-        Dim srOP As New StreamWriter(fsOP)
-        srOP.WriteLine(Now & "  " & stimType)
-        srOP.Close()
-        fsOP.Close()
+        Dim fs As New FileStream(path, FileMode.Append, FileAccess.Write)
+        Dim sr As New StreamWriter(fs)
+        sr.WriteLine(stimType & "," & resp & "," & milTime & "," & pointsEarned & "," & points)
+        sr.Close()
+        fs.Close()
 
         'start InterTrialInterval
         blankTimer.Start()
