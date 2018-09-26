@@ -21,6 +21,7 @@ Public Class frmMain
     '-----Declare frmMain variables-----'
     '==================================='
 
+    'TO CHANGE BLOCK NUMBER, OPEN -----GlobVars.vb-----  And change each. MUST BE DIVISIBLE BY 6, ELSE CODE FUCKS UP
 
     '----Declaring instances of forms----'
 
@@ -37,6 +38,10 @@ Public Class frmMain
     Public clsEndDeval As New EndDeval
     Public clsDevalued As New SOA_Devalued
     Public clsThanks As New frmThanks
+
+    'block forms
+    Public BlckEndTrain As New EndBlockTrain
+    Public BlckEndSOA As New EndBlockSOA
 
     'Training phase form instances
     Public clsTrainPractice As New TrainPractice
@@ -82,10 +87,10 @@ Public Class frmMain
     'form two arrays, one holding instances of forms, one for indexes that point to the arraylist (done for SOA phase and for Training phase)
     'indexes used this way for shuffling easier; used for randomization of trials, array size = number of trials
     Private formArraySOA As New ArrayList()
-    Private indxArraySOA(59) As Integer
+    Private indxArraySOA(GlobVars.SlipsTrialNum - 1) As Integer
 
     Private formArrayTrain As New ArrayList()
-    Private indxArrayTrain(47) As Integer
+    Private indxArrayTrain(GlobVars.TrainTrialNum - 1) As Integer
 
     'coordinates for main start window
     Private m_xStart As Integer
@@ -401,10 +406,13 @@ Public Class frmMain
     Private Sub fillArrays()
 
         'counter variable
-        Dim ind, inx As Integer
+        Dim ind, inx, SopCount, TrnCount As Integer
 
         ind = 0
         inx = 0
+        SopCount = (GlobVars.SlipsTrialNum) \ 6
+        TrnCount = (GlobVars.TrainTrialNum) \ 6
+
 
         'add all forms to each array list
         formArraySOA.Add(CongBanSOA)
@@ -422,7 +430,7 @@ Public Class frmMain
         formArrayTrain.Add(StndAppleTrain)
 
         'add numbers to index array
-        For ind = 0 To 59
+        For ind = 0 To GlobVars.SlipsTrialNum - 1
 
             'based on counter number, add specific integer to index array at position 'ind' that references index of formArraySOA
             Select Case ind
@@ -431,18 +439,24 @@ Public Class frmMain
                 'can changes cases to have more or less of specific form occurences
                 'say, if you want more of Congruent1 form, make first case through 15 or 20 (since Congruent1 is index '0' as seen in Add statements above
 
-                Case 0 To 9
+                Case 0 To SopCount - 1
                     indxArraySOA(ind) = 0
-                Case 10 To 19
+
+                Case SopCount To (2 * SopCount) - 1
                     indxArraySOA(ind) = 1
-                Case 20 To 29
+
+                Case 2 * SopCount To (3 * SopCount) - 1
                     indxArraySOA(ind) = 2
-                Case 30 To 39
+
+                Case 3 * SopCount To (4 * SopCount) - 1
                     indxArraySOA(ind) = 3
-                Case 40 To 49
+
+                Case 4 * SopCount To (5 * SopCount) - 1
                     indxArraySOA(ind) = 4
-                Case 50 To 59
+
+                Case 5 * SopCount To (6 * SopCount) - 1
                     indxArraySOA(ind) = 5
+
                 Case Else
                     'error handling
                     myMsgBox("YOUR STUPID FILL ARRAYS DONT WORK RIGHT", MsgBoxStyle.OkOnly, "YOU DONE FUCKED UP")
@@ -451,7 +465,7 @@ Public Class frmMain
 
         Next
 
-        For inx = 0 To 47
+        For inx = 0 To GlobVars.TrainTrialNum - 1
 
             'based on counter number, add specific integer to index array at position 'ind' that references index of formArraySOA
             Select Case inx
@@ -460,18 +474,24 @@ Public Class frmMain
                 'can changes cases to have more or less of specific form occurences
                 'say, if you want more of Congruent1 form, make first case through 15 or 20 (since Congruent1 is index '0' as seen in Add statements above
 
-                Case 0 To 7
+                Case 0 To TrnCount - 1
                     indxArrayTrain(inx) = 0
-                Case 8 To 15
+
+                Case TrnCount To (2 * TrnCount) - 1
                     indxArrayTrain(inx) = 1
-                Case 16 To 23
+
+                Case 2 * TrnCount To (3 * TrnCount) - 1
                     indxArrayTrain(inx) = 2
-                Case 24 To 31
+
+                Case 3 * TrnCount To (4 * TrnCount) - 1
                     indxArrayTrain(inx) = 3
-                Case 32 To 39
+
+                Case 4 * TrnCount To (5 * TrnCount) - 1
                     indxArrayTrain(inx) = 4
-                Case 40 To 47
+
+                Case 5 * TrnCount To (6 * TrnCount) - 1
                     indxArrayTrain(inx) = 5
+
                 Case Else
                     'error handling
                     myMsgBox("YOUR STUPID FILL ARRAYS DONT WORK RIGHT", MsgBoxStyle.OkOnly, "YOU DONE FUCKED UP")
@@ -499,16 +519,16 @@ Public Class frmMain
         'Goes through shuffle 3 times for more randomization
         For count = 0 To 2
 
-            For index = 0 To 59
+            For index = 0 To GlobVars.SlipsTrialNum - 1
 
-                rndNum = rndm.Next(0, 60)
+                rndNum = rndm.Next(0, GlobVars.SlipsTrialNum)
 
 
                 While rndNum = index
 
                     'If rndNum is equal to index, then the number at index will be 'swapped' with itself (aka no swap)
                     'We want to 're-roll' rndm in order to actually have it swap with a different place
-                    rndNum = rndm.Next(0, 60)
+                    rndNum = rndm.Next(0, GlobVars.SlipsTrialNum)
 
                 End While
 
@@ -519,13 +539,13 @@ Public Class frmMain
 
             Next
 
-            For i = 0 To 47
+            For i = 0 To GlobVars.TrainTrialNum - 1
 
-                rdNum = rndm.Next(0, 48)
+                rdNum = rndm.Next(0, GlobVars.TrainTrialNum)
 
                 While rdNum = i
 
-                    rdNum = rndm.Next(0, 48)
+                    rdNum = rndm.Next(0, GlobVars.TrainTrialNum)
 
                 End While
 
@@ -576,22 +596,29 @@ Public Class frmMain
 
             'declare a loop count
             Dim trainCount As Integer
+            Dim i As Integer
 
             'Show instructions first
             clsTaskInstr.ShowDialog(Me)
             clsTrainingInstr.ShowDialog(Me)
             clsTrainPractice.ShowDialog(Me)
 
-            'after instructions, loop through each trial
-            For trainCount = 0 To 47
+            For i = 1 To GlobVars.TrainBlocks
 
-                'Declare a variable to put the number from indxArrayTraining at index of traincount into
-                Dim objIndex As Integer
+                'after instructions, loop through each trial
+                For trainCount = 0 To GlobVars.TrainTrialNum - 1
 
-                objIndex = indxArrayTrain(trainCount)
+                    'Declare a variable to put the number from indxArrayTraining at index of traincount into
+                    Dim objIndex As Integer
 
-                'show the form at index of objIndex in Training form arraylist; since indxArray randomized, will show specified random forms in order
-                formArrayTrain(objIndex).ShowDialog(Me)
+                    objIndex = indxArrayTrain(trainCount)
+
+                    'show the form at index of objIndex in Training form arraylist; since indxArray randomized, will show specified random forms in order
+                    formArrayTrain(objIndex).ShowDialog(Me)
+
+                Next
+
+                BlckEndTrain.ShowDialog(Me)
 
             Next
 
@@ -672,19 +699,26 @@ Public Class frmMain
 
             'similar to training phase, show instructions/devalued stim, loop through trials, show thanks and points forms
             Dim formCount As Integer
+            Dim i As Integer
 
             clsSOAInstr.ShowDialog(Me)
             DevPracSOA.ShowDialog(Me)
             PracSOA.ShowDialog(Me)
 
-            clsDevalued.ShowDialog(Me)
+            For i = 1 To GlobVars.SlipsBlocks
 
-            For formCount = 0 To 59
+                clsDevalued.ShowDialog(Me)
 
-                Dim objIndex As Integer
+                For formCount = 0 To GlobVars.SlipsTrialNum - 1
 
-                objIndex = indxArraySOA(formCount)
-                formArraySOA(objIndex).ShowDialog(Me)
+                    Dim objIndex As Integer
+
+                    objIndex = indxArraySOA(formCount)
+                    formArraySOA(objIndex).ShowDialog(Me)
+
+                Next
+
+                BlckEndSOA.ShowDialog(Me)
 
             Next
 
@@ -791,6 +825,9 @@ Public Class frmMain
         CongPearSOA.Dispose()
         InconOrngSOA.Dispose()
         InconPineSOA.Dispose()
+
+        BlckEndTrain.Dispose()
+        BlckEndSOA.Dispose()
 
         'frmThanks.Dispose()
         'EndSOA.Dispose()

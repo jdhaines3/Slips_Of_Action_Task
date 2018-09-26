@@ -97,6 +97,18 @@
     <Compile Include="EndTrain.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="EndBlockSOA.Designer.vb">
+      <DependentUpon>EndBlockSOA.vb</DependentUpon>
+    </Compile>
+    <Compile Include="EndBlockSOA.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EndBlockTrain.Designer.vb">
+      <DependentUpon>EndBlockTrain.vb</DependentUpon>
+    </Compile>
+    <Compile Include="EndBlockTrain.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="GlobVars.vb" />
     <Compile Include="OutDevPractice.Designer.vb">
       <DependentUpon>OutDevPractice.vb</DependentUpon>
@@ -290,6 +302,14 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EndTrain.resx">
       <DependentUpon>EndTrain.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EndBlockSOA.resx">
+      <DependentUpon>EndBlockSOA.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EndBlockTrain.resx">
+      <DependentUpon>EndBlockTrain.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="OutDevPractice.resx">
