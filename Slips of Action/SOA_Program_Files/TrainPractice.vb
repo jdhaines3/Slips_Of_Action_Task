@@ -65,11 +65,11 @@ Public Class TrainPractice
                 FruitPic.Image = My.Resources.ResourceManager.GetObject("Strwbry")
 
                 InstrLbl.Text = "Each trial starts with a closed box and a fruit on the" &
-                    vbNewLine & "outside. On these, press '1' or '2' as quickly as you" &
-                    vbNewLine & "can. For each fruit, one of these responses is the" &
-                    vbNewLine & "'correct' answer, and will be the same each time you" &
-                    vbNewLine & "see that fruit. Your total points are in the upper left" &
-                    vbNewLine & "corner. For this fruit/trial, please press '1'."
+                    vbNewLine & "outside. Press '1' or '2' as quickly as you can. For" &
+                    vbNewLine & "each fruit, one of these key presses is the 'correct'" &
+                    vbNewLine & "answer, and will be the same each time. Your total" &
+                    vbNewLine & "points are in the upper left corner." &
+                    vbNewLine & "For this fruit, please press '1'."
 
                 InstrLbl.Refresh()
 
@@ -82,7 +82,7 @@ Public Class TrainPractice
 
                 InstrLbl.Text = "Now, we are on a new trial with a different fruit. Your" &
                     vbNewLine & "score box and the left/right arrows have reappeared." &
-                    vbNewLine & "For this trial, please press '2'."
+                    vbNewLine & "For this fruit, please press '2'."
 
                 InstrLbl.Refresh()
 
@@ -107,19 +107,19 @@ Public Class TrainPractice
                 ScoreBox.Text = 5
                 ScoreBox.Refresh()
 
-                InstrLbl.Text = "After you press one of the buttons, there is a quick pause" &
-                    vbNewLine & "before feedback. The screen will go blank for about half" &
-                    vbNewLine & "a second." &
+                InstrLbl.Text = "After you answer, there is a quick pause before" &
+                    vbNewLine & "feedback. The screen will go blank for about" &
+                    vbNewLine & "half a second." &
                     vbNewLine & "For now, please press '8' to continue."
 
                 InstrLbl.Refresh()
 
             Case 3
 
-                InstrLbl.Text = "After the feedback, there is another short pause before" &
+                InstrLbl.Text = "After feedback, there is another short pause before" &
                     vbNewLine & "the next round starts. This pause will be about one" &
                     vbNewLine & "second." &
-                    vbNewLine & "For now, please press '8'. to continue."
+                    vbNewLine & "For now, please press '8' to continue."
 
                 InstrLbl.Refresh()
 
@@ -161,13 +161,14 @@ Public Class TrainPractice
 
                 fdbkVis()
 
-                InstrLbl.Text = "The box is now open, and there's a fruit inside! This" &
-                    vbNewLine & "means that pressing '1' was correct. Also, your score" &
-                    vbNewLine & "went up. So, in this practice, you would press '1'" &
-                    vbNewLine & "whenever you would see a strawberry again. Faster" &
+                InstrLbl.Text = "The box is now open, and there's a reward fruit" &
+                    vbNewLine & "inside! Pressing '1' was correct and your score" &
+                    vbNewLine & "went up. In this practice, you would press '1' for" &
+                    vbNewLine & "every strawberry on the outside of the box. Faster" &
                     vbNewLine & "correct answers earn more points. You will always" &
-                    vbNewLine & "get feedback about your choice, before the next fruit" &
-                    vbNewLine & "and closed box is shown. Please press '8' to continue."
+                    vbNewLine & "get feedback about your choice, which will appear" &
+                    vbNewLine & "for about a second before moving to the next trial." &
+                    vbNewLine & "For now, please press '8' to continue."
 
                 AllowKeyTimer.Start()
 
@@ -186,10 +187,11 @@ Public Class TrainPractice
 
                 fdbkVis()
 
-                InstrLbl.Text = "Now the box is open, BUT there isn't a fruit inside." &
-                    vbNewLine & "That means that pressing '2' is NOT correct when" &
-                    vbNewLine & "you see a raspberry. Your score stayed the same." &
-                    vbNewLine & "Please press '8' to continue."
+                InstrLbl.Text = "Now the box is open but empty. Pressing '2' is" &
+                    vbNewLine & "NOT correct when you see a raspberry. Your score" &
+                    vbNewLine & "stayed the same. Again, feedback will appear for" &
+                    vbNewLine & "about a second for each trial during the task." &
+                    vbNewLine & "For now, please press '8' to continue."
 
                 InstrLbl.Refresh()
 
@@ -201,13 +203,13 @@ Public Class TrainPractice
 
                 allHidden()
 
-                InstrLbl.Text = "The experiment will begin after this slide. If you have" &
-                    vbNewLine & "questions, please ask them now. For each outside fruit," &
-                    vbNewLine & "try to remember the correct press and fruit inside the" &
-                    vbNewLine & "box. They will NOT change! Try to answer as quickly as" &
-                    vbNewLine & "possible to get the most points. When you are ready," &
-                    vbNewLine & "press '8' to start. If you want to do the practice " &
-                    vbNewLine & "again, please press '1' or '2'."
+                InstrLbl.Text = "Part 1 will begin after this slide. If you have" &
+                    vbNewLine & "questions, please ask now. For each outside fruit, try" &
+                    vbNewLine & "to remember the correct key and reward fruit. They" &
+                    vbNewLine & "will NOT change! Try to answer as quickly as possible" &
+                    vbNewLine & "possible to get the most points. To do the practice" &
+                    vbNewLine & "again, please press '1' or '2'. If you are ready to" &
+                    vbNewLine & "begin the task, press '8'."
 
                 InstrLbl.Refresh()
 
@@ -302,6 +304,8 @@ Public Class TrainPractice
                         If resp = MsgBoxResult.Yes Then
                             slideState = 0
                             Stim()
+                        Else
+                            acceptKey = True
                         End If
 
 
@@ -340,6 +344,8 @@ Public Class TrainPractice
                         If resp = MsgBoxResult.Yes Then
                             slideState = 0
                             Stim()
+                        Else
+                            acceptKey = True
                         End If
 
 

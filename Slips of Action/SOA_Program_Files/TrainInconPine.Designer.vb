@@ -23,7 +23,6 @@ Partial Class TrainInconPine
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Me.bwTimer = New System.ComponentModel.BackgroundWorker()
         Me.betweenTimer = New System.Windows.Forms.Timer(Me.components)
         Me.feedbackTimer = New System.Windows.Forms.Timer(Me.components)
         Me.blankTimer = New System.Windows.Forms.Timer(Me.components)
@@ -100,7 +99,7 @@ Partial Class TrainInconPine
         Me.ScoreBox.BackColor = System.Drawing.Color.LightGray
         Me.ScoreBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.ScoreBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 21.7!)
-        Me.ScoreBox.Location = New System.Drawing.Point(303, 21)
+        Me.ScoreBox.Location = New System.Drawing.Point(119, 21)
         Me.ScoreBox.Name = "ScoreBox"
         Me.ScoreBox.Size = New System.Drawing.Size(102, 40)
         Me.ScoreBox.TabIndex = 69
@@ -114,9 +113,9 @@ Partial Class TrainInconPine
         Me.PointsTxt.Font = New System.Drawing.Font("Microsoft Sans Serif", 22.0!)
         Me.PointsTxt.Location = New System.Drawing.Point(12, 21)
         Me.PointsTxt.Name = "PointsTxt"
-        Me.PointsTxt.Size = New System.Drawing.Size(285, 36)
+        Me.PointsTxt.Size = New System.Drawing.Size(101, 36)
         Me.PointsTxt.TabIndex = 73
-        Me.PointsTxt.Text = "Total Points Earned:"
+        Me.PointsTxt.Text = "Score:"
         '
         'ChestPic
         '
@@ -143,7 +142,6 @@ Partial Class TrainInconPine
         Me.KeyPreview = True
         Me.Name = "TrainInconPine"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "Pineapple"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         CType(Me.FruitPic, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RightArr, System.ComponentModel.ISupportInitialize).EndInit()
@@ -153,7 +151,6 @@ Partial Class TrainInconPine
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents bwTimer As System.ComponentModel.BackgroundWorker
     Friend WithEvents LeftArr As PictureBox
     Friend WithEvents RightArr As PictureBox
     Friend WithEvents FruitPic As PictureBox

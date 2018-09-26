@@ -169,12 +169,12 @@ Public Class OutKnow
         Label6.Visible = True
         Label11.Visible = True
 
-        LabelB.Visible = True
-        LabelC.Visible = True
-        LabelD.Visible = True
-        LabelE.Visible = True
-        LabelF.Visible = True
-        LabelG.Visible = True
+        BanPic.Visible = True
+        ChrPic.Visible = True
+        OrnPic.Visible = True
+        PinePic.Visible = True
+        PearPic.Visible = True
+        WmlnPic.Visible = True
 
         lblQstn.Visible = True
         ChestPic.Visible = True
@@ -202,12 +202,12 @@ Public Class OutKnow
         Label6.Visible = False
         Label11.Visible = False
 
-        LabelB.Visible = False
-        LabelC.Visible = False
-        LabelD.Visible = False
-        LabelE.Visible = False
-        LabelF.Visible = False
-        LabelG.Visible = False
+        BanPic.Visible = False
+        ChrPic.Visible = False
+        OrnPic.Visible = False
+        PinePic.Visible = False
+        PearPic.Visible = False
+        WmlnPic.Visible = False
 
         lblQstn.Visible = False
         ChestPic.Visible = False

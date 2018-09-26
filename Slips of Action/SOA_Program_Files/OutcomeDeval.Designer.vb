@@ -71,7 +71,6 @@ Partial Class OutcomeDeval
         Me.Controls.Add(Me.TopPic)
         Me.Name = "OutcomeDeval"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "OutcomeDeval"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         CType(Me.BottomPic, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TopPic, System.ComponentModel.ISupportInitialize).EndInit()

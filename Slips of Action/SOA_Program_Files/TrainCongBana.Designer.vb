@@ -23,7 +23,6 @@ Partial Class TrainCongBana
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Me.bwTimer = New System.ComponentModel.BackgroundWorker()
         Me.blankTimer = New System.Windows.Forms.Timer(Me.components)
         Me.feedbackTimer = New System.Windows.Forms.Timer(Me.components)
         Me.betweenTimer = New System.Windows.Forms.Timer(Me.components)
@@ -62,7 +61,7 @@ Partial Class TrainCongBana
         Me.ScoreBox.BackColor = System.Drawing.Color.LightGray
         Me.ScoreBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.ScoreBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 22.0!)
-        Me.ScoreBox.Location = New System.Drawing.Point(303, 21)
+        Me.ScoreBox.Location = New System.Drawing.Point(119, 21)
         Me.ScoreBox.Name = "ScoreBox"
         Me.ScoreBox.Size = New System.Drawing.Size(102, 40)
         Me.ScoreBox.TabIndex = 69
@@ -127,9 +126,9 @@ Partial Class TrainCongBana
         Me.PointsTxt.Font = New System.Drawing.Font("Microsoft Sans Serif", 22.0!)
         Me.PointsTxt.Location = New System.Drawing.Point(12, 21)
         Me.PointsTxt.Name = "PointsTxt"
-        Me.PointsTxt.Size = New System.Drawing.Size(285, 36)
+        Me.PointsTxt.Size = New System.Drawing.Size(101, 36)
         Me.PointsTxt.TabIndex = 71
-        Me.PointsTxt.Text = "Total Points Earned:"
+        Me.PointsTxt.Text = "Score:"
         '
         'TrainCongBana
         '
@@ -145,7 +144,6 @@ Partial Class TrainCongBana
         Me.KeyPreview = True
         Me.Name = "TrainCongBana"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "Banana"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         CType(Me.RightArr, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LeftArr, System.ComponentModel.ISupportInitialize).EndInit()
@@ -155,7 +153,6 @@ Partial Class TrainCongBana
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents bwTimer As System.ComponentModel.BackgroundWorker
     Friend WithEvents LeftArr As PictureBox
     Friend WithEvents RightArr As PictureBox
     Friend WithEvents FruitPic As PictureBox

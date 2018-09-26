@@ -117,22 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="bwTimer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
   <data name="Label1.Text" xml:space="preserve">
-    <value>Once again, you will have the chance to earn points by pressing keys  to open a box
-shown on the screen. Only this time, some of the fruits inside the boxes are no longer
-valuable.  At the start of the task, you will be shown the six different possible fruit from
-inside the boxes.  Two will have a red X over them, marking them as "devalued". Your
-job during the task is to press the correct key for each fruit shown on the box, BUT
-withhold your key press if the fruit INSIDE that box is one of the devalued fruit shown
-at the beginning. Correct key presses will be earn one point, and incorrect key presses 
-will not be rewarded. But, one point will be subtracted for every key press made to a
-box with a devalued fruit inside. If you successfully wait and don't press either key
-on a box with devalued fruit, you will earn one point. This is a test and we won’t show
-you your score until the very end. The boxes will only appear for a short time, so please
-remember to press quickly!  First, we will do a couple practice trials to help you know
-how the trials will go.</value>
+    <value>Once again, you will have the chance to earn points by pressing keys to open a box
+shown on the screen. On this part though, you can lose points.  At the start, you
+will be shown the six different possible reward fruits. Two will have a red 'X' over
+them, marking them as "worthless". Your job is to press the correct key for each
+fruit shown on the box, but WITHHOLD your key press if the reward fruit is
+worthless. For valuable reward fruits, correct key presses earn one point, and
+incorrect key presses earn no points. You LOSE a point if you open a box holding a
+worthless reward fruit. But, if you wait and don't press either key on a box with a
+worthless reward fruit inside, you will earn one point. We won’t show you your score
+until the end. The boxes will only appear for a short time, so please press quickly!
+Now, let's do a short practice.</value>
   </data>
 </root>

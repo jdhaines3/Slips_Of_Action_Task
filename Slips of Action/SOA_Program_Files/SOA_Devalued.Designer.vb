@@ -41,7 +41,7 @@ Partial Class SOA_Devalued
         'WatermelonPic
         '
         Me.WatermelonPic.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.WatermelonPic.BackgroundImage = Global.Slips_Of_Action.My.Resources.Resources.halfWMelon
+        Me.WatermelonPic.BackgroundImage = Global.Slips_Of_Action.My.Resources.Resources.wmelon2
         Me.WatermelonPic.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.WatermelonPic.Location = New System.Drawing.Point(120, 392)
         Me.WatermelonPic.Name = "WatermelonPic"
@@ -129,7 +129,7 @@ Partial Class SOA_Devalued
         Me.Controls.Add(Me.CherryPic)
         Me.Name = "SOA_Devalued"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "Devalued Stims SOA"
+        Me.Text = "Part 4 Worthless Fruit"
         Me.TransparencyKey = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(64, Byte), Integer))
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         CType(Me.WatermelonPic, System.ComponentModel.ISupportInitialize).EndInit()

@@ -261,7 +261,7 @@ Public Class RespKnow
                 ElseIf trkBar.Value = 1 Then
 
                     'if subject tries to select middle value (1), tell them to choose a valid answer
-                    MsgBox("Please choose a valid press, Left or Right.", MsgBoxStyle.OkOnly, "Invalid Response")
+                    MsgBox("Please choose a valid response, the '1' key or '2' Key.", MsgBoxStyle.OkOnly, "Invalid Response")
 
                 Else
 

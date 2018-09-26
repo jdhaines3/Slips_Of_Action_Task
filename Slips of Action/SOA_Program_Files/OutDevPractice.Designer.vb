@@ -80,7 +80,7 @@ Partial Class OutDevPractice
         Me.Controls.Add(Me.TopPic)
         Me.Name = "OutDevPractice"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "OutcomeDeval"
+        Me.Text = "Part 2 Practice"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         CType(Me.BottomPic, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TopPic, System.ComponentModel.ISupportInitialize).EndInit()

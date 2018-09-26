@@ -23,7 +23,6 @@ Partial Class TrainPractice
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Me.bwTimer = New System.ComponentModel.BackgroundWorker()
         Me.AllowKeyTimer = New System.Windows.Forms.Timer(Me.components)
         Me.ScoreBox = New System.Windows.Forms.Label()
         Me.PointsTxt = New System.Windows.Forms.Label()
@@ -48,7 +47,7 @@ Partial Class TrainPractice
         Me.ScoreBox.BackColor = System.Drawing.Color.LightGray
         Me.ScoreBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.ScoreBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 22.0!)
-        Me.ScoreBox.Location = New System.Drawing.Point(207, 10)
+        Me.ScoreBox.Location = New System.Drawing.Point(119, 21)
         Me.ScoreBox.Name = "ScoreBox"
         Me.ScoreBox.Size = New System.Drawing.Size(102, 40)
         Me.ScoreBox.TabIndex = 69
@@ -59,12 +58,12 @@ Partial Class TrainPractice
         '
         Me.PointsTxt.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.PointsTxt.AutoSize = True
-        Me.PointsTxt.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.0!)
+        Me.PointsTxt.Font = New System.Drawing.Font("Microsoft Sans Serif", 22.0!)
         Me.PointsTxt.Location = New System.Drawing.Point(12, 21)
         Me.PointsTxt.Name = "PointsTxt"
-        Me.PointsTxt.Size = New System.Drawing.Size(189, 25)
+        Me.PointsTxt.Size = New System.Drawing.Size(101, 36)
         Me.PointsTxt.TabIndex = 71
-        Me.PointsTxt.Text = "Total Points Earned:"
+        Me.PointsTxt.Text = "Score:"
         '
         'InstrLbl
         '
@@ -144,7 +143,7 @@ Partial Class TrainPractice
         Me.KeyPreview = True
         Me.Name = "TrainPractice"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "Banana"
+        Me.Text = "Part 1 Practice"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         CType(Me.RightArr, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LeftArr, System.ComponentModel.ISupportInitialize).EndInit()
@@ -154,7 +153,6 @@ Partial Class TrainPractice
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents bwTimer As System.ComponentModel.BackgroundWorker
     Friend WithEvents LeftArr As PictureBox
     Friend WithEvents RightArr As PictureBox
     Friend WithEvents FruitPic As PictureBox

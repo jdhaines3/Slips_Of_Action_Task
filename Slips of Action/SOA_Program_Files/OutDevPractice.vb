@@ -56,19 +56,18 @@ Public Class OutDevPractice
         Select Case slideState
             Case 0
 
-                TopPic.BackgroundImage = My.Resources.ResourceManager.GetObject("plum-2")
+                TopPic.BackgroundImage = My.Resources.ResourceManager.GetObject("plum_2")
                 TopPic.Image = My.Resources.ResourceManager.GetObject("xmark")
 
                 BottomPic.BackgroundImage = My.Resources.ResourceManager.GetObject("lemon")
                 BottomPic.Image = blankBox
 
-                InstrLbl.Text = "Here you see the plum has a red 'X' over it, and" &
-                    vbNewLine & "a lemon without one. The plum is devalued, so you" &
-                    vbNewLine & "should press the key that EARNED a lemon last time." &
-                    vbNewLine & "For the last practice, pressing '1' on a strawberry" &
-                    vbNewLine & "was correct, and a lemon was INSIDE the box. So" &
-                    vbNewLine & "for this trial, you should press '1'." &
-                    vbNewLine & "Please press '1' now."
+                InstrLbl.Text = "The plum has a red 'X' over it. This means the" &
+                    vbNewLine & "plum is not worth any points. So, you should" &
+                    vbNewLine & "press the key that EARNED a lemon. Earlier," &
+                    vbNewLine & "pressing '1' when you saw a strawberry was" &
+                    vbNewLine & "correct, and a lemon was INSIDE the box. So" &
+                    vbNewLine & "for this trial, you should press '1'."
 
                 InstrLbl.Refresh()
 
@@ -83,11 +82,11 @@ Public Class OutDevPractice
                 BottomPic.Image = My.Resources.ResourceManager.GetObject("xmark")
 
 
-                InstrLbl.Text = "Now the 'X' is on the bottom, over a pomegranate." &
-                    vbNewLine & "You will want to hit the button that earned a" &
-                    vbNewLine & "papaya.  Let's say a '1' key press earned the" &
-                    vbNewLine & "pomegranate, and a '2' earned a papaya. So, you" &
-                    vbNewLine & "should press '2' to be correct. Please do so now."
+                InstrLbl.Text = "Now the 'X' is on a pomegranate. You will" &
+                    vbNewLine & "want to press the key earned a papaya. Let's" &
+                    vbNewLine & "say a '1' key press earned the pomegranate," &
+                    vbNewLine & "and a '2' earned a papaya. So, you should" &
+                    vbNewLine & "press '2' to earn points."
 
                 InstrLbl.Refresh()
 
@@ -103,32 +102,34 @@ Public Class OutDevPractice
 
     Private Sub Blank()
 
-        acceptKey = True
+        acceptKey = False
         TopPic.Visible = False
         BottomPic.Visible = False
 
         Select Case slideState
             Case 1
 
-                InstrLbl.Text = "Again, after you make your choice, the screen" &
-                    vbNewLine & "will go blank for about half a second. You" &
-                    vbNewLine & "will NOT see feedback on whether you got it" &
-                    vbNewLine & "correct or not. The next trial will begin" &
-                    vbNewLine & "immediately after." &
+                InstrLbl.Text = "After you make your choice, the screen will" &
+                    vbNewLine & "go blank for about one-half second. You will" &
+                    vbNewLine & "NOT see feedback during this phase. The" &
+                    vbNewLine & "next trial will begin immediately after." &
                     vbNewLine & "For now, please press '8' to continue."
 
                 InstrLbl.Refresh()
 
+                AllowKeyTimer.Start()
+
             Case 3
 
-                InstrLbl.Text = "Please be aware that the 'X' can be on either" &
-                    vbNewLine & "the top or the bottom. Also, the fruits can" &
-                    vbNewLine & "be in either spot, so the top isn't always" &
-                    vbNewLine & "a '2' key press and the bottom isn't always" &
-                    vbNewLine & "a '1' press." &
+                InstrLbl.Text = "The 'X' can be on either the top or the" &
+                    vbNewLine & "bottom. The fruits can also be in either" &
+                    vbNewLine & "spot, so the top isn't always a '2' key" &
+                    vbNewLine & "press and the bottom isn't always a '1'." &
                     vbNewLine & "Press '8' to continue."
 
                 InstrLbl.Refresh()
+
+                AllowKeyTimer.Start()
 
             Case Else
                 'error
@@ -141,7 +142,6 @@ Public Class OutDevPractice
     Private Sub afterBlank()
 
         acceptKey = False
-        slideState = slideState + 1
 
         'increments slide state at keypress
 
@@ -153,16 +153,15 @@ Public Class OutDevPractice
                 TopPic.Visible = False
                 BottomPic.Visible = False
 
-                'InstrLbl.Text = "Each trial starts with a closed box and a fruit" &
-                InstrLbl.Text = "The experiment will begin after this slide. If" &
-                    vbNewLine & "you have any questions, please ask them now. For" &
-                    vbNewLine & "each trial, remember to press as quickly as you" &
-                    vbNewLine & "can.  Each fruit will be valuable twice, for a" &
-                    vbNewLine & "total of 12 trials. There is no feedback, and" &
-                    vbNewLine & "your score won't be shown until the end." &
-                    vbNewLine & "If you are ready, press '8' to start. If you" &
-                    vbNewLine & "want to do the practice again, please press" &
-                    vbNewLine & "'1' or '2'."
+
+                InstrLbl.Text = "Part 2 will begin after this slide. If you" &
+                    vbNewLine & "have any questions, please ask now. For" &
+                    vbNewLine & "each trial, remember to press as fast as" &
+                    vbNewLine & "possible. There is no feedback, and your" &
+                    vbNewLine & "score won't be shown until the end. To" &
+                    vbNewLine & "practice again, please press '1' or '2'." &
+                    vbNewLine & "If you are ready to begin Part 2, press" &
+                    vbNewLine & "'8' to start."
 
                 InstrLbl.Refresh()
 
@@ -186,7 +185,7 @@ Public Class OutDevPractice
     '-----Key Press Functions (Step #2)-----'
     '======================================='
 
-    Private Sub TrainPractice_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles MyBase.KeyPress
+    Private Sub OutDevPractice_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles MyBase.KeyPress
         Dim response As MsgBoxResult
 
         'if x, pop up message asking if you want to quit, Dispose all forms and exit
@@ -226,6 +225,8 @@ Public Class OutDevPractice
                         If resp = MsgBoxResult.Yes Then
                             slideState = 0
                             Stim()
+                        Else
+                            acceptKey = True
                         End If
 
 
@@ -264,6 +265,8 @@ Public Class OutDevPractice
                         If resp = MsgBoxResult.Yes Then
                             slideState = 0
                             Stim()
+                        Else
+                            acceptKey = True
                         End If
 
 
@@ -282,11 +285,17 @@ Public Class OutDevPractice
                 acceptKey = False
 
                 Select Case slideState
-                    Case 1, 3
+                    Case 1
 
+                        slideState = slideState + 1
                         Stim()
 
-                    Case 8
+                    Case 3
+
+                        slideState = slideState + 1
+                        afterBlank()
+
+                    Case 4
 
                         Me.Hide()
 

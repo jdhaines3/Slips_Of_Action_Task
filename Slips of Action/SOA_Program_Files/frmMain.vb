@@ -2,6 +2,18 @@ Imports System.IO
 Imports System.Data
 Imports Microsoft.VisualBasic
 
+'==================================='
+'This task was designed by Gillan et al in their paper: Disruption in the Balance Between Goal-Directed Behavior and Habit Learning in Obsessive Compulsive Disorder
+
+'The code/program was designed, coded, tested, and everything else by DAVID HAINES for the NSL and IU School of Medicine Dept of Psych
+'Changes from original task design also implemented by DAVID HAINES, and thought out by David Haines, Martin Plawecki, and Dr. Melissa Cyders
+'What I am saying is that I did a metric butt ton of work on this.
+
+'If you have any questions, ask David if he is around.
+'If not, figure it out.
+
+'==================================='
+
 
 Public Class frmMain
 
@@ -27,6 +39,7 @@ Public Class frmMain
     Public clsThanks As New frmThanks
 
     'Training phase form instances
+    Public clsTrainPractice As New TrainPractice
     Public StndGrapeTrain As New TrainStndGrape
     Public StndAppleTrain As New TrainStndApple
     Public CongBanTrain As New TrainCongBana
@@ -35,11 +48,14 @@ Public Class frmMain
     Public InconPineTrain As New TrainInconPine
 
     'Deval form instance and questions
+    Public clsODpractice As New OutDevPractice
     Public clsOutcome As New OutcomeDeval
     Public clsOutKnow As New OutKnow
     Public clsRespKnow As New RespKnow
 
     'SOA forms
+    Public DevPracSOA As New SOA_Practice_Devald
+    Public PracSOA As New SOA_Practice
     Public StndGrapeSOA As New SOA_Stnd_Grape
     Public StndAppleSOA As New SOA_Stnd_Apple
     Public CongBanSOA As New SOA_Cong_Ban
@@ -70,9 +86,6 @@ Public Class frmMain
 
     Private formArrayTrain As New ArrayList()
     Private indxArrayTrain(47) As Integer
-
-    'clock
-    Dim go As New System.Threading.Thread(AddressOf clock)
 
     'coordinates for main start window
     Private m_xStart As Integer
@@ -204,7 +217,7 @@ Public Class frmMain
 
     Private Sub frmMain_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
-        go.Priority = Threading.ThreadPriority.Lowest
+
         'find screen resolution
         'variables to use ScrHeight ScrWidth
         Dim myScreens() As Screen = Screen.AllScreens
@@ -219,7 +232,6 @@ Public Class frmMain
 
         yStart = (ScrHeight / 2) - 15
         xStart = ((ScrWidth - 533) / 2) - 2
-        go.Start()
 
     End Sub
 
@@ -240,12 +252,13 @@ Public Class frmMain
                 If My.Computer.FileSystem.DirectoryExists("C:\x\" & txtSubj.Text & "\") Then
 
                     'creates variables and pathways to check if file exists for any of the three start conditions
-                    Dim subjPath, fullTaskPath, outDevalPath, SOA_TaskPath As String
+                    Dim subjPath, fullTaskPath, outDevalPath, qstnPath, SOA_TaskPath As String
 
                     subjPath = "C:\x\" & txtSubj.Text & "\" & txtSubj.Text & cbxSess.SelectedItem
                     fullTaskPath = subjPath & "_TrainOrder.txt"
                     outDevalPath = subjPath & "_DevalOrder.txt"
                     SOA_TaskPath = subjPath & "_StimOrder.txt"
+                    qstnPath = subjPath & "_RespKnow.txxt"
 
                     If My.Computer.FileSystem.FileExists(fullTaskPath) Then
 
@@ -267,6 +280,15 @@ Public Class frmMain
                         End Select
 
                     ElseIf My.Computer.FileSystem.FileExists(SOA_TaskPath) Then
+
+                        Select Case myMsgBox("Files exist for this Subject and Session, would you like to append to them?", MsgBoxStyle.YesNo, "ERROR")
+                            Case "YES"
+                                runTask()
+                            Case "NO"
+                                myMsgBox("Then please delete previous files or rename current run.", MsgBoxStyle.OkOnly, "ERROR")
+                        End Select
+
+                    ElseIf My.Computer.FileSystem.FileExists(qstnPath) Then
 
                         Select Case myMsgBox("Files exist for this Subject and Session, would you like to append to them?", MsgBoxStyle.YesNo, "ERROR")
                             Case "YES"
@@ -316,9 +338,6 @@ Public Class frmMain
 
     Private Sub runTask()
 
-        'aborts clock timer
-        go.Abort()
-
         'hides main and sets window 
         Me.Hide()
         setWin()
@@ -346,6 +365,10 @@ Public Class frmMain
 
                 devalPhase()
 
+            Case "Qstn Phase Restart"
+
+                qstnPhase()
+
             'same as above, but start on last phase
             Case "SlipOfActionPhase Restart"
 
@@ -356,6 +379,7 @@ Public Class frmMain
 
                 'msgbox for error handling or debugging
                 myMsgBox("Error. Idk what happened, man", MsgBoxStyle.OkOnly, "Oh no.")
+                cleanseEverything()
 
         End Select
 
@@ -556,6 +580,7 @@ Public Class frmMain
             'Show instructions first
             clsTaskInstr.ShowDialog(Me)
             clsTrainingInstr.ShowDialog(Me)
+            clsTrainPractice.ShowDialog(Me)
 
             'after instructions, loop through each trial
             For trainCount = 0 To 47
@@ -596,17 +621,13 @@ Public Class frmMain
 
             'show instructions, then outcomeDevaluation form, then thanks and points forms
             clsODInstr.ShowDialog(Me)
+            clsODpractice.ShowDialog(Me)
             clsOutcome.ShowDialog(Me)
             clsThanks.ShowDialog(Me)
             clsEndDeval.ShowDialog(Me)
 
-            clsQstnInstr.ShowDialog(Me)
-            clsRespKnow.ShowDialog(Me)
-            clsOutKnow.ShowDialog(Me)
-            clsThanks.ShowDialog(Me)
-
             'continue on to slips of action
-            SlipsOfActionPhase()
+            qstnPhase()
 
 
         Catch ex As Exception
@@ -617,8 +638,32 @@ Public Class frmMain
 
     End Sub
 
+    '=========================================='
+    '-----Phase Five: Questions (Step #10)-----'
+    '=========================================='
+
+    Private Sub qstnPhase()
+
+        Try
+
+            clsQstnInstr.ShowDialog(Me)
+            clsRespKnow.ShowDialog(Me)
+            clsOutKnow.ShowDialog(Me)
+            clsThanks.ShowDialog(Me)
+
+            SlipsOfActionPhase()
+
+        Catch ex As Exception
+
+            cleanseEverything()
+
+        End Try
+
+    End Sub
+
+
     '====================================================='
-    '-----Phase Three: Slips of Action Task (Step #9)-----'
+    '-----Phase Four: Slips of Action Task (Step #10)-----'
     '====================================================='
 
     Private Sub SlipsOfActionPhase()
@@ -629,6 +674,9 @@ Public Class frmMain
             Dim formCount As Integer
 
             clsSOAInstr.ShowDialog(Me)
+            DevPracSOA.ShowDialog(Me)
+            PracSOA.ShowDialog(Me)
+
             clsDevalued.ShowDialog(Me)
 
             For formCount = 0 To 59
@@ -643,6 +691,7 @@ Public Class frmMain
             clsThanks.ShowDialog(Me)
             clsEndSOA.ShowDialog(Me)
 
+            cleanseEverything()
 
         Catch ex As Exception
 
@@ -704,38 +753,81 @@ Public Class frmMain
     Public Sub cleanseEverything()
 
         'beginning and end of run forms
-        frmThanks.Dispose()
-        EndSOA.Dispose()
-        EndTrain.Dispose()
-        EndDeval.Dispose()
+        clsTaskInstr.Dispose()
 
-        InstructionsSOA.Dispose()
-        TrainingInstr.Dispose()
-        InstructionsOD.Dispose()
-        SOA_Devalued.Dispose()
-        TaskInstr.Dispose()
+        clsSOAInstr.Dispose()
+        clsTrainingInstr.Dispose()
+        clsODInstr.Dispose()
+        clsQstnInstr.Dispose()
 
-        'Training Stim Forms
-        TrainStndGrape.Dispose()
-        TrainStndApple.Dispose()
-        TrainCongBana.Dispose()
-        TrainCongPear.Dispose()
-        TrainInconOrng.Dispose()
-        TrainInconPine.Dispose()
+        'End of phase forms
+        clsEndSOA.Dispose()
+        clsEndTrain.Dispose()
+        clsEndDeval.Dispose()
+        clsDevalued.Dispose()
+        clsThanks.Dispose()
 
-        'Deval form
-        OutcomeDeval.Dispose()
-        QstnInstr.Dispose()
-        OutKnow.Dispose()
-        RespKnow.Dispose()
+        'Training phase form instances
+        clsTrainPractice.Dispose()
+        StndGrapeTrain.Dispose()
+        StndAppleTrain.Dispose()
+        CongBanTrain.Dispose()
+        CongPearTrain.Dispose()
+        InconOrngTrain.Dispose()
+        InconPineTrain.Dispose()
+
+        'Deval form instance and questions
+        clsODpractice.Dispose()
+        clsOutcome.Dispose()
+        clsOutKnow.Dispose()
+        clsRespKnow.Dispose()
 
         'SOA forms
-        SOA_Stnd_Grape.Dispose()
-        SOA_Stnd_Apple.Dispose()
-        SOA_Cong_Ban.Dispose()
-        SOA_Cong_Pear.Dispose()
-        SOA_Incon_Orng.Dispose()
-        SOA_Incon_Pine.Dispose()
+        DevPracSOA.Dispose()
+        PracSOA.Dispose()
+        StndGrapeSOA.Dispose()
+        StndAppleSOA.Dispose()
+        CongBanSOA.Dispose()
+        CongPearSOA.Dispose()
+        InconOrngSOA.Dispose()
+        InconPineSOA.Dispose()
+
+        'frmThanks.Dispose()
+        'EndSOA.Dispose()
+        'EndTrain.Dispose()
+        'EndDeval.Dispose()
+
+        'InstructionsSOA.Dispose()
+        'TrainingInstr.Dispose()
+        'InstructionsOD.Dispose()
+        'SOA_Devalued.Dispose()
+        'TaskInstr.Dispose()
+
+        ''Training Stim Forms
+        'TrainPractice.Dispose()
+        'TrainStndGrape.Dispose()
+        'TrainStndApple.Dispose()
+        'TrainCongBana.Dispose()
+        'TrainCongPear.Dispose()
+        'TrainInconOrng.Dispose()
+        'TrainInconPine.Dispose()
+
+        ''Deval form
+        'OutDevPractice.Dispose()
+        'OutcomeDeval.Dispose()
+        'QstnInstr.Dispose()
+        'OutKnow.Dispose()
+        'RespKnow.Dispose()
+
+        ''SOA forms
+        'SOA_Practice.Dispose()
+        'SOA_Practice_Devald.Dispose()
+        'SOA_Stnd_Grape.Dispose()
+        'SOA_Stnd_Apple.Dispose()
+        'SOA_Cong_Ban.Dispose()
+        'SOA_Cong_Pear.Dispose()
+        'SOA_Incon_Orng.Dispose()
+        'SOA_Incon_Pine.Dispose()
 
         Me.Close()
         Application.Exit()

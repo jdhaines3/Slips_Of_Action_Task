@@ -23,7 +23,6 @@ Partial Class SOA_Cong_Pear
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Me.bwTimer = New System.ComponentModel.BackgroundWorker()
         Me.stimTimer = New System.Windows.Forms.Timer(Me.components)
         Me.betweenTimer = New System.Windows.Forms.Timer(Me.components)
         Me.feedbackTimer = New System.Windows.Forms.Timer(Me.components)
@@ -58,8 +57,8 @@ Partial Class SOA_Cong_Pear
         '
         Me.FruitPic.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.FruitPic.BackColor = System.Drawing.Color.Transparent
+        Me.FruitPic.BackgroundImage = Global.Slips_Of_Action.My.Resources.Resources.pear2
         Me.FruitPic.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.FruitPic.Image = Global.Slips_Of_Action.My.Resources.Resources.pear2
         Me.FruitPic.InitialImage = Nothing
         Me.FruitPic.Location = New System.Drawing.Point(75, 60)
         Me.FruitPic.Name = "FruitPic"
@@ -115,7 +114,6 @@ Partial Class SOA_Cong_Pear
         Me.KeyPreview = True
         Me.Name = "SOA_Cong_Pear"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "Pear"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         CType(Me.FruitPic, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RightArr, System.ComponentModel.ISupportInitialize).EndInit()
@@ -124,7 +122,6 @@ Partial Class SOA_Cong_Pear
         Me.ResumeLayout(False)
 
     End Sub
-    Friend WithEvents bwTimer As System.ComponentModel.BackgroundWorker
     Friend WithEvents LeftArr As PictureBox
     Friend WithEvents RightArr As PictureBox
     Friend WithEvents FruitPic As PictureBox

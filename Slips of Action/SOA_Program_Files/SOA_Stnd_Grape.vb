@@ -108,6 +108,7 @@ Public Class SOA_Stnd_Grape
 
                     'set image to feedback image for correct BUT DEVALUED Resp
                     ChestPic.BackgroundImage = My.Resources.ResourceManager.GetObject("OpnChst")
+                    FruitPic.BackgroundImage = My.Resources.ResourceManager.GetObject("cherries")
                     FruitPic.Image = My.Resources.ResourceManager.GetObject("xmark")
 
                     'set response to number designation for correct key, but DEVAL resp
@@ -125,7 +126,8 @@ Public Class SOA_Stnd_Grape
 
                     'feedback set to cherries instead
                     ChestPic.BackgroundImage = My.Resources.ResourceManager.GetObject("OpnChst")
-                    FruitPic.Image = My.Resources.ResourceManager.GetObject("cherries")
+                    FruitPic.BackgroundImage = My.Resources.ResourceManager.GetObject("cherries")
+                    FruitPic.Image = blankBox
 
                     'resp output set to correct key press
                     resp = 1
@@ -146,14 +148,35 @@ Public Class SOA_Stnd_Grape
 
                 acceptKey = False
 
-                stimOff()
+                If d1 = 0 Or d2 = 0 Then
 
-                'feedback image set to background: empty box
-                ChestPic.BackgroundImage = My.Resources.ResourceManager.GetObject("OpnChst")
-                FruitPic.Image = blankBox
+                    stimOff()
 
-                resp = 0
-                pointsEarned = 0
+                    'feedback image set to background: empty box
+                    ChestPic.BackgroundImage = My.Resources.ResourceManager.GetObject("OpnChst")
+                    FruitPic.BackgroundImage = blankBox
+                    FruitPic.Image = My.Resources.ResourceManager.GetObject("xmark")
+
+
+                    score = score - 1
+                    frmMain.setScore(score)
+                    pointsEarned = -1
+
+                    resp = 3
+
+                Else
+
+                    stimOff()
+
+                    'feedback image set to background: empty box
+                    ChestPic.BackgroundImage = My.Resources.ResourceManager.GetObject("OpnChst")
+                    FruitPic.Image = blankBox
+                    FruitPic.BackgroundImage = blankBox
+
+                    resp = 0
+                    pointsEarned = 0
+
+                End If
 
             End If
 
@@ -182,9 +205,10 @@ Public Class SOA_Stnd_Grape
             stimOff()
 
             ChestPic.BackgroundImage = My.Resources.ResourceManager.GetObject("OpnChst")
+            FruitPic.BackgroundImage = blankBox
             FruitPic.Image = My.Resources.ResourceManager.GetObject("Checkmark")
 
-            resp = 4
+            resp = 5
 
             score = score + 1
             frmMain.setScore(score)
@@ -196,8 +220,9 @@ Public Class SOA_Stnd_Grape
 
             ChestPic.BackgroundImage = My.Resources.ResourceManager.GetObject("OpnChst")
             FruitPic.Image = blankBox
+            FruitPic.BackgroundImage = blankBox
 
-            resp = 3
+            resp = 4
             pointsEarned = 0
 
         End If
@@ -278,7 +303,8 @@ Public Class SOA_Stnd_Grape
 
         'change pic back to original stim pic for next trial
         ChestPic.BackgroundImage = My.Resources.ResourceManager.GetObject("ClsChst")
-        FruitPic.Image = My.Resources.ResourceManager.GetObject("grapes")
+        FruitPic.BackgroundImage = My.Resources.ResourceManager.GetObject("grapes")
+        FruitPic.Image = blankBox
 
         'hide this form and go on to next statement in frmMain (A.K.A---next form is shown)
         Me.Hide()

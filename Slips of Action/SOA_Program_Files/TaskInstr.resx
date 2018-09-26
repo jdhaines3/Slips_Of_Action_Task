@@ -118,13 +118,8 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Label1.Text" xml:space="preserve">
-    <value>This task consists of four phases. Each one has different instructions, which will
-be displayed before the start of each phase. Your goal in most of these phases 
-is to earn as many points as you can, which you can do by pressing the correct
-button in response to different pictures. The third phase is a couple questions
-about the task, which won't be scored. Points do not carry over to other phases, 
-so just do your best during each one.  There is a timer on most trials, so please
-work quickly.  There will also be two or three practice trials for each phase, to
-help you understand the task before you begin.</value>
+    <value>This task consists of four parts, each with different instructions and scoring.
+All parts start with directions and practice. If you have questions, it is best
+to ask during those times.  Please do your best!</value>
   </data>
 </root>

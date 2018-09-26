@@ -69,7 +69,7 @@ Public Class OutcomeDeval
         cherry = My.Resources.ResourceManager.GetObject("cherries")
         banana = My.Resources.ResourceManager.GetObject("Banana")
         pineapple = My.Resources.ResourceManager.GetObject("pineapple")
-        melon = My.Resources.ResourceManager.GetObject("halfWMelon")
+        melon = My.Resources.ResourceManager.GetObject("wmelon2")
         pear = My.Resources.ResourceManager.GetObject("pear2")
         orange = My.Resources.ResourceManager.GetObject("orange")
 

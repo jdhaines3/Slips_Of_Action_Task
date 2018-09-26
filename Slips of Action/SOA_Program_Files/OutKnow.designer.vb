@@ -21,7 +21,6 @@ Partial Class OutKnow
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.trkBar = New System.Windows.Forms.TrackBar()
-        Me.LabelG = New System.Windows.Forms.Label()
         Me.lblQstn = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
@@ -31,17 +30,24 @@ Partial Class OutKnow
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.LabelF = New System.Windows.Forms.Label()
-        Me.LabelE = New System.Windows.Forms.Label()
-        Me.LabelD = New System.Windows.Forms.Label()
-        Me.LabelC = New System.Windows.Forms.Label()
-        Me.LabelB = New System.Windows.Forms.Label()
         Me.ITItimer = New System.Windows.Forms.Timer(Me.components)
         Me.ChestPic = New System.Windows.Forms.Panel()
         Me.Instruct = New System.Windows.Forms.Label()
+        Me.BanPic = New System.Windows.Forms.PictureBox()
+        Me.ChrPic = New System.Windows.Forms.PictureBox()
+        Me.OrnPic = New System.Windows.Forms.PictureBox()
+        Me.PearPic = New System.Windows.Forms.PictureBox()
+        Me.WmlnPic = New System.Windows.Forms.PictureBox()
+        Me.PinePic = New System.Windows.Forms.PictureBox()
         CType(Me.trkBar, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.StimBox, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ChestPic.SuspendLayout()
+        CType(Me.BanPic, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ChrPic, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.OrnPic, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PearPic, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.WmlnPic, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PinePic, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'trkBar
@@ -57,28 +63,17 @@ Partial Class OutKnow
         Me.trkBar.Size = New System.Drawing.Size(700, 45)
         Me.trkBar.TabIndex = 0
         '
-        'LabelG
-        '
-        Me.LabelG.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.LabelG.Font = New System.Drawing.Font("Arial", 11.0!, System.Drawing.FontStyle.Bold)
-        Me.LabelG.Location = New System.Drawing.Point(938, 587)
-        Me.LabelG.Name = "LabelG"
-        Me.LabelG.Size = New System.Drawing.Size(100, 34)
-        Me.LabelG.TabIndex = 20
-        Me.LabelG.Text = "Watermelon"
-        Me.LabelG.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
         'lblQstn
         '
         Me.lblQstn.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.lblQstn.AutoSize = True
         Me.lblQstn.Font = New System.Drawing.Font("Arial Black", 25.0!, System.Drawing.FontStyle.Bold)
-        Me.lblQstn.Location = New System.Drawing.Point(168, 28)
+        Me.lblQstn.Location = New System.Drawing.Point(131, 28)
         Me.lblQstn.Name = "lblQstn"
-        Me.lblQstn.Size = New System.Drawing.Size(970, 144)
+        Me.lblQstn.Size = New System.Drawing.Size(1043, 144)
         Me.lblQstn.TabIndex = 38
-        Me.lblQstn.Text = "Select the fruit you would see INSIDE the box after" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "you press the correct button" &
-    " for the fruit on the " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "OUTSIDE of the box below."
+        Me.lblQstn.Text = "Select the REWARD fruit you would earn after pressing" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "the correct button for the" &
+    " fruit on the OUTSIDE of the" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "box below."
         Me.lblQstn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Label11
@@ -108,9 +103,9 @@ Partial Class OutKnow
         Me.StimBox.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.StimBox.BackColor = System.Drawing.Color.Transparent
         Me.StimBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.StimBox.Location = New System.Drawing.Point(88, 60)
+        Me.StimBox.Location = New System.Drawing.Point(60, 50)
         Me.StimBox.Name = "StimBox"
-        Me.StimBox.Size = New System.Drawing.Size(225, 200)
+        Me.StimBox.Size = New System.Drawing.Size(280, 240)
         Me.StimBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.StimBox.TabIndex = 54
         Me.StimBox.TabStop = False
@@ -175,61 +170,6 @@ Partial Class OutKnow
         Me.Label5.TabIndex = 59
         Me.Label5.Text = "|"
         '
-        'LabelF
-        '
-        Me.LabelF.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.LabelF.Font = New System.Drawing.Font("Arial", 11.0!, System.Drawing.FontStyle.Bold)
-        Me.LabelF.Location = New System.Drawing.Point(836, 589)
-        Me.LabelF.Name = "LabelF"
-        Me.LabelF.Size = New System.Drawing.Size(82, 30)
-        Me.LabelF.TabIndex = 60
-        Me.LabelF.Text = "Pineapple"
-        Me.LabelF.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'LabelE
-        '
-        Me.LabelE.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.LabelE.Font = New System.Drawing.Font("Arial", 11.0!, System.Drawing.FontStyle.Bold)
-        Me.LabelE.Location = New System.Drawing.Point(732, 589)
-        Me.LabelE.Name = "LabelE"
-        Me.LabelE.Size = New System.Drawing.Size(70, 30)
-        Me.LabelE.TabIndex = 61
-        Me.LabelE.Text = "Pear"
-        Me.LabelE.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'LabelD
-        '
-        Me.LabelD.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.LabelD.Font = New System.Drawing.Font("Arial", 11.0!, System.Drawing.FontStyle.Bold)
-        Me.LabelD.Location = New System.Drawing.Point(615, 589)
-        Me.LabelD.Name = "LabelD"
-        Me.LabelD.Size = New System.Drawing.Size(70, 30)
-        Me.LabelD.TabIndex = 62
-        Me.LabelD.Text = "Orange"
-        Me.LabelD.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'LabelC
-        '
-        Me.LabelC.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.LabelC.Font = New System.Drawing.Font("Arial", 11.0!, System.Drawing.FontStyle.Bold)
-        Me.LabelC.Location = New System.Drawing.Point(506, 589)
-        Me.LabelC.Name = "LabelC"
-        Me.LabelC.Size = New System.Drawing.Size(70, 30)
-        Me.LabelC.TabIndex = 63
-        Me.LabelC.Text = "Cherry"
-        Me.LabelC.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'LabelB
-        '
-        Me.LabelB.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.LabelB.Font = New System.Drawing.Font("Arial", 11.0!, System.Drawing.FontStyle.Bold)
-        Me.LabelB.Location = New System.Drawing.Point(391, 589)
-        Me.LabelB.Name = "LabelB"
-        Me.LabelB.Size = New System.Drawing.Size(70, 30)
-        Me.LabelB.TabIndex = 64
-        Me.LabelB.Text = "Banana"
-        Me.LabelB.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
         'ITItimer
         '
         Me.ITItimer.Interval = 1000
@@ -242,7 +182,7 @@ Partial Class OutKnow
         Me.ChestPic.Controls.Add(Me.StimBox)
         Me.ChestPic.Location = New System.Drawing.Point(450, 175)
         Me.ChestPic.Name = "ChestPic"
-        Me.ChestPic.Size = New System.Drawing.Size(400, 320)
+        Me.ChestPic.Size = New System.Drawing.Size(400, 340)
         Me.ChestPic.TabIndex = 74
         '
         'Instruct
@@ -250,11 +190,77 @@ Partial Class OutKnow
         Me.Instruct.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.Instruct.AutoSize = True
         Me.Instruct.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!)
-        Me.Instruct.Location = New System.Drawing.Point(386, 669)
+        Me.Instruct.Location = New System.Drawing.Point(386, 703)
         Me.Instruct.Name = "Instruct"
-        Me.Instruct.Size = New System.Drawing.Size(532, 24)
+        Me.Instruct.Size = New System.Drawing.Size(526, 24)
         Me.Instruct.TabIndex = 75
-        Me.Instruct.Text = "Once the slider is at your choice, press the ""8"" key to continue."
+        Me.Instruct.Text = "Once the slider is at your choice, press the '8' key to continue."
+        '
+        'BanPic
+        '
+        Me.BanPic.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.BanPic.Image = Global.Slips_Of_Action.My.Resources.Resources.Banana
+        Me.BanPic.Location = New System.Drawing.Point(385, 595)
+        Me.BanPic.Name = "BanPic"
+        Me.BanPic.Size = New System.Drawing.Size(80, 80)
+        Me.BanPic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.BanPic.TabIndex = 76
+        Me.BanPic.TabStop = False
+        '
+        'ChrPic
+        '
+        Me.ChrPic.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.ChrPic.Image = Global.Slips_Of_Action.My.Resources.Resources.cherries
+        Me.ChrPic.Location = New System.Drawing.Point(499, 595)
+        Me.ChrPic.Name = "ChrPic"
+        Me.ChrPic.Size = New System.Drawing.Size(80, 80)
+        Me.ChrPic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.ChrPic.TabIndex = 77
+        Me.ChrPic.TabStop = False
+        '
+        'OrnPic
+        '
+        Me.OrnPic.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.OrnPic.Image = Global.Slips_Of_Action.My.Resources.Resources.orange
+        Me.OrnPic.Location = New System.Drawing.Point(610, 595)
+        Me.OrnPic.Name = "OrnPic"
+        Me.OrnPic.Size = New System.Drawing.Size(80, 80)
+        Me.OrnPic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.OrnPic.TabIndex = 78
+        Me.OrnPic.TabStop = False
+        '
+        'PearPic
+        '
+        Me.PearPic.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.PearPic.Image = Global.Slips_Of_Action.My.Resources.Resources.pear2
+        Me.PearPic.Location = New System.Drawing.Point(723, 595)
+        Me.PearPic.Name = "PearPic"
+        Me.PearPic.Size = New System.Drawing.Size(80, 80)
+        Me.PearPic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PearPic.TabIndex = 79
+        Me.PearPic.TabStop = False
+        '
+        'WmlnPic
+        '
+        Me.WmlnPic.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.WmlnPic.Image = Global.Slips_Of_Action.My.Resources.Resources.wmelon2
+        Me.WmlnPic.Location = New System.Drawing.Point(946, 595)
+        Me.WmlnPic.Name = "WmlnPic"
+        Me.WmlnPic.Size = New System.Drawing.Size(80, 80)
+        Me.WmlnPic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.WmlnPic.TabIndex = 80
+        Me.WmlnPic.TabStop = False
+        '
+        'PinePic
+        '
+        Me.PinePic.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.PinePic.Image = Global.Slips_Of_Action.My.Resources.Resources.pineapple
+        Me.PinePic.Location = New System.Drawing.Point(835, 595)
+        Me.PinePic.Name = "PinePic"
+        Me.PinePic.Size = New System.Drawing.Size(80, 80)
+        Me.PinePic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PinePic.TabIndex = 81
+        Me.PinePic.TabStop = False
         '
         'OutKnow
         '
@@ -262,6 +268,12 @@ Partial Class OutKnow
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.LightSteelBlue
         Me.ClientSize = New System.Drawing.Size(1284, 729)
+        Me.Controls.Add(Me.PinePic)
+        Me.Controls.Add(Me.WmlnPic)
+        Me.Controls.Add(Me.PearPic)
+        Me.Controls.Add(Me.OrnPic)
+        Me.Controls.Add(Me.ChrPic)
+        Me.Controls.Add(Me.BanPic)
         Me.Controls.Add(Me.Instruct)
         Me.Controls.Add(Me.ChestPic)
         Me.Controls.Add(Me.lblQstn)
@@ -273,26 +285,24 @@ Partial Class OutKnow
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label5)
-        Me.Controls.Add(Me.LabelB)
-        Me.Controls.Add(Me.LabelC)
-        Me.Controls.Add(Me.LabelD)
-        Me.Controls.Add(Me.LabelE)
-        Me.Controls.Add(Me.LabelF)
-        Me.Controls.Add(Me.LabelG)
         Me.KeyPreview = True
         Me.Name = "OutKnow"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "OutKnowledge"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         CType(Me.trkBar, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.StimBox, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ChestPic.ResumeLayout(False)
+        CType(Me.BanPic, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ChrPic, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.OrnPic, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PearPic, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.WmlnPic, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PinePic, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
     Friend WithEvents trkBar As System.Windows.Forms.TrackBar
-    Friend WithEvents LabelG As System.Windows.Forms.Label
     Friend WithEvents lblQstn As System.Windows.Forms.Label
     Friend WithEvents Label11 As System.Windows.Forms.Label
     Friend WithEvents Label6 As System.Windows.Forms.Label
@@ -302,12 +312,13 @@ Partial Class OutKnow
     Friend WithEvents Label3 As Label
     Friend WithEvents Label4 As Label
     Friend WithEvents Label5 As Label
-    Friend WithEvents LabelF As Label
-    Friend WithEvents LabelE As Label
-    Friend WithEvents LabelD As Label
-    Friend WithEvents LabelC As Label
-    Friend WithEvents LabelB As Label
     Friend WithEvents ITItimer As Timer
     Friend WithEvents ChestPic As Panel
     Friend WithEvents Instruct As Label
+    Friend WithEvents BanPic As PictureBox
+    Friend WithEvents ChrPic As PictureBox
+    Friend WithEvents OrnPic As PictureBox
+    Friend WithEvents PearPic As PictureBox
+    Friend WithEvents WmlnPic As PictureBox
+    Friend WithEvents PinePic As PictureBox
 End Class

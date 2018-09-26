@@ -118,17 +118,12 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Label1.Text" xml:space="preserve">
-    <value>In this phase, you will see boxes with pictures of fruit on them.  To earn points in this
-game, press either the "1" key (left) or "2" key (right) to open the box. If you press the
-correct key, the box will open to reveal a fruit inside, and points will be added to your
-score. However, if you press the incorrect key, the box will be empty and no points will
-be added to your score. Your goal is to learn which is the correct key to press for each 
-fruit. Sometimes it will be the "1" key, and sometimes it will be the "2" key. The picture
-on the front of the box is based on which key is correct. The faster you press correctly, 
-the more points will be added to your score. Your points will appear at the top of the
-screen. You should try to learn the types of fruits that are inside the boxes (appearing 
-after correct responses) because later on, you will be asked to gather some types of
-fruits (that are inside the box) but not others.  We will now do a couple quick guided
-practice trials.</value>
+    <value>In this part, you will see boxes with fruit on the outside. To earn points, press either 
+the '1' key or the '2' key to open the box.  Your goal is to press the correct key for
+each fruit. If correct, the box will open to reveal a reward fruit inside, and points will
+be added to your score. However, if incorrect, the box will be empty inside, and no
+points will be earned. Try to learn and remember the reward fruits. The correct key
+for each different fruit will never change, and the faster you press correctly, the more
+points will be earned. We will now do a couple quick, guided practice trials.</value>
   </data>
 </root>

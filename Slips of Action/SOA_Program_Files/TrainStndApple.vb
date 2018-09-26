@@ -176,7 +176,7 @@ Public Class TrainStndApple
                 stimOff()
 
                 ChestPic.BackgroundImage = My.Resources.ResourceManager.GetObject("OpnChst")
-                FruitPic.Image = My.Resources.ResourceManager.GetObject("halfWMelon")
+                FruitPic.Image = My.Resources.ResourceManager.GetObject("wmelon2")
 
                 ScoreBox.Text = points
 

@@ -55,7 +55,7 @@ Partial Class RespKnow
         Me.lblQstn.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.lblQstn.AutoSize = True
         Me.lblQstn.Font = New System.Drawing.Font("Arial Black", 30.0!, System.Drawing.FontStyle.Bold)
-        Me.lblQstn.Location = New System.Drawing.Point(208, 40)
+        Me.lblQstn.Location = New System.Drawing.Point(213, 40)
         Me.lblQstn.Name = "lblQstn"
         Me.lblQstn.Size = New System.Drawing.Size(874, 112)
         Me.lblQstn.TabIndex = 38
@@ -101,22 +101,22 @@ Partial Class RespKnow
         Me.Label1.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(261, 592)
+        Me.Label1.Location = New System.Drawing.Point(281, 592)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(105, 19)
+        Me.Label1.Size = New System.Drawing.Size(60, 19)
         Me.Label1.TabIndex = 56
-        Me.Label1.Text = """1"" Key (left)"
+        Me.Label1.Text = "'1' Key"
         '
         'Label2
         '
         Me.Label2.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(926, 592)
+        Me.Label2.Location = New System.Drawing.Point(961, 592)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(117, 19)
+        Me.Label2.Size = New System.Drawing.Size(60, 19)
         Me.Label2.TabIndex = 57
-        Me.Label2.Text = """2"" Key (right)"
+        Me.Label2.Text = "'2' Key"
         '
         'ITItimer
         '
@@ -128,9 +128,9 @@ Partial Class RespKnow
         Me.ChestPic.BackgroundImage = Global.Slips_Of_Action.My.Resources.Resources.ClsChst
         Me.ChestPic.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ChestPic.Controls.Add(Me.StimBox)
-        Me.ChestPic.Location = New System.Drawing.Point(450, 175)
+        Me.ChestPic.Location = New System.Drawing.Point(449, 170)
         Me.ChestPic.Name = "ChestPic"
-        Me.ChestPic.Size = New System.Drawing.Size(400, 320)
+        Me.ChestPic.Size = New System.Drawing.Size(400, 340)
         Me.ChestPic.TabIndex = 75
         '
         'StimBox
@@ -138,9 +138,9 @@ Partial Class RespKnow
         Me.StimBox.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.StimBox.BackColor = System.Drawing.Color.Transparent
         Me.StimBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.StimBox.Location = New System.Drawing.Point(88, 60)
+        Me.StimBox.Location = New System.Drawing.Point(60, 50)
         Me.StimBox.Name = "StimBox"
-        Me.StimBox.Size = New System.Drawing.Size(225, 200)
+        Me.StimBox.Size = New System.Drawing.Size(280, 240)
         Me.StimBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.StimBox.TabIndex = 54
         Me.StimBox.TabStop = False
@@ -152,9 +152,9 @@ Partial Class RespKnow
         Me.Instruct.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!)
         Me.Instruct.Location = New System.Drawing.Point(387, 665)
         Me.Instruct.Name = "Instruct"
-        Me.Instruct.Size = New System.Drawing.Size(532, 24)
+        Me.Instruct.Size = New System.Drawing.Size(526, 24)
         Me.Instruct.TabIndex = 76
-        Me.Instruct.Text = "Once the slider is at your choice, press the ""8"" key to continue."
+        Me.Instruct.Text = "Once the slider is at your choice, press the '8' key to continue."
         '
         'RespKnow
         '
@@ -174,7 +174,6 @@ Partial Class RespKnow
         Me.KeyPreview = True
         Me.Name = "RespKnow"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "RespKnowledge"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         CType(Me.trkBar, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ChestPic.ResumeLayout(False)

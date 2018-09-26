@@ -26,7 +26,7 @@
     <SignAssembly>false</SignAssembly>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <TargetFrameworkProfile />
-    <PublishUrl>C:\x\</PublishUrl>
+    <PublishUrl>P:\Coding\SOA\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -39,6 +39,7 @@
     <ApplicationRevision>6</ApplicationRevision>
     <ApplicationVersion>1.0.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -96,6 +97,13 @@
     <Compile Include="EndTrain.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="GlobVars.vb" />
+    <Compile Include="OutDevPractice.Designer.vb">
+      <DependentUpon>OutDevPractice.vb</DependentUpon>
+    </Compile>
+    <Compile Include="OutDevPractice.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="QstnInstr.Designer.vb">
       <DependentUpon>QstnInstr.vb</DependentUpon>
     </Compile>
@@ -124,6 +132,18 @@
       <DependentUpon>OutcomeDeval.vb</DependentUpon>
     </Compile>
     <Compile Include="OutcomeDeval.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SOA_Practice_Devald.Designer.vb">
+      <DependentUpon>SOA_Practice_Devald.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SOA_Practice_Devald.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SOA_Practice.Designer.vb">
+      <DependentUpon>SOA_Practice.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SOA_Practice.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="SOA_Devalued.Designer.vb">
@@ -160,6 +180,12 @@
       <DependentUpon>SOA_Cong_Ban.vb</DependentUpon>
     </Compile>
     <Compile Include="SOA_Cong_Ban.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TrainPractice.Designer.vb">
+      <DependentUpon>TrainPractice.vb</DependentUpon>
+    </Compile>
+    <Compile Include="TrainPractice.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="TrainCongBana.Designer.vb">
@@ -266,6 +292,9 @@
       <DependentUpon>EndTrain.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="OutDevPractice.resx">
+      <DependentUpon>OutDevPractice.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="QstnInstr.resx">
       <DependentUpon>QstnInstr.vb</DependentUpon>
     </EmbeddedResource>
@@ -280,6 +309,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="OutcomeDeval.resx">
       <DependentUpon>OutcomeDeval.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SOA_Practice_Devald.resx">
+      <DependentUpon>SOA_Practice_Devald.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SOA_Practice.resx">
+      <DependentUpon>SOA_Practice.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SOA_Devalued.resx">
       <DependentUpon>SOA_Devalued.vb</DependentUpon>
@@ -299,6 +334,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SOA_Cong_Ban.resx">
       <DependentUpon>SOA_Cong_Ban.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TrainPractice.resx">
+      <DependentUpon>TrainPractice.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TrainCongBana.resx">
       <DependentUpon>TrainCongBana.vb</DependentUpon>
@@ -457,6 +495,16 @@
     <None Include="Resources\Checkmark.png" />
     <None Include="Resources\OpnChst.png" />
     <None Include="Resources\ClsChst.png" />
+    <None Include="Resources\lemon.png" />
+    <None Include="Resources\razzleberry.png" />
+    <None Include="Resources\melon.png" />
+    <None Include="Resources\plum-2.png" />
+    <None Include="Resources\papaya.png" />
+    <None Include="Resources\pom.png" />
+    <None Include="Resources\blackberry.png" />
+    <None Include="Resources\coconut.png" />
+    <None Include="Resources\wmelon2.png" />
+    <None Include="Resources\kiwi.png" />
     <Content Include="Resources\xmark.png" />
     <None Include="Resources\grape.bmp" />
     <None Include="Resources\Right.bmp" />

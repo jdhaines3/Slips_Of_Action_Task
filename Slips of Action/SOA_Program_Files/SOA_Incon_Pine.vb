@@ -95,17 +95,35 @@ Public Class SOA_Incon_Pine
             If acceptKey = True Then
 
                 acceptKey = False
+                If d1 = 5 Or d2 = 5 Then
 
-                'see sub comments
-                stimOff()
+                    stimOff()
 
-                'set image to incorrect feedback
-                ChestPic.BackgroundImage = My.Resources.ResourceManager.GetObject("OpnChst")
-                FruitPic.Image = blankBox
+                    ChestPic.BackgroundImage = My.Resources.ResourceManager.GetObject("OpnChst")
+                    FruitPic.BackgroundImage = blankBox
+                    FruitPic.Image = My.Resources.ResourceManager.GetObject("xmark")
 
-                'set resp to incorrect button press
-                resp = 0
-                pointsEarned = 0
+                    resp = 3
+
+                    score = score - 1
+                    frmMain.setScore(score)
+                    pointsEarned = -1
+
+                Else
+
+                    'see sub comments
+                    stimOff()
+
+                    'set image to incorrect feedback
+                    ChestPic.BackgroundImage = My.Resources.ResourceManager.GetObject("OpnChst")
+                    FruitPic.Image = blankBox
+                    FruitPic.BackgroundImage = blankBox
+
+                    'set resp to incorrect button press
+                    resp = 0
+                    pointsEarned = 0
+
+                End If
 
             End If
 
@@ -121,6 +139,7 @@ Public Class SOA_Incon_Pine
                     stimOff()
 
                     ChestPic.BackgroundImage = My.Resources.ResourceManager.GetObject("OpnChst")
+                    FruitPic.BackgroundImage = My.Resources.ResourceManager.GetObject("orange")
                     FruitPic.Image = My.Resources.ResourceManager.GetObject("xmark")
 
                     resp = 2
@@ -134,7 +153,8 @@ Public Class SOA_Incon_Pine
                     stimOff()
 
                     ChestPic.BackgroundImage = My.Resources.ResourceManager.GetObject("OpnChst")
-                    FruitPic.Image = My.Resources.ResourceManager.GetObject("orange")
+                    FruitPic.BackgroundImage = My.Resources.ResourceManager.GetObject("orange")
+                    FruitPic.Image = blankBox
 
                     resp = 1
 
@@ -167,9 +187,10 @@ Public Class SOA_Incon_Pine
             stimOff()
 
             ChestPic.BackgroundImage = My.Resources.ResourceManager.GetObject("OpnChst")
+            FruitPic.BackgroundImage = blankBox
             FruitPic.Image = My.Resources.ResourceManager.GetObject("Checkmark")
 
-            resp = 4
+            resp = 5
 
             score = score + 1
             frmMain.setScore(score)
@@ -181,9 +202,10 @@ Public Class SOA_Incon_Pine
 
             ChestPic.BackgroundImage = My.Resources.ResourceManager.GetObject("OpnChst")
             FruitPic.Image = blankBox
+            FruitPic.BackgroundImage = blankBox
 
-            resp = 3
-            pointsEarned = -1
+            resp = 4
+            pointsEarned = 0
 
         End If
 
@@ -262,7 +284,8 @@ Public Class SOA_Incon_Pine
 
         'change pic back to original stim pic for next trial
         ChestPic.BackgroundImage = My.Resources.ResourceManager.GetObject("ClsChst")
-        FruitPic.Image = My.Resources.ResourceManager.GetObject("pineapple")
+        FruitPic.BackgroundImage = My.Resources.ResourceManager.GetObject("pineapple")
+        FruitPic.Image = blankBox
 
         'hide this form and go on to next statement in frmMain (A.K.A---next form is shown)
         Me.Hide()

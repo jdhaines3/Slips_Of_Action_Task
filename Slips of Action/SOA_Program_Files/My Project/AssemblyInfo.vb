@@ -8,11 +8,11 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("LYCASE_Quizzer")> 
+<Assembly: AssemblyTitle("Slips Of Action Task")>
 <Assembly: AssemblyDescription("")> 
-<Assembly: AssemblyCompany("IU School of Medicine")> 
-<Assembly: AssemblyProduct("LYCASE_Quizzer")> 
-<Assembly: AssemblyCopyright("Copyright © IU School of Medicine 2010")> 
+<Assembly: AssemblyCompany("IU School of Medicine")>
+<Assembly: AssemblyProduct("SOA_Program")>
+<Assembly: AssemblyCopyright("Copyright © IU School of Medicine 2018")>
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(False)>

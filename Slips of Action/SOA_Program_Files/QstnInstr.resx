@@ -118,11 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Label1.Text" xml:space="preserve">
-    <value>You will now be asked a series of questions about the fruit (outside and
-inside the boxes) that you have seen so far.  You will respond by moving
-a slider on a trackbar using the (1) and (2) keys. Read the questions and
-move the slider to the desired answer.  To submit your answer and move
-to the next question, press the (8) key.  This will bring up the next question
-after a brief pause.  </value>
+    <value>You will now be asked a series of questions about the fruit you have seen,
+from both outside and inside the boxes. Respond by moving a slider on
+a trackbar using the '1' and '2' keys. Press the '8' key to submit your answer
+and move to the next question. This will bring up the next question after a
+brief pause.  </value>
   </data>
 </root>
