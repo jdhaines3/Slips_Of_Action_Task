@@ -103,19 +103,19 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>Mre6BXMyscnClhP/epWW6TUAxhTJJwBQVDkZwxf26Ag=</dsig:DigestValue>
+        <dsig:DigestValue>5LalAOLqKxwNbJ0nW2fCZKRSgtLR43yDuG10J4G7U7A=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Slips_Of_Action.exe" size="3141120">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Slips_Of_Action.exe" size="3439104">
       <assemblyIdentity name="Slips_Of_Action" version="1.0.0.2" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>A4jZfJnJUsP9dj3u0i8zr4wr0VnFcwpvg8oTcOJlwYk=</dsig:DigestValue>
+        <dsig:DigestValue>6r5TAwOMWM0qX5zXdT59226rjkp2KG3min1GDHXPWSQ=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

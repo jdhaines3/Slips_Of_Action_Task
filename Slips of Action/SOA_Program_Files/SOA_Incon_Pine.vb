@@ -57,6 +57,7 @@ Public Class SOA_Incon_Pine
         pointsEarned = 100
 
         'keyboard input on and all pics visible
+        ChestPic.Visible = True
         FruitPic.Visible = True
         LeftArr.Visible = True
         RightArr.Visible = True
@@ -99,6 +100,7 @@ Public Class SOA_Incon_Pine
                 stimOff()
 
                 'set image to incorrect feedback
+                ChestPic.BackgroundImage = My.Resources.ResourceManager.GetObject("OpnChst")
                 FruitPic.Image = blankBox
 
                 'set resp to incorrect button press
@@ -118,6 +120,7 @@ Public Class SOA_Incon_Pine
 
                     stimOff()
 
+                    ChestPic.BackgroundImage = My.Resources.ResourceManager.GetObject("OpnChst")
                     FruitPic.Image = My.Resources.ResourceManager.GetObject("xmark")
 
                     resp = 2
@@ -130,6 +133,7 @@ Public Class SOA_Incon_Pine
                     'else correct press and add point
                     stimOff()
 
+                    ChestPic.BackgroundImage = My.Resources.ResourceManager.GetObject("OpnChst")
                     FruitPic.Image = My.Resources.ResourceManager.GetObject("orange")
 
                     resp = 1
@@ -162,6 +166,7 @@ Public Class SOA_Incon_Pine
         If d1 = 5 Or d2 = 5 Then
             stimOff()
 
+            ChestPic.BackgroundImage = My.Resources.ResourceManager.GetObject("OpnChst")
             FruitPic.Image = My.Resources.ResourceManager.GetObject("Checkmark")
 
             resp = 4
@@ -174,6 +179,7 @@ Public Class SOA_Incon_Pine
 
             stimOff()
 
+            ChestPic.BackgroundImage = My.Resources.ResourceManager.GetObject("OpnChst")
             FruitPic.Image = blankBox
 
             resp = 3
@@ -192,6 +198,7 @@ Public Class SOA_Incon_Pine
         'reset/stop timer, make pics invisible and turn off keyboard input
         stimTimer.Stop()
 
+        ChestPic.Visible = False
         FruitPic.Visible = False
         LeftArr.Visible = False
         RightArr.Visible = False
@@ -211,6 +218,7 @@ Public Class SOA_Incon_Pine
         betweenTimer.Stop()
 
         'set new feedback pic as visible
+        ChestPic.Visible = True
         FruitPic.Visible = True
 
         'start timer for how long feedback image stays on screen
@@ -228,6 +236,7 @@ Public Class SOA_Incon_Pine
         feedbackTimer.Stop()
 
         'turn off feedback pic
+        ChestPic.Visible = False
         FruitPic.Visible = False
 
         'write the resp variable to the text file, then close filestream
@@ -252,6 +261,7 @@ Public Class SOA_Incon_Pine
         blankTimer.Stop()
 
         'change pic back to original stim pic for next trial
+        ChestPic.BackgroundImage = My.Resources.ResourceManager.GetObject("ClsChst")
         FruitPic.Image = My.Resources.ResourceManager.GetObject("pineapple")
 
         'hide this form and go on to next statement in frmMain (A.K.A---next form is shown)

@@ -161,6 +161,7 @@ Public Class RespKnow
 
         trkBar.Visible = True
 
+        Instruct.Visible = True
         Label1.Visible = True
         Label2.Visible = True
         Label4.Visible = True
@@ -168,6 +169,7 @@ Public Class RespKnow
         Label5.Visible = True
 
         lblQstn.Visible = True
+        ChestPic.Visible = True
         StimBox.Visible = True
 
         'ensure keyboard input accepted, as keypress lets code continue
@@ -183,6 +185,7 @@ Public Class RespKnow
 
         trkBar.Visible = False
 
+        Instruct.Visible = False
         Label1.Visible = False
         Label2.Visible = False
         Label4.Visible = False
@@ -190,6 +193,7 @@ Public Class RespKnow
         Label5.Visible = False
 
         lblQstn.Visible = False
+        ChestPic.Visible = False
         StimBox.Visible = False
 
     End Sub

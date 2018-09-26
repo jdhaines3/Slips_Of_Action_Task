@@ -122,14 +122,17 @@
   </metadata>
   <data name="Label1.Text" xml:space="preserve">
     <value>Once again, you will have the chance to earn points by pressing keys  to open a box
-shown on the screen, only this time, some of the fruits inside the boxes are no longer
-valuable. Your job is to press the correct key for each fruit shown on the box, BUT
-withhold your key press if the fruit INSIDE that box is devalued. Correct key presses
-will be rewarded (one point) and incorrect key presses will not be rewarded, but one
-point will be subtracted for every key press made to a box with a devalued fruit inside.
-This is a test and we won’t show you your score until the very end. At the beginning
-of the phase, we will show you the two fruits that are devalued during this test - 
-these will have a cross on them. Remember to press quickly as the boxes will follow
-each other very rapidly!</value>
+shown on the screen. Only this time, some of the fruits inside the boxes are no longer
+valuable.  At the start of the task, you will be shown the six different possible fruit from
+inside the boxes.  Two will have a red X over them, marking them as "devalued". Your
+job during the task is to press the correct key for each fruit shown on the box, BUT
+withhold your key press if the fruit INSIDE that box is one of the devalued fruit shown
+at the beginning. Correct key presses will be earn one point, and incorrect key presses 
+will not be rewarded. But, one point will be subtracted for every key press made to a
+box with a devalued fruit inside. If you successfully wait and don't press either key
+on a box with devalued fruit, you will earn one point. This is a test and we won’t show
+you your score until the very end. The boxes will only appear for a short time, so please
+remember to press quickly!  First, we will do a couple practice trials to help you know
+how the trials will go.</value>
   </data>
 </root>

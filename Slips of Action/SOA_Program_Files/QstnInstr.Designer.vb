@@ -32,11 +32,11 @@ Partial Class QstnInstr
         '
         Me.Title.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.Title.AutoSize = True
-        Me.Title.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, CType(((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic) _
-                Or System.Drawing.FontStyle.Underline), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Title.Location = New System.Drawing.Point(294, 54)
+        Me.Title.Font = New System.Drawing.Font("Microsoft Sans Serif", 25.0!, CType(((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic) _
+                Or System.Drawing.FontStyle.Underline), System.Drawing.FontStyle))
+        Me.Title.Location = New System.Drawing.Point(548, 50)
         Me.Title.Name = "Title"
-        Me.Title.Size = New System.Drawing.Size(167, 31)
+        Me.Title.Size = New System.Drawing.Size(203, 39)
         Me.Title.TabIndex = 0
         Me.Title.Text = "Instructions"
         '
@@ -45,7 +45,7 @@ Partial Class QstnInstr
         Me.InstrLabel.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.InstrLabel.AutoSize = True
         Me.InstrLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.InstrLabel.Location = New System.Drawing.Point(285, 396)
+        Me.InstrLabel.Location = New System.Drawing.Point(548, 600)
         Me.InstrLabel.Name = "InstrLabel"
         Me.InstrLabel.Size = New System.Drawing.Size(197, 25)
         Me.InstrLabel.TabIndex = 1
@@ -55,10 +55,10 @@ Partial Class QstnInstr
         '
         Me.Label1.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 16.0!)
-        Me.Label1.Location = New System.Drawing.Point(34, 153)
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.0!)
+        Me.Label1.Location = New System.Drawing.Point(198, 247)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(712, 130)
+        Me.Label1.Size = New System.Drawing.Size(903, 186)
         Me.Label1.TabIndex = 2
         Me.Label1.Text = resources.GetString("Label1.Text")
         '
@@ -67,7 +67,7 @@ Partial Class QstnInstr
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.BackColor = System.Drawing.Color.LightBlue
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.ClientSize = New System.Drawing.Size(784, 461)
+        Me.ClientSize = New System.Drawing.Size(1284, 729)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.InstrLabel)
         Me.Controls.Add(Me.Title)

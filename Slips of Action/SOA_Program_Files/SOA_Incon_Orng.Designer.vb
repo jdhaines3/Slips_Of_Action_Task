@@ -31,9 +31,11 @@ Partial Class SOA_Incon_Orng
         Me.FruitPic = New System.Windows.Forms.PictureBox()
         Me.RightArr = New System.Windows.Forms.PictureBox()
         Me.LeftArr = New System.Windows.Forms.PictureBox()
+        Me.ChestPic = New System.Windows.Forms.Panel()
         CType(Me.FruitPic, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RightArr, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LeftArr, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.ChestPic.SuspendLayout()
         Me.SuspendLayout()
         '
         'stimTimer
@@ -55,13 +57,13 @@ Partial Class SOA_Incon_Orng
         'FruitPic
         '
         Me.FruitPic.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.FruitPic.BackgroundImage = Global.Slips_Of_Action.My.Resources.Resources.crate
+        Me.FruitPic.BackColor = System.Drawing.Color.Transparent
         Me.FruitPic.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.FruitPic.Image = Global.Slips_Of_Action.My.Resources.Resources.orange
         Me.FruitPic.InitialImage = Nothing
-        Me.FruitPic.Location = New System.Drawing.Point(187, 27)
+        Me.FruitPic.Location = New System.Drawing.Point(75, 60)
         Me.FruitPic.Name = "FruitPic"
-        Me.FruitPic.Size = New System.Drawing.Size(318, 269)
+        Me.FruitPic.Size = New System.Drawing.Size(350, 300)
         Me.FruitPic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.FruitPic.TabIndex = 65
         Me.FruitPic.TabStop = False
@@ -72,9 +74,9 @@ Partial Class SOA_Incon_Orng
         Me.RightArr.BackgroundImage = Global.Slips_Of_Action.My.Resources.Resources.Right
         Me.RightArr.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.RightArr.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.RightArr.Location = New System.Drawing.Point(427, 344)
+        Me.RightArr.Location = New System.Drawing.Point(800, 595)
         Me.RightArr.Name = "RightArr"
-        Me.RightArr.Size = New System.Drawing.Size(78, 40)
+        Me.RightArr.Size = New System.Drawing.Size(100, 50)
         Me.RightArr.TabIndex = 64
         Me.RightArr.TabStop = False
         '
@@ -84,19 +86,30 @@ Partial Class SOA_Incon_Orng
         Me.LeftArr.BackgroundImage = Global.Slips_Of_Action.My.Resources.Resources.Left
         Me.LeftArr.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.LeftArr.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LeftArr.Location = New System.Drawing.Point(187, 344)
+        Me.LeftArr.Location = New System.Drawing.Point(400, 595)
         Me.LeftArr.Name = "LeftArr"
-        Me.LeftArr.Size = New System.Drawing.Size(78, 40)
+        Me.LeftArr.Size = New System.Drawing.Size(100, 50)
         Me.LeftArr.TabIndex = 63
         Me.LeftArr.TabStop = False
+        '
+        'ChestPic
+        '
+        Me.ChestPic.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.ChestPic.BackgroundImage = Global.Slips_Of_Action.My.Resources.Resources.ClsChst
+        Me.ChestPic.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.ChestPic.Controls.Add(Me.FruitPic)
+        Me.ChestPic.Location = New System.Drawing.Point(400, 110)
+        Me.ChestPic.Name = "ChestPic"
+        Me.ChestPic.Size = New System.Drawing.Size(500, 420)
+        Me.ChestPic.TabIndex = 73
         '
         'SOA_Incon_Orng
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.BackColor = System.Drawing.Color.LightBlue
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.ClientSize = New System.Drawing.Size(700, 400)
-        Me.Controls.Add(Me.FruitPic)
+        Me.ClientSize = New System.Drawing.Size(1284, 729)
+        Me.Controls.Add(Me.ChestPic)
         Me.Controls.Add(Me.RightArr)
         Me.Controls.Add(Me.LeftArr)
         Me.KeyPreview = True
@@ -107,6 +120,7 @@ Partial Class SOA_Incon_Orng
         CType(Me.FruitPic, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RightArr, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LeftArr, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.ChestPic.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -118,4 +132,5 @@ Partial Class SOA_Incon_Orng
     Friend WithEvents betweenTimer As Timer
     Friend WithEvents feedbackTimer As Timer
     Friend WithEvents blankTimer As Timer
+    Friend WithEvents ChestPic As Panel
 End Class

@@ -119,15 +119,16 @@
   </resheader>
   <data name="Label1.Text" xml:space="preserve">
     <value>In this phase, you will see boxes with pictures of fruit on them.  To earn points in this
-game, press either the left (1) or right (2) key to open the box. If you press the correct
-key, the box will open to reveal a fruit inside, and points will be added to your score.
-However, if you press the incorrect key, the box will be empty and no points will be 
-added to your score. Your task is to learn which is the correct key to press. Sometimes
-it will be the left-hand one, and sometimes it will be the right-hand one. The picture on
-the front of the box predicts which is correct. The faster you press correctly, the more
-points will be added to your score. Your points will appear at the top of the screen. You
-should try to learn the types of fruits that are inside the boxes (appearing after left- or
-right-hand responses) because later on you will be asked to gather some types of fruits
-but not others.</value>
+game, press either the "1" key (left) or "2" key (right) to open the box. If you press the
+correct key, the box will open to reveal a fruit inside, and points will be added to your
+score. However, if you press the incorrect key, the box will be empty and no points will
+be added to your score. Your goal is to learn which is the correct key to press for each 
+fruit. Sometimes it will be the "1" key, and sometimes it will be the "2" key. The picture
+on the front of the box is based on which key is correct. The faster you press correctly, 
+the more points will be added to your score. Your points will appear at the top of the
+screen. You should try to learn the types of fruits that are inside the boxes (appearing 
+after correct responses) because later on, you will be asked to gather some types of
+fruits (that are inside the box) but not others.  We will now do a couple quick guided
+practice trials.</value>
   </data>
 </root>

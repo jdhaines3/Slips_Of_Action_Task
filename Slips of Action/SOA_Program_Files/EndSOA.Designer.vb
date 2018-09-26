@@ -34,7 +34,7 @@ Partial Class EndSOA
         Me.Label2.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(236, 314)
+        Me.Label2.Location = New System.Drawing.Point(527, 521)
         Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(72, 20)
@@ -45,7 +45,7 @@ Partial Class EndSOA
         '
         Me.btnExit.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.btnExit.BackColor = System.Drawing.Color.Fuchsia
-        Me.btnExit.Location = New System.Drawing.Point(354, 299)
+        Me.btnExit.Location = New System.Drawing.Point(645, 506)
         Me.btnExit.Name = "btnExit"
         Me.btnExit.Size = New System.Drawing.Size(119, 50)
         Me.btnExit.TabIndex = 4
@@ -57,7 +57,7 @@ Partial Class EndSOA
         Me.Label6.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.Label6.AutoSize = True
         Me.Label6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label6.Location = New System.Drawing.Point(227, 295)
+        Me.Label6.Location = New System.Drawing.Point(518, 502)
         Me.Label6.MinimumSize = New System.Drawing.Size(250, 57)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(250, 57)
@@ -67,10 +67,10 @@ Partial Class EndSOA
         '
         Me.Label1.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.0!)
-        Me.Label1.Location = New System.Drawing.Point(150, 35)
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 30.0!)
+        Me.Label1.Location = New System.Drawing.Point(349, 110)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(413, 186)
+        Me.Label1.Size = New System.Drawing.Size(607, 276)
         Me.Label1.TabIndex = 10
         Me.Label1.Text = "The experiment is complete!" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Check your score below, then" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "press ""cntrl + x"" to s" &
     "ave and exit," & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "or press the button at the bottom." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Total Points Earned:"
@@ -82,7 +82,7 @@ Partial Class EndSOA
         Me.ScoreTxt.BackColor = System.Drawing.Color.LightBlue
         Me.ScoreTxt.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.ScoreTxt.Font = New System.Drawing.Font("Microsoft Sans Serif", 21.7!)
-        Me.ScoreTxt.Location = New System.Drawing.Point(295, 235)
+        Me.ScoreTxt.Location = New System.Drawing.Point(589, 409)
         Me.ScoreTxt.Name = "ScoreTxt"
         Me.ScoreTxt.Size = New System.Drawing.Size(111, 38)
         Me.ScoreTxt.TabIndex = 71
@@ -93,7 +93,7 @@ Partial Class EndSOA
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.BackColor = System.Drawing.SystemColors.ActiveBorder
-        Me.ClientSize = New System.Drawing.Size(703, 400)
+        Me.ClientSize = New System.Drawing.Size(1284, 729)
         Me.Controls.Add(Me.ScoreTxt)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.btnExit)

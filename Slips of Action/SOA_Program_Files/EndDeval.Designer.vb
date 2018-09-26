@@ -30,10 +30,10 @@ Partial Class EndDeval
         '
         Me.Label1.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.0!)
-        Me.Label1.Location = New System.Drawing.Point(131, 38)
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 30.0!)
+        Me.Label1.Location = New System.Drawing.Point(327, 138)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(440, 186)
+        Me.Label1.Size = New System.Drawing.Size(646, 276)
         Me.Label1.TabIndex = 10
         Me.Label1.Text = "The devaluation phase is complete!" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Check your score below," & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "then press 8 to cont" &
     "inue" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "to the next phase!" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Total Points Earned:"
@@ -45,9 +45,9 @@ Partial Class EndDeval
         Me.ScoreTxt.BackColor = System.Drawing.Color.LightBlue
         Me.ScoreTxt.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.ScoreTxt.Font = New System.Drawing.Font("Microsoft Sans Serif", 21.7!)
-        Me.ScoreTxt.Location = New System.Drawing.Point(295, 260)
+        Me.ScoreTxt.Location = New System.Drawing.Point(595, 459)
         Me.ScoreTxt.Name = "ScoreTxt"
-        Me.ScoreTxt.Size = New System.Drawing.Size(111, 38)
+        Me.ScoreTxt.Size = New System.Drawing.Size(110, 40)
         Me.ScoreTxt.TabIndex = 71
         Me.ScoreTxt.Text = "0"
         Me.ScoreTxt.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -56,7 +56,7 @@ Partial Class EndDeval
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.BackColor = System.Drawing.SystemColors.ActiveBorder
-        Me.ClientSize = New System.Drawing.Size(700, 400)
+        Me.ClientSize = New System.Drawing.Size(1284, 729)
         Me.Controls.Add(Me.ScoreTxt)
         Me.Controls.Add(Me.Label1)
         Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))

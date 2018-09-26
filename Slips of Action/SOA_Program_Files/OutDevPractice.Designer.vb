@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class OutcomeDeval
+Partial Class OutDevPractice
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -25,8 +25,8 @@ Partial Class OutcomeDeval
         Me.components = New System.ComponentModel.Container()
         Me.BottomPic = New System.Windows.Forms.PictureBox()
         Me.TopPic = New System.Windows.Forms.PictureBox()
-        Me.durTimer = New System.Windows.Forms.Timer(Me.components)
-        Me.OverflowTimer = New System.Windows.Forms.Timer(Me.components)
+        Me.AllowKeyTimer = New System.Windows.Forms.Timer(Me.components)
+        Me.InstrLbl = New System.Windows.Forms.Label()
         CType(Me.BottomPic, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TopPic, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -53,23 +53,32 @@ Partial Class OutcomeDeval
         Me.TopPic.TabIndex = 1
         Me.TopPic.TabStop = False
         '
-        'durTimer
+        'AllowKeyTimer
         '
-        Me.durTimer.Interval = 1500
+        Me.AllowKeyTimer.Interval = 1500
         '
-        'OverflowTimer
+        'InstrLbl
         '
-        Me.OverflowTimer.Interval = 60000
+        Me.InstrLbl.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.InstrLbl.BackColor = System.Drawing.Color.Tomato
+        Me.InstrLbl.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.InstrLbl.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.InstrLbl.Location = New System.Drawing.Point(12, 199)
+        Me.InstrLbl.Name = "InstrLbl"
+        Me.InstrLbl.Size = New System.Drawing.Size(460, 370)
+        Me.InstrLbl.TabIndex = 73
+        Me.InstrLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'OutcomeDeval
+        'OutDevPractice
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.BackColor = System.Drawing.Color.LightBlue
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.ClientSize = New System.Drawing.Size(1284, 729)
+        Me.Controls.Add(Me.InstrLbl)
         Me.Controls.Add(Me.BottomPic)
         Me.Controls.Add(Me.TopPic)
-        Me.Name = "OutcomeDeval"
+        Me.Name = "OutDevPractice"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "OutcomeDeval"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
@@ -80,6 +89,6 @@ Partial Class OutcomeDeval
     End Sub
     Friend WithEvents TopPic As PictureBox
     Friend WithEvents BottomPic As PictureBox
-    Friend WithEvents durTimer As Timer
-    Friend WithEvents OverflowTimer As Timer
+    Friend WithEvents AllowKeyTimer As Timer
+    Friend WithEvents InstrLbl As Label
 End Class

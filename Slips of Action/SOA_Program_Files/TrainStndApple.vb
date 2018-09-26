@@ -60,7 +60,8 @@ Public Class TrainStndApple
         pointsEarned = 100
 
         'turn on keyboard input; pics all visible
-
+        ChestPic.Visible = True
+        PointsTxt.Visible = True
         FruitPic.Visible = True
         LeftArr.Visible = True
         RightArr.Visible = True
@@ -108,6 +109,7 @@ Public Class TrainStndApple
 
                 stimOff()
 
+                ChestPic.BackgroundImage = My.Resources.ResourceManager.GetObject("OpnChst")
                 'set image to feedback image for incorrect response; blank box (background image with foreground image set to 1 pixel)
                 FruitPic.Image = blankBox
 
@@ -173,6 +175,7 @@ Public Class TrainStndApple
                 'turn stim off, set pic to correct feedback, resp to 1 for correct
                 stimOff()
 
+                ChestPic.BackgroundImage = My.Resources.ResourceManager.GetObject("OpnChst")
                 FruitPic.Image = My.Resources.ResourceManager.GetObject("halfWMelon")
 
                 ScoreBox.Text = points
@@ -193,10 +196,13 @@ Public Class TrainStndApple
 
     Private Sub stimOff()
 
+        ChestPic.Visible = False
+        PointsTxt.Visible = False
         FruitPic.Visible = False
         LeftArr.Visible = False
         RightArr.Visible = False
         ScoreBox.Visible = False
+
 
         betweenTimer.Start()
 
@@ -231,6 +237,7 @@ Public Class TrainStndApple
             pointsEarned = -5
 
             'set feedback image to blank crate
+            ChestPic.BackgroundImage = My.Resources.ResourceManager.GetObject("OpnChst")
             FruitPic.Image = blankBox
 
         End If
@@ -247,6 +254,8 @@ Public Class TrainStndApple
         betweenTimer.Stop()
 
         'set new feedback pic as visible
+        ChestPic.Visible = True
+        PointsTxt.Visible = True
         FruitPic.Visible = True
         ScoreBox.Visible = True
 
@@ -266,6 +275,8 @@ Public Class TrainStndApple
         feedbackTimer.Stop()
 
         'turn off feedback pic
+        ChestPic.Visible = False
+        PointsTxt.Visible = False
         FruitPic.Visible = False
         ScoreBox.Visible = False
 
@@ -293,6 +304,7 @@ Public Class TrainStndApple
 
         'change pic back to original stim pic for next trial
         FruitPic.Image = My.Resources.ResourceManager.GetObject("apple")
+        ChestPic.BackgroundImage = My.Resources.ResourceManager.GetObject("ClsChst")
 
         'hide this form and go on to next statement in frmMain (A.K.A---next form is shown)
         Me.Hide()

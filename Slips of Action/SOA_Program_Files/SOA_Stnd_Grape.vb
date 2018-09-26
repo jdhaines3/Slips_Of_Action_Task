@@ -61,6 +61,7 @@ Public Class SOA_Stnd_Grape
         pointsEarned = 100
 
         'turn on keyboard input and ensure all pictures visible
+        ChestPic.Visible = True
         FruitPic.Visible = True
         LeftArr.Visible = True
         RightArr.Visible = True
@@ -106,6 +107,7 @@ Public Class SOA_Stnd_Grape
                     stimOff()
 
                     'set image to feedback image for correct BUT DEVALUED Resp
+                    ChestPic.BackgroundImage = My.Resources.ResourceManager.GetObject("OpnChst")
                     FruitPic.Image = My.Resources.ResourceManager.GetObject("xmark")
 
                     'set response to number designation for correct key, but DEVAL resp
@@ -122,6 +124,7 @@ Public Class SOA_Stnd_Grape
                     stimOff()
 
                     'feedback set to cherries instead
+                    ChestPic.BackgroundImage = My.Resources.ResourceManager.GetObject("OpnChst")
                     FruitPic.Image = My.Resources.ResourceManager.GetObject("cherries")
 
                     'resp output set to correct key press
@@ -146,6 +149,7 @@ Public Class SOA_Stnd_Grape
                 stimOff()
 
                 'feedback image set to background: empty box
+                ChestPic.BackgroundImage = My.Resources.ResourceManager.GetObject("OpnChst")
                 FruitPic.Image = blankBox
 
                 resp = 0
@@ -177,6 +181,7 @@ Public Class SOA_Stnd_Grape
 
             stimOff()
 
+            ChestPic.BackgroundImage = My.Resources.ResourceManager.GetObject("OpnChst")
             FruitPic.Image = My.Resources.ResourceManager.GetObject("Checkmark")
 
             resp = 4
@@ -189,6 +194,7 @@ Public Class SOA_Stnd_Grape
 
             stimOff()
 
+            ChestPic.BackgroundImage = My.Resources.ResourceManager.GetObject("OpnChst")
             FruitPic.Image = blankBox
 
             resp = 3
@@ -207,6 +213,7 @@ Public Class SOA_Stnd_Grape
         'reset/stop timer, make pics invisible and turn off keyboard input
         stimTimer.Stop()
 
+        ChestPic.Visible = False
         FruitPic.Visible = False
         LeftArr.Visible = False
         RightArr.Visible = False
@@ -226,6 +233,7 @@ Public Class SOA_Stnd_Grape
         betweenTimer.Stop()
 
         'set new feedback pic as visible
+        ChestPic.Visible = True
         FruitPic.Visible = True
 
         'start timer for how long feedback image stays on screen
@@ -243,6 +251,7 @@ Public Class SOA_Stnd_Grape
         feedbackTimer.Stop()
 
         'turn off feedback pic
+        ChestPic.Visible = False
         FruitPic.Visible = False
 
 
@@ -268,6 +277,7 @@ Public Class SOA_Stnd_Grape
         blankTimer.Stop()
 
         'change pic back to original stim pic for next trial
+        ChestPic.BackgroundImage = My.Resources.ResourceManager.GetObject("ClsChst")
         FruitPic.Image = My.Resources.ResourceManager.GetObject("grapes")
 
         'hide this form and go on to next statement in frmMain (A.K.A---next form is shown)

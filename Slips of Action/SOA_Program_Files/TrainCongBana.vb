@@ -60,6 +60,8 @@ Public Class TrainCongBana
         pointsEarned = 100
 
         'turn on keyboard input and ensure all pics visible
+        ChestPic.Visible = True
+        PointsTxt.Visible = True
         FruitPic.Visible = True
         LeftArr.Visible = True
         RightArr.Visible = True
@@ -144,6 +146,7 @@ Public Class TrainCongBana
                 'turn off stim, set resp and feedback to correct
                 stimOff()
 
+                ChestPic.BackgroundImage = My.Resources.ResourceManager.GetObject("OpnChst")
                 FruitPic.Image = My.Resources.ResourceManager.GetObject("Banana")
 
                 ScoreBox.Text = points
@@ -166,6 +169,7 @@ Public Class TrainCongBana
 
                 stimOff()
 
+                ChestPic.BackgroundImage = My.Resources.ResourceManager.GetObject("OpnChst")
                 FruitPic.Image = blankBox
 
                 resp = 0
@@ -186,6 +190,8 @@ Public Class TrainCongBana
 
     Private Sub stimOff()
 
+        ChestPic.Visible = False
+        PointsTxt.Visible = False
         FruitPic.Visible = False
         LeftArr.Visible = False
         RightArr.Visible = False
@@ -224,6 +230,7 @@ Public Class TrainCongBana
             pointsEarned = -5
 
             'set feedback image to blank crate
+            ChestPic.BackgroundImage = My.Resources.ResourceManager.GetObject("OpnChst")
             FruitPic.Image = blankBox
 
         End If
@@ -240,6 +247,8 @@ Public Class TrainCongBana
         betweenTimer.Stop()
 
         'set new feedback pic as visible
+        ChestPic.Visible = True
+        PointsTxt.Visible = True
         FruitPic.Visible = True
         ScoreBox.Visible = True
 
@@ -258,6 +267,8 @@ Public Class TrainCongBana
         feedbackTimer.Stop()
 
         'turn off feedback pic
+        ChestPic.Visible = False
+        PointsTxt.Visible = False
         FruitPic.Visible = False
         ScoreBox.Visible = False
 
@@ -283,7 +294,9 @@ Public Class TrainCongBana
         blankTimer.Stop()
 
         'change pic back to original stim pic for next trial
+        ChestPic.BackgroundImage = My.Resources.ResourceManager.GetObject("ClsChst")
         FruitPic.Image = My.Resources.ResourceManager.GetObject("Banana")
+
 
         'hide this form and go on to next statement in frmMain (A.K.A---next form is shown)
         Me.Hide()

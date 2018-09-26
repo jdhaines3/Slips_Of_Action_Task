@@ -43,9 +43,9 @@ Partial Class SOA_Devalued
         Me.WatermelonPic.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.WatermelonPic.BackgroundImage = Global.Slips_Of_Action.My.Resources.Resources.halfWMelon
         Me.WatermelonPic.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.WatermelonPic.Location = New System.Drawing.Point(12, 213)
+        Me.WatermelonPic.Location = New System.Drawing.Point(120, 392)
         Me.WatermelonPic.Name = "WatermelonPic"
-        Me.WatermelonPic.Size = New System.Drawing.Size(175, 175)
+        Me.WatermelonPic.Size = New System.Drawing.Size(225, 225)
         Me.WatermelonPic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.WatermelonPic.TabIndex = 5
         Me.WatermelonPic.TabStop = False
@@ -55,9 +55,9 @@ Partial Class SOA_Devalued
         Me.OrangePic.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.OrangePic.BackgroundImage = Global.Slips_Of_Action.My.Resources.Resources.orange
         Me.OrangePic.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.OrangePic.Location = New System.Drawing.Point(513, 213)
+        Me.OrangePic.Location = New System.Drawing.Point(910, 392)
         Me.OrangePic.Name = "OrangePic"
-        Me.OrangePic.Size = New System.Drawing.Size(175, 175)
+        Me.OrangePic.Size = New System.Drawing.Size(225, 225)
         Me.OrangePic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.OrangePic.TabIndex = 4
         Me.OrangePic.TabStop = False
@@ -67,9 +67,9 @@ Partial Class SOA_Devalued
         Me.PearPic.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.PearPic.BackgroundImage = Global.Slips_Of_Action.My.Resources.Resources.pear2
         Me.PearPic.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.PearPic.Location = New System.Drawing.Point(263, 213)
+        Me.PearPic.Location = New System.Drawing.Point(523, 392)
         Me.PearPic.Name = "PearPic"
-        Me.PearPic.Size = New System.Drawing.Size(175, 175)
+        Me.PearPic.Size = New System.Drawing.Size(225, 225)
         Me.PearPic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.PearPic.TabIndex = 3
         Me.PearPic.TabStop = False
@@ -79,9 +79,9 @@ Partial Class SOA_Devalued
         Me.PineapplePic.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.PineapplePic.BackgroundImage = Global.Slips_Of_Action.My.Resources.Resources.pineapple
         Me.PineapplePic.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.PineapplePic.Location = New System.Drawing.Point(513, 12)
+        Me.PineapplePic.Location = New System.Drawing.Point(910, 100)
         Me.PineapplePic.Name = "PineapplePic"
-        Me.PineapplePic.Size = New System.Drawing.Size(175, 175)
+        Me.PineapplePic.Size = New System.Drawing.Size(225, 225)
         Me.PineapplePic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.PineapplePic.TabIndex = 2
         Me.PineapplePic.TabStop = False
@@ -91,9 +91,9 @@ Partial Class SOA_Devalued
         Me.BananaPic.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.BananaPic.BackgroundImage = Global.Slips_Of_Action.My.Resources.Resources.Banana
         Me.BananaPic.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.BananaPic.Location = New System.Drawing.Point(263, 12)
+        Me.BananaPic.Location = New System.Drawing.Point(523, 100)
         Me.BananaPic.Name = "BananaPic"
-        Me.BananaPic.Size = New System.Drawing.Size(175, 175)
+        Me.BananaPic.Size = New System.Drawing.Size(225, 225)
         Me.BananaPic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.BananaPic.TabIndex = 1
         Me.BananaPic.TabStop = False
@@ -104,9 +104,9 @@ Partial Class SOA_Devalued
         Me.CherryPic.BackColor = System.Drawing.Color.LightBlue
         Me.CherryPic.BackgroundImage = Global.Slips_Of_Action.My.Resources.Resources.cherries
         Me.CherryPic.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.CherryPic.Location = New System.Drawing.Point(12, 12)
+        Me.CherryPic.Location = New System.Drawing.Point(120, 100)
         Me.CherryPic.Name = "CherryPic"
-        Me.CherryPic.Size = New System.Drawing.Size(175, 175)
+        Me.CherryPic.Size = New System.Drawing.Size(225, 225)
         Me.CherryPic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.CherryPic.TabIndex = 0
         Me.CherryPic.TabStop = False
@@ -120,7 +120,7 @@ Partial Class SOA_Devalued
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.BackColor = System.Drawing.Color.LightBlue
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.ClientSize = New System.Drawing.Size(700, 400)
+        Me.ClientSize = New System.Drawing.Size(1284, 729)
         Me.Controls.Add(Me.WatermelonPic)
         Me.Controls.Add(Me.OrangePic)
         Me.Controls.Add(Me.PearPic)

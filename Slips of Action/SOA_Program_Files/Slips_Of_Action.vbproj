@@ -455,6 +455,8 @@
     <None Include="Resources\pear2.png" />
     <None Include="Resources\pear3.jpg" />
     <None Include="Resources\Checkmark.png" />
+    <None Include="Resources\OpnChst.png" />
+    <None Include="Resources\ClsChst.png" />
     <Content Include="Resources\xmark.png" />
     <None Include="Resources\grape.bmp" />
     <None Include="Resources\Right.bmp" />

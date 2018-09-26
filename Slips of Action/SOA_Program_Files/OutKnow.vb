@@ -160,6 +160,7 @@ Public Class OutKnow
 
         trkBar.Visible = True
 
+        Instruct.Visible = True
         Label1.Visible = True
         Label2.Visible = True
         Label3.Visible = True
@@ -176,6 +177,7 @@ Public Class OutKnow
         LabelG.Visible = True
 
         lblQstn.Visible = True
+        ChestPic.Visible = True
         StimBox.Visible = True
 
         'make sure keyboard input on, as that advances the code
@@ -191,6 +193,7 @@ Public Class OutKnow
 
         trkBar.Visible = False
 
+        Instruct.Visible = False
         Label1.Visible = False
         Label2.Visible = False
         Label3.Visible = False
@@ -207,6 +210,7 @@ Public Class OutKnow
         LabelG.Visible = False
 
         lblQstn.Visible = False
+        ChestPic.Visible = False
         StimBox.Visible = False
 
     End Sub

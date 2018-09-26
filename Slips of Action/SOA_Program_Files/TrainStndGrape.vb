@@ -62,10 +62,13 @@ Public Class TrainStndGrape
 
         'turn on keyboard input and ensure all pictures visible
 
+        ChestPic.Visible = True
         FruitPic.Visible = True
         LeftArr.Visible = True
         RightArr.Visible = True
+        PointsTxt.Visible = True
         ScoreBox.Visible = True
+        'ScoreBox.ForeColor = Color.Black           ------>          If need to change color.  Green is 'LimeGreen'
 
         'start stopwatch and overflow timer
         stpWatch.Start()
@@ -149,6 +152,8 @@ Public Class TrainStndGrape
                 'do stimOff function
                 stimOff()
 
+
+                ChestPic.BackgroundImage = My.Resources.ResourceManager.GetObject("OpnChst")
                 'set image to feedback image (cherries for correct)
                 FruitPic.Image = My.Resources.ResourceManager.GetObject("cherries")
 
@@ -177,6 +182,7 @@ Public Class TrainStndGrape
 
                 stimOff()
 
+                ChestPic.BackgroundImage = My.Resources.ResourceManager.GetObject("OpnChst")
                 'feedback image set to background: empty box
                 FruitPic.Image = blankBox
 
@@ -201,10 +207,12 @@ Public Class TrainStndGrape
 
     Private Sub stimOff()
 
+        ChestPic.Visible = False
         FruitPic.Visible = False
         LeftArr.Visible = False
         RightArr.Visible = False
         ScoreBox.Visible = False
+        PointsTxt.Visible = False
 
         betweenTimer.Start()
 
@@ -239,6 +247,7 @@ Public Class TrainStndGrape
             pointsEarned = -5
 
             'set feedback image to blank crate
+            ChestPic.BackgroundImage = My.Resources.ResourceManager.GetObject("OpnChst")
             FruitPic.Image = blankBox
 
         End If
@@ -256,6 +265,8 @@ Public Class TrainStndGrape
         betweenTimer.Stop()
 
         'set new feedback pic as visible
+        ChestPic.Visible = True
+        PointsTxt.Visible = True
         FruitPic.Visible = True
         ScoreBox.Visible = True
 
@@ -274,6 +285,8 @@ Public Class TrainStndGrape
         feedbackTimer.Stop()
 
         'turn off feedback pic
+        ChestPic.Visible = False
+        PointsTxt.Visible = False
         FruitPic.Visible = False
         ScoreBox.Visible = False
 
@@ -298,8 +311,10 @@ Public Class TrainStndGrape
         'stop/reset timer
         blankTimer.Stop()
 
+        ChestPic.BackgroundImage = My.Resources.ResourceManager.GetObject("ClsChst")
         'change pic back to original stim pic for next trial
         FruitPic.Image = My.Resources.ResourceManager.GetObject("grapes")
+
 
         'hide this form and go on to next statement in frmMain (A.K.A---next form is shown)
         Me.Hide()

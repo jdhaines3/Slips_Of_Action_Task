@@ -56,6 +56,7 @@ Public Class SOA_Cong_Ban
         pointsEarned = 100
 
         'turn on keyboard input and ensure all pics visible
+        ChestPic.Visible = True
         FruitPic.Visible = True
         LeftArr.Visible = True
         RightArr.Visible = True
@@ -68,6 +69,7 @@ Public Class SOA_Cong_Ban
         acceptKey = True
 
     End Sub
+
 
     '==========================='
     '-----KeyPress Function-----'
@@ -100,6 +102,7 @@ Public Class SOA_Cong_Ban
 
                     stimOff()
 
+                    ChestPic.BackgroundImage = My.Resources.ResourceManager.GetObject("OpnChst")
                     FruitPic.Image = My.Resources.ResourceManager.GetObject("xmark")
 
                     resp = 2
@@ -112,6 +115,7 @@ Public Class SOA_Cong_Ban
                     'if not, correct press
                     stimOff()
 
+                    ChestPic.BackgroundImage = My.Resources.ResourceManager.GetObject("OpnChst")
                     FruitPic.Image = My.Resources.ResourceManager.GetObject("Banana")
 
                     resp = 1
@@ -133,6 +137,7 @@ Public Class SOA_Cong_Ban
 
                 stimOff()
 
+                ChestPic.BackgroundImage = My.Resources.ResourceManager.GetObject("OpnChst")
                 FruitPic.Image = blankBox
 
                 resp = 0
@@ -162,6 +167,7 @@ Public Class SOA_Cong_Ban
 
             stimOff()
 
+            ChestPic.BackgroundImage = My.Resources.ResourceManager.GetObject("OpnChst")
             FruitPic.Image = My.Resources.ResourceManager.GetObject("Checkmark")
 
             resp = 4
@@ -174,6 +180,7 @@ Public Class SOA_Cong_Ban
 
             stimOff()
 
+            ChestPic.BackgroundImage = My.Resources.ResourceManager.GetObject("OpnChst")
             FruitPic.Image = blankBox
 
             resp = 3
@@ -192,6 +199,7 @@ Public Class SOA_Cong_Ban
         'reset/stop timer, make pics invisible and turn off keyboard input
         stimTimer.Stop()
 
+        ChestPic.Visible = False
         FruitPic.Visible = False
         LeftArr.Visible = False
         RightArr.Visible = False
@@ -211,6 +219,7 @@ Public Class SOA_Cong_Ban
         betweenTimer.Stop()
 
         'set new feedback pic as visible
+        ChestPic.Visible = True
         FruitPic.Visible = True
 
         'start timer for how long feedback image stays on screen
@@ -228,6 +237,7 @@ Public Class SOA_Cong_Ban
         feedbackTimer.Stop()
 
         'turn off feedback pic
+        ChestPic.Visible = False
         FruitPic.Visible = False
 
         'write the resp variable to the text file, then close filestream
@@ -252,6 +262,7 @@ Public Class SOA_Cong_Ban
         blankTimer.Stop()
 
         'change pic back to original stim pic for next trial
+        ChestPic.BackgroundImage = My.Resources.ResourceManager.GetObject("ClsChst")
         FruitPic.Image = My.Resources.ResourceManager.GetObject("Banana")
 
         'hide this form and go on to next statement in frmMain (A.K.A---next form is shown)

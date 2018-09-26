@@ -121,11 +121,13 @@
     <value>17, 17</value>
   </metadata>
   <data name="Label1.Text" xml:space="preserve">
-    <value>Two open boxes will appear on the screen with different fruits inside.
-One fruit was earned by a left response in the first stage and the other
-by a right response. Although both were valuable before, one of them
-is now devalued and earns no points. The devalued fruit will have a cross
-on it. Please press the correct button for the valued fruit, rather than the
-devalued fruit.</value>
+    <value>Two open boxes will appear on the screen, one above the other, each 
+with different fruits inside. One fruit was earned by a "1" key press in the
+first stage, and the other was earned by a "2" key press. The fruits shown
+are the fruits from INSIDE the boxes during the previous phase. Although
+both were valuable before, one of them is now "devalued" and earns no
+points. The devalued fruit will have a red "X" on it. Please press the correct
+key that would earn you the valued fruit, rather than the devalued fruit.
+We will now do a practice trial.</value>
   </data>
 </root>
