@@ -1,0 +1,3 @@
+Consent to use task was given, but not included in repository due to private information such as names, emails, and addresses being included in the email.
+
+If proof needed, please contact me at jdhaines@iupui.edu.
